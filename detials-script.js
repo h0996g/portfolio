@@ -54,14 +54,14 @@ const projectsData = {
             }
         ],
         screenshots: [
-            "../../assets/creno/1.jpg",
-            "../../assets/creno/2.jpg",
-            "../../assets/creno/3.jpg",
-            "../../assets/creno/4.jpg",
-            "../../assets/creno/5.jpg",
-            "../../assets/creno/6.jpg",
-            "../../assets/creno/7.jpg",
-            "../../assets/creno/8.jpg"
+            "assets/creno/1.jpg",
+            "assets/creno/2.jpg",
+            "assets/creno/3.jpg",
+            "assets/creno/4.jpg",
+            "assets/creno/5.jpg",
+            "assets/creno/6.jpg",
+            "assets/creno/7.jpg",
+            "assets/creno/8.jpg"
         ],
         githubLink: "#",
         demoLink: "#"
@@ -127,16 +127,16 @@ const projectsData = {
             }
         ],
         screenshots: [
-            "../../assets/fiqhpath/1.jpg",
-            "../../assets/fiqhpath/2.jpg",
-            "../../assets/fiqhpath/3.jpg",
-            "../../assets/fiqhpath/4.jpg",
-            "../../assets/fiqhpath/5.jpg",
-            "../../assets/fiqhpath/6.jpg",
-            "../../assets/fiqhpath/7.jpg",
-            "../../assets/fiqhpath/8.jpg",
-            "../../assets/fiqhpath/9.jpg",
-            "../../assets/fiqhpath/10.jpg"
+            "assets/fiqhpath/1.jpg",
+            "assets/fiqhpath/2.jpg",
+            "assets/fiqhpath/3.jpg",
+            "assets/fiqhpath/4.jpg",
+            "assets/fiqhpath/5.jpg",
+            "assets/fiqhpath/6.jpg",
+            "assets/fiqhpath/7.jpg",
+            "assets/fiqhpath/8.jpg",
+            "assets/fiqhpath/9.jpg",
+            "assets/fiqhpath/10.jpg"
         ],
         githubLink: "#",
         demoLink: "#"
