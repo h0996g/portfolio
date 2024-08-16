@@ -200,7 +200,10 @@ const projectsData = {
             "assets/adkar/3.jpg",
             "assets/adkar/4.jpg",
             "assets/adkar/5.jpg",
-            "assets/adkar/6.jpg"
+            "assets/adkar/6.jpg",
+            "assets/adkar/7.jpg",
+            "assets/adkar/8.jpg",
+            "assets/adkar/9.jpg",
         ],
         githubLink: "#",
         demoLink: "#"
