@@ -16,9 +16,9 @@ const projectsData = {
         ],
         techStack: {
             Frontend: ["Flutter", "Cubit (State Management)"],
-            Backend: ["Node.js with Express", "MongoDB with Mongoose", "Nodemailer (Forgot Password)"],
+            Backend: ["Node.js with Express", "MongoDB with Mongoose"],
             "Cloud Services": ["Firebase (Push Notifications FCM, Storage 5GB free)"],
-            "Additional Features": ["Google Maps Integration", "Pagination with Cursor", "Lazy Loading"],
+            "Additional Features": ["Google Maps Integration", "Pagination with Cursor", "Lazy Loading", "Nodemailer (Forgot Password)", "Shared Preferences", "image_picker", "flutter_image_compress", "cached_network_image", "..."],
             "Machine Learning": ["Python (Recommendation System)"]
         },
         detailedFeatures: [
@@ -81,10 +81,10 @@ const projectsData = {
             "Multi-language support"
         ],
         techStack: {
-            Frontend: ["Flutter", "Cubit (State Management)", "YouTubePlayer", "cached_network_image"],
-            Backend: ["Node.js with Express", "Socket.IO (for real-time comments)"],
+            Frontend: ["Flutter", "Cubit (State Management)"],
+            Backend: ["Node.js with Express", "Socket.IO (for real-time comments)", "Firebase"],
             "Cloud Services": ["Firebase (Storage for images and PDFs, 5GB free)"],
-            "Additional Features": ["Multi-language support", "Image compression"]
+            "Additional Features": ["Multi-language support", "Image compression", "YouTubePlayer", "cached_network_image"]
         },
         detailedFeatures: [
             {
@@ -136,11 +136,77 @@ const projectsData = {
             "assets/fiqhpath/7.jpg",
             "assets/fiqhpath/8.jpg",
             "assets/fiqhpath/9.jpg",
-            "assets/fiqhpath/10.jpg"
+            "assets/fiqhpath/10.jpg",
+            "assets/fiqhpath/11.jpg",
         ],
         githubLink: "#",
         demoLink: "#"
-    }
+    },
+    "adkar-app": {
+        title: "Adkar: Muslim Remembrance App",
+        subtitle: "A comprehensive application for Muslim daily remembrances and Quranic verses",
+        overview: "Adkar is a mobile application designed to assist Muslims with their daily remembrances (adhkar), Quranic recitations, and spiritual practices. It offers a range of features including morning and evening remembrances, Quranic verses with interpretations, Allah's beautiful names, customizable rosary, and timely notifications.",
+        keyFeatures: [
+            "Morning and evening remembrances with counters",
+            "Holy Quran with reading and interpretation",
+            "Beautiful names of Allah with explanations",
+            "Customizable digital rosary",
+            "Quranic verses with audio recitations",
+            "Notifications for remembrances and hourly reminders",
+            "User feedback and update notification system"
+        ],
+        techStack: {
+            Frontend: ["Flutter", "Cubit (State Management)"],
+            Backend: ["firebase"],
+            "Cloud Services": ["Firebase (Storage for audio, 5GB free)"],
+            "Additional Features": ["Customizable notifications", "audio player,flutter_native_splash", "vibration"]
+        },
+        detailedFeatures: [
+            {
+                title: "Remembrances (Adhkar)",
+                details: [
+                    "Morning and evening remembrances with counters",
+                    "Customizable digital rosary with adjustable repetitions",
+                    "Hourly remembrance notifications"
+                ]
+            },
+            {
+                title: "Quranic Content",
+                details: [
+                    "Complete Holy Quran with reading and verse-by-verse interpretation",
+                    "Selected Quranic verses with audio recitations",
+                    "Multiple reciters and recitation styles"
+                ]
+            },
+            {
+                title: "Divine Names",
+                details: [
+                    "List of Allah's beautiful names (Al-Asma ul-Husna)",
+                    "Detailed explanations for each name"
+                ]
+            },
+            {
+                title: "User Experience",
+                details: [
+                    "Customizable notification system for reminders",
+                    "In-app feedback and suggestion submission",
+                    "Application update notifications"
+                ]
+            }
+        ],
+        screenshots: [
+            "assets/adkar/1.jpg",
+            "assets/adkar/2.jpg",
+            "assets/adkar/3.jpg",
+            "assets/adkar/4.jpg",
+            "assets/adkar/5.jpg",
+            "assets/adkar/6.jpg"
+        ],
+        githubLink: "#",
+        demoLink: "#"
+    },
+
+
 
 
     // Add more projects here
@@ -155,6 +221,7 @@ function loadProjectDetails() {
         console.error("Project not found");
         return;
     }
+    document.title = `${project.title} - Project Details`;
 
     document.getElementById('project-title').textContent = project.title;
     document.getElementById('project-subtitle').textContent = project.subtitle;
@@ -171,49 +238,67 @@ function loadProjectDetails() {
 
     const techStackDiv = document.getElementById('tech-stack');
     for (const [category, technologies] of Object.entries(project.techStack)) {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'mb-4';
+
         const h4 = document.createElement('h4');
         h4.textContent = category;
-        h4.className = 'mt-3';
-        techStackDiv.appendChild(h4);
+        h4.className = 'mb-3';
+        categoryDiv.appendChild(h4);
+
+        const techList = document.createElement('div');
+        techList.className = 'd-flex flex-wrap gap-2';
 
         technologies.forEach(tech => {
-            const span = document.createElement('span');
+            const techBadge = document.createElement('span');
+            techBadge.className = 'badge rounded-pill';
+            techBadge.textContent = tech;
+
             // Assign color classes based on the category
-            let colorClass = 'bg-secondary';
             switch (category) {
                 case 'Frontend':
-                    colorClass = tech.includes('Flutter') ? 'bg-primary' : 'bg-danger';
+                    techBadge.classList.add(tech.includes('Flutter') ? 'bg-primary' : 'bg-danger');
                     break;
                 case 'Backend':
-                    colorClass = tech.includes('Node.js') ? 'bg-success' :
-                        tech.includes('MongoDB') ? 'bg-danger' :
-                            'bg-warning text-dark';
+                    if (tech.includes('Node.js')) {
+                        techBadge.classList.add('bg-success');
+                    } else if (tech.includes('MongoDB')) {
+                        techBadge.classList.add('bg-danger');
+                    } else {
+                        techBadge.classList.add('bg-warning', 'text-dark');
+                    }
                     break;
                 case 'Cloud Services':
-                    colorClass = 'bg-info text-dark';
+                    techBadge.classList.add('bg-info', 'text-dark');
                     break;
                 case 'Machine Learning':
-                    colorClass = 'bg-dark';
+                    techBadge.classList.add('bg-dark');
                     break;
+                default:
+                    techBadge.classList.add('bg-secondary');
             }
-            span.className = `badge ${colorClass} me-2`;
-            span.textContent = tech;
-            techStackDiv.appendChild(span);
+
+            techList.appendChild(techBadge);
         });
+
+        categoryDiv.appendChild(techList);
 
         // Add list items for Cloud Services
         if (category === 'Cloud Services') {
             const ul = document.createElement('ul');
-            ul.className = 'list-unstyled ms-4 mt-2';
+            ul.className = 'list-unstyled mt-2 ms-2';
             ['Push Notifications (FCM)', 'Storage (5GB free)'].forEach(item => {
                 const li = document.createElement('li');
-                li.textContent = `- ${item}`;
+                li.innerHTML = `<small><i class="bi bi-check-circle-fill text-success me-2"></i>${item}</small>`;
                 ul.appendChild(li);
             });
-            techStackDiv.appendChild(ul);
+            categoryDiv.appendChild(ul);
         }
+
+        techStackDiv.appendChild(categoryDiv);
     }
 
+    // 
     const featureAccordion = document.getElementById('featureAccordion');
     project.detailedFeatures.forEach((feature, index) => {
         const accordionItem = document.createElement('div');
@@ -245,3 +330,4 @@ function loadProjectDetails() {
 }
 
 document.addEventListener('DOMContentLoaded', loadProjectDetails);
+
