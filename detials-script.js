@@ -208,6 +208,62 @@ const projectsData = {
         githubLink: "#",
         demoLink: "#"
     },
+    "tic-tac-toe-app": {
+        title: "Tic Tac Toe Game",
+        subtitle: "A multiplayer Tic Tac Toe game with real-time functionality",
+        overview: "This Tic Tac Toe game offers multiple play modes: against the machine, against a friend on the same device, or against a remote player using Firebase Firestore for real-time updates. It's a great example of implementing real-time functionality in a mobile game.",
+        keyFeatures: [
+            "Play against machine",
+            "Local multiplayer on the same device",
+            "Online multiplayer using Firebase Firestore",
+            "Real-time game updates",
+            "Practice real-time database interactions"
+        ],
+        techStack: {
+            Frontend: ["Flutter", "Cubit (State Management)"],
+            Backend: ["Firebase Firestore"],
+            "Additional Features": ["Real-time updates", "Machine opponent"]
+        },
+        detailedFeatures: [
+            {
+                title: "Game Modes",
+                details: [
+                    "Single-player mode against machine",
+                    "Local multiplayer on the same device",
+                    "Online multiplayer with real-time updates"
+                ]
+            },
+            {
+                title: "Firebase Integration",
+                details: [
+                    "Real-time game state synchronization",
+                    "Player matching for online games",
+                    "Secure and scalable backend"
+                ]
+            },
+            {
+                title: "User Experience",
+                details: [
+                    "Intuitive game interface",
+                    "Smooth transitions between turns",
+                    "Real-time updates for online games"
+                ]
+            }
+        ],
+        screenshots: [
+            "assets/tictactoe/1.jpg",
+            "assets/tictactoe/2.jpg",
+            "assets/tictactoe/3.jpg",
+            "assets/tictactoe/4.jpg",
+            "assets/tictactoe/5.jpg",
+            "assets/tictactoe/6.jpg",
+            "assets/tictactoe/7.jpg",
+        ],
+        githubLink: "#",
+        demoLink: "#"
+    },
+
+
 
 
 
