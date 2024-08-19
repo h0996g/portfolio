@@ -159,7 +159,7 @@ const projectsData = {
             Frontend: ["Flutter", "Cubit (State Management)"],
             Backend: ["firebase"],
             "Cloud Services": ["Firebase (Storage for audio, 5GB free)"],
-            "Additional Features": ["Customizable notifications", "audio player,flutter_native_splash", "vibration"]
+            "Additional Features": ["Local notifications", "audio player,flutter_native_splash", "vibration"]
         },
         detailedFeatures: [
             {
