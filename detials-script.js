@@ -83,7 +83,7 @@ const projectsData = {
         techStack: {
             Frontend: ["Flutter", "Cubit (State Management)"],
             Backend: ["Node.js with Express", "Socket.IO (for real-time comments)", "Firebase"],
-            "Cloud Services": ["Firebase (Storage for images and PDFs, 5GB free)"],
+            "Cloud Services": ["Firebase (Push Notifications FCM,Storage for images and PDFs(5GB free))"],
             "Additional Features": ["Multi-language support", "Image compression", "YouTubePlayer", "cached_network_image"]
         },
         detailedFeatures: [
@@ -346,11 +346,11 @@ function loadProjectDetails() {
         if (category === 'Cloud Services') {
             const ul = document.createElement('ul');
             ul.className = 'list-unstyled mt-2 ms-2';
-            ['Push Notifications (FCM)', 'Storage (5GB free)'].forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = `<small><i class="bi bi-check-circle-fill text-success me-2"></i>${item}</small>`;
-                ul.appendChild(li);
-            });
+            // ['Push Notifications (FCM)', 'Storage (5GB free)'].forEach(item => {
+            //     const li = document.createElement('li');
+            //     li.innerHTML = `<small><i class="bi bi-check-circle-fill text-success me-2"></i>${item}</small>`;
+            //     ul.appendChild(li);
+            // });
             categoryDiv.appendChild(ul);
         }
 
