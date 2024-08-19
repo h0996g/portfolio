@@ -145,7 +145,7 @@ const projectsData = {
     "adkar-app": {
         title: "Adkar: Muslim Remembrance App",
         subtitle: "A comprehensive application for Muslim daily remembrances and Quranic verses",
-        overview: "Adkar is a mobile application designed to assist Muslims with their daily remembrances (adhkar), Quranic recitations, and spiritual practices. It offers a range of features including morning and evening remembrances, Quranic verses with interpretations, Allah's beautiful names, customizable rosary, and timely notifications.",
+        overview: "Adkar is a mobile application designed to assist Muslims with their daily remembrances (adkar), Quranic recitations, and spiritual practices. It offers a range of features including morning and evening remembrances, Quranic verses with interpretations, Allah's beautiful names, customizable rosary, and timely notifications.",
         keyFeatures: [
             "Morning and evening remembrances with counters",
             "Holy Quran with reading and interpretation",
@@ -163,7 +163,7 @@ const projectsData = {
         },
         detailedFeatures: [
             {
-                title: "Remembrances (Adhkar)",
+                title: "Remembrances (Adkar)",
                 details: [
                     "Morning and evening remembrances with counters",
                     "Customizable digital rosary with adjustable repetitions",
