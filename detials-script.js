@@ -84,7 +84,7 @@ const projectsData = {
         techStack: {
             Frontend: ["Flutter", "Cubit (State Management)"],
             Backend: ["Node.js with Express", "Socket.IO (for real-time comments)", "Firebase"],
-            "Cloud Services": ["Firebase (Push Notifications FCM,Storage for images and PDFs(5GB free))"],
+            "Cloud Services": ["Firebase (FCM,Storage for images and PDFs(5GB free))"],
             "Additional Features": ["Multi-language support", "Image compression", "YouTubePlayer", "cached_network_image"]
         },
         detailedFeatures: [
