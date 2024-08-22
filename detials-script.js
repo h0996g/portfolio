@@ -63,7 +63,8 @@ const projectsData = {
             "assets/creno/7.jpg",
             "assets/creno/8.jpg"
         ],
-        githubLink: "#",
+        githubLinkFront: { 'owner': 'alaeddinovv', 'projectId': 'PFEprojet' },
+        githubLinkBack: { 'owner': 'h0996g', 'projectId': 'creno' },
         demoLink: "#"
     }
     ,
@@ -139,8 +140,8 @@ const projectsData = {
             "assets/fiqhpath/10.jpg",
             "assets/fiqhpath/11.jpg",
         ],
-        githubLink: "#",
-        demoLink: "#"
+        githubLinkFront: { 'owner': 'h0996g', 'projectId': 'mosqueFlutter' },
+        githubLinkBack: { 'owner': 'h0996g', 'projectId': 'mosqueNode' }, demoLink: "#"
     },
     "adkar-app": {
         title: "Adkar: Muslim Remembrance App",
@@ -205,7 +206,7 @@ const projectsData = {
             "assets/adkar/8.jpg",
             "assets/adkar/9.jpg",
         ],
-        githubLink: "#",
+        githubLink: "https://github.com/h0996g/adkar",
         demoLink: "#"
     },
     "tic-tac-toe-app": {
@@ -259,7 +260,7 @@ const projectsData = {
             "assets/tictactoe/6.jpg",
             "assets/tictactoe/7.jpg",
         ],
-        githubLink: "#",
+        githubLink: "https://github.com/h0996g/tictactoeFir",
         demoLink: "#"
     },
 
@@ -285,7 +286,16 @@ function loadProjectDetails() {
     document.getElementById('project-title').textContent = project.title;
     document.getElementById('project-subtitle').textContent = project.subtitle;
     document.getElementById('project-overview').textContent = project.overview;
-    document.getElementById('github-link').href = project.githubLink;
+    document.getElementById('github-link').addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent the default link behavior
+        if (project.githubLinkFront == null || project.githubLinkBack == null) {
+            window.open(project.githubLink);
+        }
+        showGitHubOptions(
+            { owner: project.githubLinkFront.owner, projectId: project.githubLinkFront.projectId },
+            { owner: project.githubLinkBack.owner, projectId: project.githubLinkBack.projectId },
+        );
+    });
     document.getElementById('demo-link').href = project.demoLink;
 
     const keyFeaturesList = document.getElementById('key-features');
@@ -387,6 +397,38 @@ function loadProjectDetails() {
         screenshotsDiv.appendChild(div);
     });
 }
+function showGitHubOptions(front, back) {
+    Swal.fire({
+        title: 'Select Repository',
+        html: `
+      <p class="swal-text">Choose which part of the project you'd like to view:</p>
+      <div class="swal-button-container">
+        <button id="frontend-btn" class="swal-button">Frontend</button>
+        <button id="backend-btn" class="swal-button">Backend</button>
+      </div>
+    `,
+        showConfirmButton: false,
+        showCloseButton: true,
+        background: '#f8f9fa',
+        customClass: {
+            popup: 'swal-popup',
+            title: 'swal-title',
+            closeButton: 'swal-close-button'
+        },
+        didOpen: () => {
+            document.getElementById('frontend-btn').addEventListener('click', () => {
+                window.open(`https://github.com/${front.owner}/${front.projectId}`);
+                Swal.close();
+            });
+            document.getElementById('backend-btn').addEventListener('click', () => {
+                window.open(`https://github.com/${back.owner}/${back.projectId}`);
+                Swal.close();
+            });
+        }
+    });
+}
+
+
 
 document.addEventListener('DOMContentLoaded', loadProjectDetails);
 
