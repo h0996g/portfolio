@@ -8,6 +8,8 @@
   <title>My Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="mediaqueries.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -212,7 +214,8 @@
           </div>
           <h2 class="experience-sub-title project-title">Creno Dz</h2>
           <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/'">
+            <button class="btn btn-color-2 project-btn"
+              onclick="showGitHubOptions({'owner':'h0996g','projectId':'creno'},{'owner':'alaeddinovv','projectId':'PFEprojet'})">
               Github
             </button>
             <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=creno-app'">
@@ -228,7 +231,8 @@
           </div>
           <h2 class="experience-sub-title project-title">FiqhPath</h2>
           <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/'">
+            <button class="btn btn-color-2 project-btn"
+              onclick="showGitHubOptions({'owner':'h0996g','projectId':'mosqueFlutter'},{'owner':'h0996g','projectId':'mosqueNode'})">
               Github
             </button>
             <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=fiqhpath-app'">
@@ -242,7 +246,8 @@
           </div>
           <h2 class="experience-sub-title project-title">Adkar</h2>
           <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href=' https://github.com/'">
+            <button class="btn btn-color-2 project-btn"
+              onclick="window.open('https://github.com/h0996g/adkar', '_blank')">
               Github
             </button>
             <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=adkar-app'">
@@ -256,7 +261,8 @@
           </div>
           <h2 class="experience-sub-title project-title">Tic Tac Toe</h2>
           <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href=' https://github.com/'">
+            <button class="btn btn-color-2 project-btn"
+              onclick="window.open('https://github.com/h0996g/tictactoeFir', '_blank')">
               Github
             </button>
             <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=tic-tac-toe-app'">
