@@ -322,7 +322,7 @@ section {
   display: flex;
   justify-content: center;
   gap: 5rem;
-  height: auto;
+  height: 80vh;
 }
 
 .section__pic-container {
@@ -421,8 +421,6 @@ section {
 
 #about {
   position: relative;
-  height: auto;
-
 }
 
 .about-containers {
@@ -727,12 +725,12 @@ footer p {
 }
 
 /* PROFILE SECTION */
+
 #profile {
   display: flex;
   justify-content: center;
   gap: 5rem;
-  height: auto;
-  margin-bottom: 0; /* Remove any margin at the bottom */
+  height: 80vh;
 }
 
 .section__pic-container {
@@ -830,11 +828,9 @@ footer p {
 /* ABOUT SECTION */
 
 #about {
-  height: auto;
-
-  margin-top: -2rem; /* Negative margin to pull the section up */
-  padding-top: 4rem; /* Adjust the padding to create some space within */
+  position: relative;
 }
+
 .about-containers {
   gap: 2rem;
   margin-bottom: 2rem;
