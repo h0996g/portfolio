@@ -1,0 +1,172 @@
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .project-header {
+            background-color: #343a40;
+            color: white;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: #f8f9fa;
+            transform: skewY(-3deg);
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            color: #28a745;
+            margin-right: 0.5rem;
+        }
+
+        .screenshot-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .screenshot {
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .screenshot:hover {
+            transform: scale(1.05);
+        }
+
+
+        .tech-stack {
+            background-color: #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #28a745;
+        }
+
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #218838;
+        }
+@media (max-width: 991px) {
+    .col-lg-4 {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .btn-custom, .btn-outline-secondary {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+}
+.tech-stack .d-flex {
+    flex-wrap: wrap;
+}
+
+.tech-stack .badge {
+    margin-bottom: 0.5rem;
+}
+@media (max-width: 575px) {
+    .accordion-button {
+        padding: 0.75rem;
+    }
+    .accordion-body {
+        padding: 0.75rem;
+    }
+}
+.swal-popup {
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.swal-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.swal-text {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.swal-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.swal-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.swal-button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.swal-button:last-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.swal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.swal-close-button {
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.swal-close-button:hover {
+  color: #333;
+}
+
+
