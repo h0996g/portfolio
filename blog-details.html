@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating an Email Tracking System with Node.js and Deploying on Vercel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="blog-style.css">
+</head>
+
+<body>
+    <div id="project-details">
+        <div class="project-header text-center">
+            <div class="container">
+                <h1 class="display-4">Creating an Email Tracking System with Node.js and Deploying on Vercel</h1>
+                <p class="lead">Email tracking is a powerful tool for understanding user engagement. In this blog post,
+                    I'll walk you through the steps I took to create a simple email tracking system using Node.js and
+                    Vercel.</p>
+            </div>
+        </div>
+
+        <div class="container my-5">
+
+            <section class="step">
+                <div class="step-content">
+                    <h2><i class="fas fa-code"></i> Understanding How the Code Works</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>The core of this system is a Node.js Express server that serves a 1x1 transparent PNG
+                                image. When an email containing
+                                this image is opened, the recipient's email client sends a request to our server. This
+                                triggers our tracking
+                                mechanism, allowing us to log the event and serve the image. Here's a breakdown of the
+                                main components:</p>
+                            <ul>
+                                <li>Express server setup</li>
+                                <li>Middleware for logging requests</li>
+                                <li>Route for serving the transparent image</li>
+                                <li>Integration with Vercel Blob for storing logs</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <pre><code class="language-javascript">
+// Import required modules
+const app = require('express')(); // Create an Express application
+const { put } = require('@vercel/blob'); // Import the 'put' function from Vercel Blob for storing logs
+const Jimp = require('jimp'); // Import Jimp for image manipulation
+const path = require('path'); // Import path module for file path operations
+
+// Enable trust proxy to get the correct IP address when behind a reverse proxy
+app.set('trust proxy', true);
+
+// Set the port for the server to listen on
+const PORT = process.env.PORT || 3000;
+
+// Middleware to log requests and store them in Vercel Blob
+app.use(async (req, res, next) => {
+    const now = new Date();
+    const imageName = path.basename(req.path); // Extract the filename from the request path
+    const ip = req.ip; // Get the IP address of the client
+    const log = `${now.toISOString()} - ${imageName} - IP: ${ip}`; // Create a log entry
+
+    try {
+        // Store the log entry in Vercel Blob
+        await put(`logs/${imageName}.txt`, log, {
+            access: 'public',
+            contentType: 'text/plain'
+        });
+    } catch (error) {
+        console.error("Error writing log to Vercel Blob:", error);
+    }
+    next(); // Continue to the next middleware or route handler
+});
+            
+// Route to serve a 1x1 transparent PNG image
+app.get('/image/:filename.png', (req, res) => {
+    const width = 1;
+    const height = 1;
+
+    // Create a new 1x1 transparent image using Jimp
+    new Jimp(width, height, 0x00000000, (err, image) => {
+        if (err) {
+            console.error("Error creating image:", err);
+            return res.status(500).send("Error creating image");
+        }
+        // Convert the image to a buffer and send it as the response
+        image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
+            if (err) {
+                console.error("Error getting image buffer:", err);
+                return res.status(500).send("Error processing image");
+            }
+            res.set('Content-Type', Jimp.MIME_PNG);
+            res.send(buffer);
+        });
+    });
+});
+            
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+});</code></pre>
+
+                </div>
+            </section>
+
+            <section class="step">
+                <div class="step-content">
+                    <h2><i class="fas fa-cogs"></i> Step 1: Setting Up the Environment</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>Before we start coding, ensure you have Node.js installed on your system. If not, you can
+                                download it
+                                from <a href="https://nodejs.org/" target="_blank">Node.js</a>.</p>
+                            <p>Next, install the necessary packages by running the following commands in your terminal:
+                            </p>
+                            <pre><code class="language-bash">npm install express </code></pre>
+                            <p>These packages include:</p>
+                            <ul>
+                                <li><strong>Express:</strong> A minimal and flexible Node.js web application framework.
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="step">
+                <div class="step-content">
+                    <h2><i class="fas fa-image"></i>Step 2: Understanding Jimp Usage</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>Jimp (JavaScript Image Manipulation Program) is used in this code to create a 1x1
+                                transparent PNG
+                                image. Here's how it works:</p>
+                            <ol>
+                                <li>Jimp is imported at the beginning of the file:</li>
+                                <pre><code class="language-javascript">const Jimp = require('jimp');</code></pre>
+                                <li>In the route handler for '/image/:filename.png', Jimp creates the image:</li>
+                                <pre><code class="language-javascript">// Create a new 1x1 transparent image using Jimp
+new Jimp(width, height, 0x00000000, (err, image) => {
+    // Error handling if image creation fails
+    if (err) {
+        console.error("Error creating image:", err);
+        return res.status(500).send("Error creating image");
+    }
+    
+    // Convert the image to a PNG buffer
+    image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
+        // Error handling if buffer creation fails
+        if (err) {
+            console.error("Error getting image buffer:", err);
+            return res.status(500).send("Error processing image");
+        }
+        
+        // Set the content type of the response to PNG
+        res.set('Content-Type', Jimp.MIME_PNG);
+        
+        // Send the PNG buffer as the response
+        res.send(buffer);
+    });
+});</code></pre>
+
+                                <li>The image is created with a width and height of 1 pixel, and a fully transparent
+                                    color
+                                    (0x00000000).</li>
+                                <li>The image is then converted to a buffer in PNG format and sent as the response.</li>
+                            </ol>
+                            <p>This approach allows us to serve a tiny, invisible image that can be used for tracking
+                                email opens
+                                without affecting the email's appearance.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="step">
+                <div class="step-content">
+                    <h2><i class="fas fa-cloud-upload-alt"></i> Step 3: Deploying the Project on Vercel</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>Deploying your Node.js application on Vercel is straightforward. Here's the process:</p>
+                            <ol>
+                                <li>Create a Vercel account if you don't have one: <a href="https://vercel.com/"
+                                        target="_blank">Vercel</a></li>
+
+                                <li>Install the Vercel CLI by running the following command in your terminal:</li>
+                                <pre><code class="language-bash">npm install -g vercel</code></pre>
+                                <li>Configure your project with a <code>vercel.json</code> file to specify build and
+                                    routing
+                                    configurations. Here is an example:</li>
+                                <pre><code class="language-javascript">{
+    "version": 2, // Specifies the Vercel configuration schema version being used.
+    "builds": [
+    {
+        "src": "./app.js", // Path to the source file that Vercel will build.
+        "use": "@vercel/node" // Indicates that Vercel should use the Node.js runtime for this build.
+    }
+    ],
+    "routes": [
+    {
+        "src": "/(.*)", // Pattern to match all incoming requests.
+        "dest": "/app.js" // All requests are routed to the app.js file.
+    }
+    ]
+}</code></pre>
+                                <li>Connect your local project with your Vercel account using the command:</li>
+                                <pre><code class="language-bash">vercel</code></pre>
+                                <li>Upload any changes to Vercel with the command:</li>
+                                <pre><code class="language-bash">vercel --prod</code></pre>
+                            </ol>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <section class="step">
+                <div class="step-content">
+                    <h2><i class="fas fa-database"></i> Step 3: Setting Up Vercel Blob for Storing Logs</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>To store the logs of when emails are opened, I used Vercel's Blob storage. Here's how to
+                                set it up:
+                            </p>
+                            <ol>
+                                <li>Install the <code>@vercel/blob</code> package by running the following command in
+                                    your terminal:
+                                </li>
+                                <pre><code class="language-bash">npm install @vercel/blob</code></pre>
+                                <li>Configure Vercel Blob in your project settings:
+                                    <ul>
+                                        <li>Go to your project in the Vercel dashboard.</li>
+                                        <li>Navigate to the "Storage" section.
+                                            <!-- <a href="#" onclick="openModal('images/1.png'); return false;">here</a> -->
+
+
+
+                                        </li>
+                                        <li>Enable Blob storage for your project.</li>
+                                    </ul>
+                                </li>
+                                <li>Use the <code>put</code> function from the <code>@vercel/blob</code> package to
+                                    store logs.
+                                    Here’s a code snippet demonstrating this:</li>
+                                <pre><code class="language-javascript">// Import the 'put' function from Vercel Blob for storing logs
+const { put } = require('@vercel/blob');
+
+// Store the log entry in Vercel Blob
+await put(`logs/${imageName}.txt`, log, {
+    access: 'public',  // Set the access level to public
+    contentType: 'text/plain'  // Specify the content type as plain text
+});</code></pre>
+
+                                <li>Implement error handling for any failed log writes to ensure your application can
+                                    handle issues
+                                    gracefully.</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="conclusion">
+                <h3 class="mt-5 section-title">Conclusion</h3>
+                <p>With these steps, I successfully created and deployed a simple email tracking system using Node.js
+                    and Vercel.
+                    The key to this project was understanding how to serve and log image requests, as well as
+                    effectively deploying
+                    the server to Vercel. I hope this guide helps you in building your own email tracking systems or
+                    similar
+                    projects!</p>
+                <p>As an upcoming feature, I plan to add functionality to receive SMS notifications on my phone when
+                    someone opens
+                    my email. This will provide real-time alerts and further enhance the tracking capabilities of the
+                    system. Stay
+                    tuned for updates on how this SMS integration will be implemented!</p>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+        <div class="container text-center">
+            <a href="index.html" class="btn btn-outline-secondary">Back to Portfolio</a>
+        </div>
+    </footer>
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+    <script src="blog-script.js"></script>
+</body>
+
+</html>

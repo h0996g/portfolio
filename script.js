@@ -34,5 +34,25 @@ function showGitHubOptions(front, back) {
     }
   });
 }
+// Add this to your existing script.js file
+
+function toggleContent(contentType) {
+  const projectsContent = document.getElementById('projects-content');
+  const blogsContent = document.getElementById('blogs-content');
+  const projectsBtn = document.querySelector('.toggle-btn:first-child');
+  const blogsBtn = document.querySelector('.toggle-btn:last-child');
+
+  if (contentType === 'projects') {
+    projectsContent.classList.add('active');
+    blogsContent.classList.remove('active');
+    projectsBtn.classList.add('active');
+    blogsBtn.classList.remove('active');
+  } else {
+    blogsContent.classList.add('active');
+    projectsContent.classList.remove('active');
+    blogsBtn.classList.add('active');
+    projectsBtn.classList.remove('active');
+  }
+}
 
 

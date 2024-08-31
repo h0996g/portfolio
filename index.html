@@ -100,6 +100,7 @@
     </div>
     <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#experience'" />
   </section>
+  <div class="main-content"></div>
   <section id="experience">
     <p class="section__text__p1">Explore My</p>
     <h1 class="title">Experience</h1>
@@ -203,91 +204,109 @@
     </div>
     <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#projects'" />
   </section>
-  <section id="projects">
+  <!-- <section id="projects"> -->
+  <section id="projects-and-blogs">
     <p class="section__text__p1">Browse My Recent</p>
-    <h1 class="title">Projects</h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="details-container color-container">
-          <div class="article-container" onclick="location.href='details.html?id=creno-app'">
-            <img src="./assets/creno.png" alt="Project 1" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Creno Dz</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="showGitHubOptions({'owner':'alaeddinovv','projectId':'PFEprojet'},{'owner':'h0996g','projectId':'creno'})">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=creno-app'">
-              Show details
-            </button>
+    <h1 class="title">Projects & Blogs</h1>
+    <div class="toggle-container">
+      <button class="toggle-btn active" onclick="toggleContent('projects')">Projects</button>
+      <button class="toggle-btn" onclick="toggleContent('blogs')">Blogs</button>
+    </div>
+    <div class="content-container">
+      <div id="projects-content" class="active">
+        <div class="experience-details-container">
+          <div class="about-containers">
+            <div class="details-container color-container">
+              <div class="article-container" onclick="location.href='details.html?id=creno-app'">
+                <img src="./assets/creno.png" alt="Project 1" class="project-img" />
+              </div>
+              <h2 class="experience-sub-title project-title">Creno Dz</h2>
+              <div class="btn-container">
+                <button class="btn btn-color-2 project-btn"
+                  onclick="showGitHubOptions({'owner':'alaeddinovv','projectId':'PFEprojet'},{'owner':'h0996g','projectId':'creno'})">
+                  Github
+                </button>
+                <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=creno-app'">
+                  Show details
+                </button>
 
 
+              </div>
+            </div>
+            <div class="details-container color-container">
+              <div class="article-container" onclick="location.href='details.html?id=fiqhpath-app'">
+                <img src="./assets/mosque.jpg" alt="Project 2" class="project-img" />
+              </div>
+              <h2 class="experience-sub-title project-title">FiqhPath</h2>
+              <div class="btn-container">
+                <button class="btn btn-color-2 project-btn"
+                  onclick="showGitHubOptions({'owner':'h0996g','projectId':'mosqueFlutter'},{'owner':'h0996g','projectId':'mosqueNode'})">
+                  Github
+                </button>
+                <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=fiqhpath-app'">
+                  Show details
+                </button>
+              </div>
+            </div>
+            <div class="details-container color-container">
+              <div class="article-container" onclick="location.href='details.html?id=adkar-app'">
+                <img src=" ./assets/adkar1.jpg" alt="Project 2" class="project-img" />
+              </div>
+              <h2 class="experience-sub-title project-title">Adkar</h2>
+              <div class="btn-container">
+                <button class="btn btn-color-2 project-btn"
+                  onclick="window.open('https://github.com/h0996g/adkar', '_blank')">
+                  Github
+                </button>
+                <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=adkar-app'">
+                  Show details
+                </button>
+              </div>
+            </div>
+            <div class="details-container color-container">
+              <div class="article-container" onclick="location.href='details.html?id=tic-tac-toe-app'">
+                <img src=" ./assets/tic2.png" alt="Project 2" class="project-img" />
+              </div>
+              <h2 class="experience-sub-title project-title">Tic Tac Toe</h2>
+              <div class="btn-container">
+                <button class="btn btn-color-2 project-btn"
+                  onclick="window.open('https://github.com/h0996g/tictactoeFir', '_blank')">
+                  Github
+                </button>
+                <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=tic-tac-toe-app'">
+                  Show details
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="details-container color-container">
-          <div class="article-container" onclick="location.href='details.html?id=fiqhpath-app'">
-            <img src="./assets/mosque.jpg" alt="Project 2" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">FiqhPath</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="showGitHubOptions({'owner':'h0996g','projectId':'mosqueFlutter'},{'owner':'h0996g','projectId':'mosqueNode'})">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=fiqhpath-app'">
-              Show details
-            </button>
-          </div>
-        </div>
-        <div class="details-container color-container">
-          <div class="article-container" onclick="location.href='details.html?id=adkar-app'">
-            <img src=" ./assets/adkar1.jpg" alt="Project 2" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Adkar</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://github.com/h0996g/adkar', '_blank')">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=adkar-app'">
-              Show details
-            </button>
-          </div>
-        </div>
-        <div class="details-container color-container">
-          <div class="article-container" onclick="location.href='details.html?id=tic-tac-toe-app'">
-            <img src=" ./assets/tic2.png" alt="Project 2" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Tic Tac Toe</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://github.com/h0996g/tictactoeFir', '_blank')">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=tic-tac-toe-app'">
-              Show details
-            </button>
-          </div>
-        </div>
-        <!-- <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/coming-soon1.png" alt="Project 2" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Coming Soon</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/'" hidden>
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/'" hidden>
-              Show details
-            </button>
-          </div>
-        </div> -->
 
       </div>
+      <div id="blogs-content">
+        <div class="experience-details-container">
+          <div class="about-containers">
+            <!-- Blog items -->
+            <div class="details-container color-container">
+              <div class="article-container" onclick="location.href='blog-details.html?id=blog-1'">
+                <img src="./assets/pixel.png" alt="Blog 1" class="project-img" />
+              </div>
+              <h2 class="experience-sub-title project-title">Pixel espion with Express.js</h2>
+              <div class="btn-container">
+                <button class="btn btn-color-2 project-btn" onclick="location.href='blog-details.html?id=blog-1'">
+                  Read More
+                </button>
+              </div>
+            </div>
+            <!-- Add more blog items here -->
+          </div>
+        </div>
+      </div>
     </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
+  </section>
+  </div>
+  </div>
+
+  <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
   </section>
   <section id="contact">
     <p class="section__text__p1">Get in Touch</p>
