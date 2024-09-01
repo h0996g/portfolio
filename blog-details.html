@@ -60,49 +60,55 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware to log requests and store them in Vercel Blob
 app.use(async (req, res, next) => {
-    const now = new Date();
-    const imageName = path.basename(req.path); // Extract the filename from the request path
-    const ip = req.ip; // Get the IP address of the client
-    const log = `${now.toISOString()} - ${imageName} - IP: ${ip}`; // Create a log entry
+const now = new Date(); // Get the current date and time
+const imageName = path.parse(req.path).name; // Extract the filename (without extension) from the request path
 
-    try {
-        // Store the log entry in Vercel Blob
-        await put(`logs/${imageName}.txt`, log, {
-            access: 'public',
-            contentType: 'text/plain'
-        });
-    } catch (error) {
-        console.error("Error writing log to Vercel Blob:", error);
-    }
-    next(); // Continue to the next middleware or route handler
+const ip = req.ip; // Get the IP address of the client
+const log = `${now.toISOString()} - ${imageName} - IP: ${ip}`; // Create a log entry
+
+try {
+// Store the log entry in Vercel Blob under the 'gmail' directory
+await put(`gmail/${imageName}.txt`, log, {
+access: 'public', // Make the log file publicly accessible
+addRandomSuffix: false, // Do not add a random suffix to the filename
 });
-            
+} catch (error) {
+console.error("Error writing log to Vercel Blob:", error); // Log any errors that occur while writing the log
+}
+next(); // Continue to the next middleware or route handler
+});
+
+// Route to respond with a simple "Hello" message
+app.get('/', (req, res) => {
+res.send('Hello');
+});
+
 // Route to serve a 1x1 transparent PNG image
 app.get('/image/:filename.png', (req, res) => {
-    const width = 1;
-    const height = 1;
+const width = 1;
+const height = 1;
 
-    // Create a new 1x1 transparent image using Jimp
-    new Jimp(width, height, 0x00000000, (err, image) => {
-        if (err) {
-            console.error("Error creating image:", err);
-            return res.status(500).send("Error creating image");
-        }
-        // Convert the image to a buffer and send it as the response
-        image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
-            if (err) {
-                console.error("Error getting image buffer:", err);
-                return res.status(500).send("Error processing image");
-            }
-            res.set('Content-Type', Jimp.MIME_PNG);
-            res.send(buffer);
-        });
-    });
+// Create a new 1x1 transparent image using Jimp
+new Jimp(width, height, 0x00000000, (err, image) => {
+if (err) {
+console.error("Error creating image:", err);
+return res.status(500).send("Error creating image");
+}
+// Convert the image to a buffer and send it as the response
+image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
+if (err) {
+console.error("Error getting image buffer:", err);
+return res.status(500).send("Error processing image");
+}
+res.set('Content-Type', 'image/png'); // Set the response content type to PNG
+res.send(buffer); // Send the image buffer as the response
 });
-            
-// Start the server
+});
+});
+
+// Start the server and listen on the specified port
 app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+console.log(`Server started on port ${PORT}`);
 });</code></pre>
 
                 </div>
@@ -143,27 +149,28 @@ app.listen(PORT, () => {
                                 <li>In the route handler for '/image/:filename.png', Jimp creates the image:</li>
                                 <pre><code class="language-javascript">// Create a new 1x1 transparent image using Jimp
 new Jimp(width, height, 0x00000000, (err, image) => {
-    // Error handling if image creation fails
-    if (err) {
-        console.error("Error creating image:", err);
-        return res.status(500).send("Error creating image");
-    }
-    
-    // Convert the image to a PNG buffer
-    image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
-        // Error handling if buffer creation fails
-        if (err) {
-            console.error("Error getting image buffer:", err);
-            return res.status(500).send("Error processing image");
-        }
-        
-        // Set the content type of the response to PNG
-        res.set('Content-Type', Jimp.MIME_PNG);
-        
-        // Send the PNG buffer as the response
-        res.send(buffer);
-    });
-});</code></pre>
+// Error handling if image creation fails
+if (err) {
+console.error("Error creating image:", err);
+return res.status(500).send("Error creating image");
+}
+
+// Convert the image to a PNG buffer
+image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
+// Error handling if buffer creation fails
+if (err) {
+console.error("Error getting image buffer:", err);
+return res.status(500).send("Error processing image");
+}
+
+// Set the content type of the response to PNG
+res.set('Content-Type', 'image/png');
+
+// Send the PNG buffer as the response
+res.send(buffer);
+});
+});
+                                </code></pre>
 
                                 <li>The image is created with a width and height of 1 pixel, and a fully transparent
                                     color
@@ -255,7 +262,7 @@ const { put } = require('@vercel/blob');
 // Store the log entry in Vercel Blob
 await put(`logs/${imageName}.txt`, log, {
     access: 'public',  // Set the access level to public
-    contentType: 'text/plain'  // Specify the content type as plain text
+    addRandomSuffix: false, // Do not add a random suffix to the filename
 });</code></pre>
 
                                 <li>Implement error handling for any failed log writes to ensure your application can
