@@ -169,8 +169,7 @@ res.set('Content-Type', 'image/png');
 // Send the PNG buffer as the response
 res.send(buffer);
 });
-});
-                                </code></pre>
+});</code></pre>
 
                                 <li>The image is created with a width and height of 1 pixel, and a fully transparent
                                     color
@@ -230,7 +229,7 @@ res.send(buffer);
 
             <section class="step">
                 <div class="step-content">
-                    <h2><i class="fas fa-database"></i> Step 3: Setting Up Vercel Blob for Storing Logs</h2>
+                    <h2><i class="fas fa-database"></i> Step 4: Setting Up Vercel Blob for Storing Logs</h2>
                     <div class="row">
                         <div class="col-12">
                             <p>To store the logs of when emails are opened, I used Vercel's Blob storage. Here's how to
@@ -271,6 +270,54 @@ await put(`logs/${imageName}.txt`, log, {
                             </ol>
                         </div>
 
+                    </div>
+                </div>
+            </section>
+            <section class="step">
+                <div class="step-content">
+                    <h2><i class="fas fa-envelope"></i> Step 5: Testing Your Email Tracking Script</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>Now that your script is deployed on Vercel, let's test it using Gmail. Follow these
+                                steps:</p>
+                            <ol>
+                                <li>Open Gmail and click on "Compose" to create a new email.</li>
+                                <li>Write your email content as usual.</li>
+                                <li>To insert the tracking image, click on the "Insert photo" icon in the formatting
+                                    toolbar (it
+                                    looks like a picture).</li>
+                                <li>In the "Insert photo" dialog, choose "Web address (URL)".</li>
+                                <li>In the URL field, paste your Vercel deployment URL followed by the endpoint
+                                    `/image/` and then
+                                    add a unique name for the image. For example:
+                                    <pre><code class="language-plaintext">https://your-vercel-app.vercel.app/image/uniqueimagename.png</code></pre>
+                                    <p>Replace `your-vercel-app` with your actual Vercel app name, and `uniqueimagename`
+                                        with a name
+                                        of your choice.</p>
+                                </li>
+                                <li>Click "Insert" to add the invisible tracking image to your email.</li>
+                                <li>Send the email to the intended recipient.</li>
+                                <li>When the recipient opens the email, their email client will attempt to load the
+                                    image, sending a
+                                    GET request to your Vercel app.</li>
+                                <li>Your app will log this request, storing information about when the email was opened
+                                    in Vercel
+                                    Blob storage.</li>
+                                <li>You can then check your Vercel Blob storage to see the logs of when your emails were
+                                    opened.
+                                </li>
+                            </ol>
+                            <p>This process allows you to track when your emails are opened without affecting the
+                                appearance of the
+                                email itself. The 1x1 transparent PNG image is invisible to the recipient but still
+                                triggers a
+                                request to your server when the email is opened.</p>
+                            <p><strong>Note:</strong> Remember that this method isn't 100% reliable as some email
+                                clients block
+                                images by default or give users the option to not load images. Additionally, be sure to
+                                comply with
+                                all relevant privacy laws and regulations when implementing email tracking.</p>
+                        </div>
                     </div>
                 </div>
             </section>
