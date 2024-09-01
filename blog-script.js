@@ -23,3 +23,27 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('.copy-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+            const pre = button.nextElementSibling;
+            const code = pre.querySelector('code');
+            const range = document.createRange();
+            range.selectNode(code);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+
+            try {
+                document.execCommand('copy');
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-copy"></i>';
+                }, 2000);
+            } catch (e) {
+                console.error('Failed to copy text: ', e);
+            }
+
+            window.getSelection().removeAllRanges();
+        });
+    });
+});

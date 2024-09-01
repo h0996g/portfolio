@@ -45,7 +45,11 @@
                         </div>
 
                     </div>
-                    <pre><code class="language-javascript">
+                    <div class="code-block">
+                        <button class="copy-btn" aria-label="Copy code">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <pre><code class="language-javascript">
 // Import required modules
 const app = require('express')(); // Create an Express application
 const { put } = require('@vercel/blob'); // Import the 'put' function from Vercel Blob for storing logs
@@ -109,8 +113,8 @@ res.send(buffer); // Send the image buffer as the response
 // Start the server and listen on the specified port
 app.listen(PORT, () => {
 console.log(`Server started on port ${PORT}`);
-});</code></pre>
-
+                });</code></pre>
+                    </div>
                 </div>
             </section>
 
@@ -124,7 +128,12 @@ console.log(`Server started on port ${PORT}`);
                                 from <a href="https://nodejs.org/" target="_blank">Node.js</a>.</p>
                             <p>Next, install the necessary packages by running the following commands in your terminal:
                             </p>
-                            <pre><code class="language-bash">npm install express </code></pre>
+                            <div class="code-block">
+                                <button class="copy-btn" aria-label="Copy code">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <pre><code class="language-bash">npm install express </code></pre>
+                            </div>
                             <p>These packages include:</p>
                             <ul>
                                 <li><strong>Express:</strong> A minimal and flexible Node.js web application framework.
@@ -140,14 +149,25 @@ console.log(`Server started on port ${PORT}`);
                     <h2><i class="fas fa-image"></i>Step 2: Understanding Jimp Usage</h2>
                     <div class="row">
                         <div class="col-12">
+
                             <p>Jimp (JavaScript Image Manipulation Program) is used in this code to create a 1x1
                                 transparent PNG
                                 image. Here's how it works:</p>
                             <ol>
                                 <li>Jimp is imported at the beginning of the file:</li>
-                                <pre><code class="language-javascript">const Jimp = require('jimp');</code></pre>
+                                <div class="code-block">
+                                    <button class="copy-btn" aria-label="Copy code">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+
+                                    <pre><code class="language-javascript">const Jimp = require('jimp');</code></pre>
+                                </div>
                                 <li>In the route handler for '/image/:filename.png', Jimp creates the image:</li>
-                                <pre><code class="language-javascript">// Create a new 1x1 transparent image using Jimp
+                                <div class="code-block">
+                                    <button class="copy-btn" aria-label="Copy code">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <pre><code class="language-javascript">// Create a new 1x1 transparent image using Jimp
 new Jimp(width, height, 0x00000000, (err, image) => {
 // Error handling if image creation fails
 if (err) {
@@ -170,6 +190,7 @@ res.set('Content-Type', 'image/png');
 res.send(buffer);
 });
 });</code></pre>
+                                </div>
 
                                 <li>The image is created with a width and height of 1 pixel, and a fully transparent
                                     color
@@ -195,11 +216,20 @@ res.send(buffer);
                                         target="_blank">Vercel</a></li>
 
                                 <li>Install the Vercel CLI by running the following command in your terminal:</li>
-                                <pre><code class="language-bash">npm install -g vercel</code></pre>
+                                <div class="code-block">
+                                    <button class="copy-btn" aria-label="Copy code">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <pre><code class="language-bash">npm install -g vercel</code></pre>
+                                </div>
                                 <li>Configure your project with a <code>vercel.json</code> file to specify build and
                                     routing
                                     configurations. Here is an example:</li>
-                                <pre><code class="language-javascript">{
+                                <div class="code-block">
+                                    <button class="copy-btn" aria-label="Copy code">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <pre><code class="language-javascript">{
     "version": 2, // Specifies the Vercel configuration schema version being used.
     "builds": [
     {
@@ -213,11 +243,22 @@ res.send(buffer);
         "dest": "/app.js" // All requests are routed to the app.js file.
     }
     ]
-}</code></pre>
+                                }</code></pre>
+                                </div>
                                 <li>Connect your local project with your Vercel account using the command:</li>
-                                <pre><code class="language-bash">vercel</code></pre>
+                                <div class="code-block">
+                                    <button class="copy-btn" aria-label="Copy code">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <pre><code class="language-bash">vercel</code></pre>
+                                </div>
                                 <li>Upload any changes to Vercel with the command:</li>
-                                <pre><code class="language-bash">vercel --prod</code></pre>
+                                <div class="code-block">
+                                    <button class="copy-btn" aria-label="Copy code">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <pre><code class="language-bash">vercel --prod</code></pre>
+                                </div>
                             </ol>
                         </div>
 
@@ -239,7 +280,12 @@ res.send(buffer);
                                 <li>Install the <code>@vercel/blob</code> package by running the following command in
                                     your terminal:
                                 </li>
-                                <pre><code class="language-bash">npm install @vercel/blob</code></pre>
+                                <div class="code-block">
+                                    <button class="copy-btn" aria-label="Copy code">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <pre><code class="language-bash">npm install @vercel/blob</code></pre>
+                                </div>
                                 <li>Configure Vercel Blob in your project settings:
                                     <ul>
                                         <li>Go to your project in the Vercel dashboard.</li>
@@ -255,7 +301,11 @@ res.send(buffer);
                                 <li>Use the <code>put</code> function from the <code>@vercel/blob</code> package to
                                     store logs.
                                     Here’s a code snippet demonstrating this:</li>
-                                <pre><code class="language-javascript">// Import the 'put' function from Vercel Blob for storing logs
+                                <div class="code-block">
+                                    <button class="copy-btn" aria-label="Copy code">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <pre><code class="language-javascript">// Import the 'put' function from Vercel Blob for storing logs
 const { put } = require('@vercel/blob');
 
 // Store the log entry in Vercel Blob
@@ -263,6 +313,7 @@ await put(`logs/${imageName}.txt`, log, {
     access: 'public',  // Set the access level to public
     addRandomSuffix: false, // Do not add a random suffix to the filename
 });</code></pre>
+                                </div>
 
                                 <li>Implement error handling for any failed log writes to ensure your application can
                                     handle issues
@@ -290,7 +341,12 @@ await put(`logs/${imageName}.txt`, log, {
                                 <li>In the URL field, paste your Vercel deployment URL followed by the endpoint
                                     `/image/` and then
                                     add a unique name for the image. For example:
-                                    <pre><code class="language-plaintext">https://your-vercel-app.vercel.app/image/uniqueimagename.png</code></pre>
+                                    <div class="code-block">
+                                        <button class="copy-btn" aria-label="Copy code">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                        <pre><code class="language-plaintext">https://your-vercel-app.vercel.app/image/uniqueimagename.png</code></pre>
+                                    </div>
                                     <p>Replace `your-vercel-app` with your actual Vercel app name, and `uniqueimagename`
                                         with a name
                                         of your choice.</p>
