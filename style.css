@@ -514,6 +514,9 @@ article .icon {
 #projects {
   position: relative;
 }
+#projects-and-blogs {
+  position: relative;
+}
 
 .color-container {
   border-color: rgb(163, 163, 163);
