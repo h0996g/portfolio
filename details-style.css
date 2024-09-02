@@ -168,5 +168,41 @@
 .swal-close-button:hover {
   color: #333;
 }
+.code-block {
+    position: relative;
+}
 
+#imageModal .modal-content {
+    background-color: transparent;
+    border: none;
+}
+
+#imageModal .modal-body {
+    position: relative;
+}
+
+#modalImage {
+    max-height: 90vh;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+#prevImage, #nextImage {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+#prevImage:hover, #nextImage:hover {
+    opacity: 1;
+}
+
+.screenshot {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.screenshot:hover {
+    transform: scale(1.05);
+}
 

@@ -263,6 +263,73 @@ const projectsData = {
         githubLink: "https://github.com/h0996g/tictactoeFir",
         demoLink: "#"
     },
+    "responsive-design-showcase": {
+        title: "Responsive Design Showcase",
+        subtitle: "Demonstrating harmonious design across various devices",
+        overview: "This Flutter application showcases my capabilities in creating harmonious designs that adapt seamlessly across various devices, including computers and mobile phones. The design incorporates multiple tasks and elements efficiently on a single page, highlighting the power of responsive and cohesive design principles using Flutter and GetX for state management.",
+        keyFeatures: [
+            "Responsive layout adapting to different screen sizes",
+            "Efficient use of space to display multiple tasks",
+            "Harmonious color scheme and typography",
+            "Intuitive navigation across different sections",
+            "Optimized performance across devices"
+        ],
+        techStack: {
+            Frontend: ["Flutter", "GetX (State Management)"],
+            Backend: ["Node.js (Simple server for items)"],
+            "Additional Packages": ["flutter_slidable", "flutter_svg"],
+            "Responsive Design": ["FittedBox", "MediaQuery", "LayoutBuilder"]
+        },
+        detailedFeatures: [
+            {
+                title: "Responsive Layout",
+                details: [
+                    "Utilizes MediaQuery for adaptive layouts",
+                    "FittedBox for flexible content sizing",
+                    "LayoutBuilder for conditional layouts",
+                    "Flexible and Expanded widgets for proportional spacing"
+                ]
+            },
+            {
+                title: "State Management with GetX",
+                details: [
+                    "Efficient state management for responsive UI updates",
+                    "Reactive state handling for dynamic content",
+                    "GetX controllers for separation of concerns"
+                ]
+            },
+            {
+                title: "Interactive Elements",
+                details: [
+                    "flutter_slidable for swipeable list items",
+                    "Custom SVG icons using flutter_svg",
+                    "Animated transitions for smooth user experience"
+                ]
+            },
+            {
+                title: "Backend Integration",
+                details: [
+                    "Simple Node.js server for item management",
+                    "CRUD operations: Add, Delete, and Freeze items",
+                    "RESTful API for seamless frontend-backend communication"
+                ]
+            }
+        ],
+        screenshots: [
+            "assets/figma/origine1.jpg",
+            "assets/figma/origine2.jpg",
+            "assets/figma/poco1.jpg",
+            "assets/figma/poco2.jpg",
+            "assets/figma/emulator1.png",
+            "assets/figma/web1.png",
+            "assets/figma/web2.png",
+            "assets/figma/web12.png",
+            "assets/figma/web22.png",
+        ],
+        githubLink: "https://github.com/h0996g/figma",
+        demoLink: "#"
+    }
+
 
 
 
@@ -389,13 +456,48 @@ function loadProjectDetails() {
         featureAccordion.appendChild(accordionItem);
     });
 
+    // const screenshotsDiv = document.getElementById('screenshots');
+    // project.screenshots.forEach((screenshot, index) => {
+    //     const div = document.createElement('div');
+    //     div.className = 'col-4 col-md-2';
+    //     div.innerHTML = `<img src="${screenshot}" alt="App Screenshot ${index + 1}" class="img-fluid screenshot">`;
+    //     screenshotsDiv.appendChild(div);
+
+    // });
+
     const screenshotsDiv = document.getElementById('screenshots');
     project.screenshots.forEach((screenshot, index) => {
         const div = document.createElement('div');
         div.className = 'col-4 col-md-2';
         div.innerHTML = `<img src="${screenshot}" alt="App Screenshot ${index + 1}" class="img-fluid screenshot">`;
+        div.querySelector('img').addEventListener('click', () => openImageModal(index));
         screenshotsDiv.appendChild(div);
     });
+
+    // Add event listeners for navigation buttons
+    document.getElementById('prevImage').addEventListener('click', () => changeImage(-1));
+    document.getElementById('nextImage').addEventListener('click', () => changeImage(1));
+}
+
+let currentImageIndex = 0;
+
+function openImageModal(index) {
+    currentImageIndex = index;
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = projectsData[getCurrentProjectId()].screenshots[index];
+    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+    modal.show();
+}
+
+function changeImage(direction) {
+    const screenshots = projectsData[getCurrentProjectId()].screenshots;
+    currentImageIndex = (currentImageIndex + direction + screenshots.length) % screenshots.length;
+    document.getElementById('modalImage').src = screenshots[currentImageIndex];
+}
+
+function getCurrentProjectId() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
 }
 function showGitHubOptions(front, back) {
     Swal.fire({
