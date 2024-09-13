@@ -205,9 +205,17 @@ const projectsData = {
             "assets/adkar/7.jpg",
             "assets/adkar/8.jpg",
             "assets/adkar/9.jpg",
+            "assets/adkar/10.jpg",
+            "assets/adkar/11.jpg",
+            "assets/adkar/12.jpg",
+            "assets/adkar/13.jpg",
+            "assets/adkar/14.jpg",
+            "assets/adkar/15.jpg",
+            "assets/adkar/16.jpg",
+            "assets/adkar/17.jpg",
         ],
         githubLink: "https://github.com/h0996g/adkar",
-        demoLink: "#"
+        demoLink: "https://play.google.com/store/apps/details?id=com.h0774g.alhou"
     },
     "tic-tac-toe-app": {
         title: "Tic Tac Toe Game",
@@ -363,7 +371,10 @@ function loadProjectDetails() {
             { owner: project.githubLinkBack.owner, projectId: project.githubLinkBack.projectId },
         );
     });
-    document.getElementById('demo-link').href = project.demoLink;
+    document.getElementById('demo-link').addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent the default link behavior
+        window.open(project.demoLink, '_blank'); // Open the demo link in a new window/tab
+    });
 
     const keyFeaturesList = document.getElementById('key-features');
     project.keyFeatures.forEach(feature => {

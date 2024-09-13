@@ -1097,3 +1097,76 @@ footer p {
 .content-container > div.active {
   display: block;
 }
+/* Styles for the Play Store icon */
+
+
+
+
+/* play store button ---------------------------------------------------------*/
+
+.play-store-icon {
+  height: 2.5rem; /* Adjust the size as needed */
+  vertical-align: middle;
+  transition: transform 0.3s ease;
+}
+
+.play-store-link {
+  margin-left: 0.5rem;
+}
+.play-store-link {
+  position: relative;
+}
+
+.play-store-link::after {
+  content: 'Download on Play Store';
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.play-store-link:hover::after {
+  opacity: 1;
+}
+  .play-store-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .play-store-link span {
+    margin-left: 0.5rem;
+    font-weight: 600;
+  }
+
+  .play-store-link:hover span {
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 600px) {
+  .btn-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-container > * {
+    margin-bottom: 0.5rem;
+  }
+
+  .play-store-link {
+    margin-left: 0;
+  }
+}
+  .play-store-link:focus .play-store-icon {
+    outline: 2px solid #007bff;
+    outline-offset: 4px;
+  }
+/* end play store button ---------------------------------------------------------*/
