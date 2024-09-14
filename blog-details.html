@@ -16,9 +16,11 @@
         <div class="project-header text-center">
             <div class="container">
                 <h1 class="display-4">Creating an Email Tracking System with Node.js and Deploying on Vercel</h1>
-                <p class="lead">Email tracking is a powerful tool for understanding user engagement. In this blog post,
-                    I'll walk you through the steps I took to create a simple email tracking system using Node.js and
-                    Vercel.</p>
+                <p class="lead">Tired of wondering if your emails are read or ignored? Let's build something cool. In
+                    this tutorial, we'll create a
+                    simple email tracking system using Node.js and Vercel. You'll learn to make an invisible image that
+                    reports when an
+                    email is opened. Ready? Let's dive in.</p>
             </div>
         </div>
 
@@ -123,9 +125,8 @@ console.log(`Server started on port ${PORT}`);
                     <h2><i class="fas fa-cogs"></i> Step 1: Setting Up the Environment</h2>
                     <div class="row">
                         <div class="col-12">
-                            <p>Before we start coding, ensure you have Node.js installed on your system. If not, you can
-                                download it
-                                from <a href="https://nodejs.org/" target="_blank">Node.js</a>.</p>
+                            <p>Before you start coding, ensure that you have Node.js installed on your system. If not,
+                                you can download it from <a href="https://nodejs.org/" target="_blank">Node.js</a>.</p>
                             <p>Next, install the necessary packages by running the following commands in your terminal:
                             </p>
                             <div class="code-block">
@@ -315,7 +316,8 @@ await put(`logs/${imageName}.txt`, log, {
 });</code></pre>
                                 </div>
 
-                                <li>Implement error handling for any failed log writes to ensure your application can
+                                <li>Implement error handling for any failed log writes to ensure that your application
+                                    can
                                     handle issues
                                     gracefully.</li>
                             </ol>
@@ -329,8 +331,7 @@ await put(`logs/${imageName}.txt`, log, {
                     <h2><i class="fas fa-envelope"></i> Step 5: Testing Your Email Tracking Script</h2>
                     <div class="row">
                         <div class="col-12">
-                            <p>Now that your script is deployed on Vercel, let's test it using Gmail. Follow these
-                                steps:</p>
+                            <p>Moving on to testing, we'll use Gmail to verify your Vercel deployment. Follow along:</p>
                             <ol>
                                 <li>Open Gmail and click on "Compose" to create a new email.</li>
                                 <li>Write your email content as usual.</li>
@@ -353,21 +354,24 @@ await put(`logs/${imageName}.txt`, log, {
                                 </li>
                                 <li>Click "Insert" to add the invisible tracking image to your email.</li>
                                 <li>Send the email to the intended recipient.</li>
-                                <li>When the recipient opens the email, their email client will attempt to load the
-                                    image, sending a
-                                    GET request to your Vercel app.</li>
+                                <li>When the recipient opens the email, most email applications automatically try to
+                                    display all images in the message. This
+                                    action triggers the email software to retrieve the invisible tracking pixel, which
+                                    sends a GET request to your Vercel
+                                    app.</li>
                                 <li>Your app will log this request, storing information about when the email was opened
                                     in Vercel
                                     Blob storage.</li>
-                                <li>You can then check your Vercel Blob storage to see the logs of when your emails were
-                                    opened.
+                                <li>After sending your email, you can monitor your Vercel Blob storage for real-time
+                                    tracking data. This storage contains
+                                    logs that record each instance when a recipient opens your email.
                                 </li>
                             </ol>
-                            <p>This process allows you to track when your emails are opened without affecting the
-                                appearance of the
-                                email itself. The 1x1 transparent PNG image is invisible to the recipient but still
-                                triggers a
-                                request to your server when the email is opened.</p>
+                            <p>This tracking method uses an invisible 1x1 PNG image in your email. When opened, it
+                                silently contacts your server,
+                                providing engagement data without altering the email's appearance or alerting
+                                recipients. This allows accurate
+                                measurement of open rates and timing while preserving user experience.</p>
                             <p><strong>Note:</strong> Remember that this method isn't 100% reliable as some email
                                 clients block
                                 images by default or give users the option to not load images. Additionally, be sure to
@@ -387,9 +391,9 @@ await put(`logs/${imageName}.txt`, log, {
                     the server to Vercel. I hope this guide helps you in building your own email tracking systems or
                     similar
                     projects!</p>
-                <p>As an upcoming feature, I plan to add functionality to receive SMS notifications on my phone when
+                <p>As an upcoming feature, We plan to add functionality "receive SMS notifications on your phone when
                     someone opens
-                    my email. This will provide real-time alerts and further enhance the tracking capabilities of the
+                    your email". This will provide real-time alerts and further enhance the tracking capabilities of the
                     system. Stay
                     tuned for updates on how this SMS integration will be implemented!</p>
             </section>
