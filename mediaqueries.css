@@ -10,7 +10,7 @@
   #projects {
     height: fit-content;
   }
-  #projects-and-blogs {
+  #projects-and-tutorials {
     height: fit-content;
   }
 }
@@ -105,7 +105,7 @@
   }
 }
 @media screen and (min-width: 1200px) {
-  #experience, #projects-and-blogs {
+  #experience, #projects-and-tutorials {
     margin-bottom: 2rem; /* Adjust as needed */
   }
 }

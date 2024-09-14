@@ -38,19 +38,19 @@ function showGitHubOptions(front, back) {
 
 function toggleContent(contentType) {
   const projectsContent = document.getElementById('projects-content');
-  const blogsContent = document.getElementById('blogs-content');
+  const tutorialsContent = document.getElementById('tutorials-content');
   const projectsBtn = document.querySelector('.toggle-btn:first-child');
-  const blogsBtn = document.querySelector('.toggle-btn:last-child');
+  const tutorialsBtn = document.querySelector('.toggle-btn:last-child');
 
   if (contentType === 'projects') {
     projectsContent.classList.add('active');
-    blogsContent.classList.remove('active');
+    tutorialsContent.classList.remove('active');
     projectsBtn.classList.add('active');
-    blogsBtn.classList.remove('active');
+    tutorialsBtn.classList.remove('active');
   } else {
-    blogsContent.classList.add('active');
+    tutorialsContent.classList.add('active');
     projectsContent.classList.remove('active');
-    blogsBtn.classList.add('active');
+    tutorialsBtn.classList.add('active');
     projectsBtn.classList.remove('active');
   }
 }

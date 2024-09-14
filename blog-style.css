@@ -90,7 +90,7 @@ pre code {
     font-size: 0.875rem;
 }
 
-footer {
+/* footer {
     background-color: #f8f9fa;
     color: #333;
     padding: 1rem 0;
@@ -104,9 +104,14 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+} */
+@media (max-width: 575px) {
+    .btn-custom, .btn-outline-secondary {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
 }
-
-.btn-outline-secondary {
+/* .btn-outline-secondary {
     border-color: #28a745;
     color: #28a745;
 }
@@ -114,7 +119,7 @@ footer a:hover {
 .btn-outline-secondary:hover {
     background-color: #28a745;
     color: white;
-}
+} */
 
 @media (max-width: 767px) {
     .step {

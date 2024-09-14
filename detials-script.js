@@ -146,7 +146,7 @@ const projectsData = {
     "adkar-app": {
         title: "Adkar: Muslim Remembrance App",
         subtitle: "A comprehensive application for Muslim daily remembrances and Quranic verses",
-        overview: "Adkar is a mobile application designed to assist Muslims with their daily remembrances (adkar), Quranic recitations, and spiritual practices. It offers a range of features including morning and evening remembrances, Quranic verses with interpretations, Allah's beautiful names, customizable rosary, and timely notifications.",
+        overview: "Adkar is a mobile application designed to assist Muslims with their daily remembrances (adkar), Quranic recitations . It offers a range of features including morning and evening remembrances, Quranic verses with interpretations, Allah's beautiful names, customizable rosary, and timely notifications.",
         keyFeatures: [
             "Morning and evening remembrances with counters",
             "Holy Quran with reading and interpretation",
@@ -154,13 +154,16 @@ const projectsData = {
             "Customizable digital rosary",
             "Quranic verses with audio recitations",
             "Notifications for remembrances and hourly reminders",
-            "User feedback and update notification system"
+            "User feedback and update notification system",
+            "Custom notifications with repeat intervals (5min, 30min, 4h, etc.)",
+            "Effortlessly share audio with friends on social media",
+            "Share app with link and small description or with QR code"
         ],
         techStack: {
-            Frontend: ["Flutter", "Cubit (State Management)"],
-            Backend: ["firebase"],
+            Frontend: ["Flutter", "kotlin", "Cubit (State Management)"],
+            Backend: ["firebase", "kotlin"],
             "Cloud Services": ["Firebase (Storage for audio, 5GB free)"],
-            "Additional Features": ["Local notifications", "audio player,flutter_native_splash", "vibration"]
+            "Additional Features": ["Local notifications", "audio player,flutter_native_splash", "vibration", "Custom notifications with Kotlin"]
         },
         detailedFeatures: [
             {
@@ -168,7 +171,7 @@ const projectsData = {
                 details: [
                     "Morning and evening remembrances with counters",
                     "Customizable digital rosary with adjustable repetitions",
-                    "Hourly remembrance notifications"
+                    "Customize reminders to repeat at your chosen times, ensuring you never miss your remembrances."
                 ]
             },
             {
@@ -176,7 +179,7 @@ const projectsData = {
                 details: [
                     "Complete Holy Quran with reading and verse-by-verse interpretation",
                     "Selected Quranic verses with audio recitations",
-                    "Multiple reciters and recitation styles"
+                    "Multiple reciters"
                 ]
             },
             {
@@ -191,7 +194,14 @@ const projectsData = {
                 details: [
                     "Customizable notification system for reminders",
                     "In-app feedback and suggestion submission",
-                    "Application update notifications"
+                    "Get notified when a new version of Adkar is released, with a brief overview of the changes and improvements made."
+                ]
+            },
+            {
+                "title": "Sharing and Social",
+                "details": [
+                    "Effortlessly share audio with friends on social media",
+                    "Share app with link and small description or with QR code"
                 ]
             }
         ],
@@ -214,8 +224,8 @@ const projectsData = {
             "assets/adkar/16.jpg",
             "assets/adkar/17.jpg",
         ],
-        githubLink: "https://github.com/h0996g/adkar",
-        demoLink: "https://play.google.com/store/apps/details?id=com.h0774g.alhou"
+        "githubLink": "https://github.com/h0996g/adkar",
+        "demoLink": "https://play.google.com/store/apps/details?id=com.h0774g.alhou"
     },
     "tic-tac-toe-app": {
         title: "Tic Tac Toe Game",

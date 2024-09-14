@@ -306,7 +306,7 @@ section {
   min-height: fit-content;
 }
 
-#projects-and-blogs {
+#projects-and-tutorials {
   height: auto;
 }
 
@@ -514,7 +514,7 @@ article .icon {
 #projects {
   position: relative;
 }
-#projects-and-blogs {
+#projects-and-tutorials {
   position: relative;
 }
 
@@ -717,7 +717,7 @@ footer p {
   display: block;
 }
 
-#projects-and-blogs {
+#projects-and-tutorials {
   height: auto;
 }
 
