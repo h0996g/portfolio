@@ -223,6 +223,7 @@ const projectsData = {
             "assets/adkar/15.jpg",
             "assets/adkar/16.jpg",
             "assets/adkar/17.jpg",
+            "assets/adkar/18.jpg",
         ],
         "githubLink": "https://github.com/h0996g/adkar",
         "demoLink": "https://play.google.com/store/apps/details?id=com.h0774g.alhou"
