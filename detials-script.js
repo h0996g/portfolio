@@ -225,7 +225,7 @@ const projectsData = {
             "assets/adkar/17.jpg",
             "assets/adkar/18.jpg",
         ],
-        playstoreLink: "https://play.google.com/store/apps/details?id=your.app.id",
+        playstoreLink: "https://play.google.com/store/apps/details?id=com.h0774g.alhou",
         "githubLink": "https://github.com/h0996g/adkar",
         "demoLink": "https://play.google.com/store/apps/details?id=com.h0774g.alhou"
     },
