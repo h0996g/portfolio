@@ -225,6 +225,7 @@ const projectsData = {
             "assets/adkar/17.jpg",
             "assets/adkar/18.jpg",
         ],
+        playstoreLink: "https://play.google.com/store/apps/details?id=your.app.id",
         "githubLink": "https://github.com/h0996g/adkar",
         "demoLink": "https://play.google.com/store/apps/details?id=com.h0774g.alhou"
     },
@@ -382,15 +383,19 @@ function loadProjectDetails() {
             { owner: project.githubLinkBack.owner, projectId: project.githubLinkBack.projectId },
         );
     });
-    document.getElementById('demo-link').addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent the default link behavior
-        window.open(project.demoLink, '_blank'); // Open the demo link in a new window/tab
+    // document.getElementById('demo-link').addEventListener('click', (e) => {
+    //     e.preventDefault(); // Prevent the default link behavior
+    //     window.open(project.demoLink, '_blank'); // Open the demo link in a new window/tab
+    // });
+    document.getElementById('playstore-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open(project.playstoreLink, '_blank');
     });
 
     const keyFeaturesList = document.getElementById('key-features');
     project.keyFeatures.forEach(feature => {
         const li = document.createElement('li');
-        li.innerHTML = `<i class="bi bi-check-circle-fill feature-icon"></i>${feature}`;
+        li.innerHTML = `<i class="bi bi-check feature-icon"></i>${feature}`;
         keyFeaturesList.appendChild(li);
     });
 
