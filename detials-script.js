@@ -279,6 +279,7 @@ const projectsData = {
             "assets/tictactoe/5.jpg",
             "assets/tictactoe/6.jpg",
             "assets/tictactoe/7.jpg",
+            "assets/tictactoe/8.jpg",
         ],
         playstoreLink: "https://play.google.com/store/apps/details?id=com.h0774g.tictactoefir",
         githubLink: "https://github.com/h0996g/tictactoeFir",
