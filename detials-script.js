@@ -76,6 +76,7 @@ const projectsData = {
             "assets/memory-card-game/7.jpg",
             "assets/memory-card-game/8.jpg"
         ],
+        playstoreLink: "https://play.google.com/store/apps/details?id=app.netlify.houssameddine.memorygame",
         githubLinkFront: { 'owner': 'h0996g', 'projectId': 'memory_game' },
         githubLinkBack: { 'owner': 'h0996g', 'projectId': 'game_memory_Socket.io' },
         demoLink: "#"
