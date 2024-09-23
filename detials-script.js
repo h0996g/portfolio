@@ -2,7 +2,84 @@
 
 const projectsData = {
     // ... existing Creno app data ...
+    "memory-card-game": {
+        title: "Memory Card Game",
+        subtitle: "A versatile memory game with dark mode, single-player, local multiplayer, and online real-time modes",
+        overview: "This Flutter-based Memory Card Game showcases advanced state management with GetX, real-time multiplayer functionality using Socket.io, and a user-friendly dark mode. It offers various play modes including single-player, local multiplayer for 2 players on the same device, and online multiplayer across different devices in real-time, demonstrating comprehensive Flutter development skills.",
+        keyFeatures: [
+            "Single-player mode for personal practice",
+            "Local multiplayer mode for 2 players on the same device",
+            "Online real-time multiplayer across different devices",
+            "Dark mode for comfortable gameplay in low-light conditions",
+            "Numbered cards for enhanced memory challenge",
+            "GetX state management for efficient UI updates",
+            "Socket.io integration for real-time gameplay",
+            "Customizable difficulty levels",
+            "Timed turns for strategic gameplay"
+        ],
+        techStack: {
+            Frontend: ["Flutter", "GetX (State Management)"],
+            Backend: ["Node.js", "Socket.io"],
+            "Additional Packages": [
+                "uuid",
+                "url_launcher",
+                "google_fonts"
+            ]
+        },
+        detailedFeatures: [
+            {
+                title: "Game Modes",
+                details: [
+                    "Single-player mode with adjustable difficulty",
+                    "Local multiplayer for 2 players on the same device",
+                    "Online multiplayer with real-time card flipping and score updates",
+                    "Practice mode for improving memory skills",
+                    "Timed turns where each player has a set time to make their move"
+                ]
+            },
+            {
+                title: "GetX State Management",
+                details: [
+                    "Efficient state management for smooth UI updates",
+                    "Reactive state handling for real-time game state changes",
+                    "Separation of game logic and UI for better maintainability",
+                    "Integration with get_storage for persistent dark mode settings"
+                ]
+            },
+            {
+                title: "Real-time Functionality",
+                details: [
+                    "Socket.io integration for instant multiplayer actions",
+                    "Real-time card flipping visible to all players",
+                    "Live score updates and game progress synchronization",
+                    "Low-latency player matching for online games"
+                ]
+            },
+            {
+                title: "User Experience",
+                details: [
+                    "Dark mode toggle for comfortable gameplay in various lighting conditions",
+                    "Intuitive card flipping animations",
+                    "Dynamic scoreboard for tracking player performance",
+                    "Google Fonts integration for attractive and readable text"
+                ]
+            },
 
+        ],
+        screenshots: [
+            "assets/memory-card-game/1.jpg",
+            "assets/memory-card-game/2.jpg",
+            "assets/memory-card-game/3.jpg",
+            "assets/memory-card-game/4.jpg",
+            "assets/memory-card-game/5.jpg",
+            "assets/memory-card-game/6.jpg",
+            "assets/memory-card-game/7.jpg",
+            "assets/memory-card-game/8.jpg"
+        ],
+        githubLinkFront: { 'owner': 'h0996g', 'projectId': 'memory_game' },
+        githubLinkBack: { 'owner': 'h0996g', 'projectId': 'game_memory_Socket.io' },
+        demoLink: "#"
+    },
     "creno-app": {
         title: "Football Field Reservation App",
         subtitle: "A comprehensive solution for managing football field reservations and team activities",
