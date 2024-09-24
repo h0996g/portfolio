@@ -82,9 +82,9 @@ const projectsData = {
         demoLink: "#"
     },
     "creno-app": {
-        title: "Football Field Reservation App",
-        subtitle: "A comprehensive solution for managing football field reservations and team activities",
-        overview: "The Football Field Reservation App is a mobile application designed to streamline the process of booking football fields, managing teams, and organizing matches. It caters to players, team managers, and field owners, providing a seamless experience for all users.",
+        title: "Football Field Reservation App (Creno)",
+        subtitle: "A comprehensive solution for managing football field reservations and team activities - Master's Thesis Project",
+        overview: "The Football Field Reservation App, also known as Creno, is my final Master's thesis project at Université de Constantine 2 - Abdelhamid Mehri. This mobile application is designed to revolutionize the process of booking football fields, managing teams, and organizing matches in urban areas. It caters to players, team managers, and field owners, providing a seamless experience for all users while incorporating advanced features such as AI-based recommendation systems.",
         keyFeatures: [
             "View available fields and their schedules",
             "Book fields for specific time slots",
