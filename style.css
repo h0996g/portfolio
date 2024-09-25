@@ -1170,3 +1170,56 @@ footer p {
     outline-offset: 4px;
   }
 /* end play store button ---------------------------------------------------------*/
+/* Toggle Container */
+/* Toggle Container */
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+/* Toggle Buttons */
+.toggle-btn {
+  position: relative;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  color: #333; /* Initial text color */
+  font-weight: 600;
+  background: #e0e0e0; /* Neutral background */
+  border: none;
+  border-radius: 30px;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  box-shadow:
+    inset 5px 5px 10px #bebebe,
+    inset -5px -5px 10px #ffffff;
+}
+
+/* Icons inside Buttons */
+.toggle-btn i {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Active and Hover States */
+.toggle-btn.active,
+.toggle-btn:hover {
+  background: linear-gradient(135deg, #f973c7, #070141); /* Gradient background */
+  color: #fff; /* Change text color to white */
+  transform: translateY(-3px);
+  box-shadow:
+    5px 5px 10px #bebebe,
+    -5px -5px 10px #ffffff,
+    0 4px 15px rgba(92, 90, 249, 0.5);
+}
+
+/* Focus State */
+.toggle-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(106, 90, 249, 0.5);
+}
+

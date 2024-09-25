@@ -8,6 +8,7 @@
   <title>My Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="mediaqueries.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
@@ -230,8 +231,12 @@
     <p class="section__text__p1">Browse My Recent</p>
     <h1 class="title">Projects & Tutorials</h1>
     <div class="toggle-container">
-      <button class="toggle-btn active" onclick="toggleContent('projects')">Projects</button>
-      <button class="toggle-btn" onclick="toggleContent('tutorials')">Tutorials</button>
+      <button class="toggle-btn active" onclick="toggleContent('projects')">
+        <i class="fas fa-briefcase"></i> Projects
+      </button>
+      <button class="toggle-btn" onclick="toggleContent('tutorials')">
+        <i class="fas fa-chalkboard-teacher"></i> Tutorials
+      </button>
     </div>
     <div class="content-container">
       <div id="projects-content" class="active">
