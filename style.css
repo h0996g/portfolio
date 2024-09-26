@@ -1223,3 +1223,7 @@ footer p {
   box-shadow: 0 0 0 3px rgba(106, 90, 249, 0.5);
 }
 
+small {
+  font-size: 0.9rem;
+
+}
