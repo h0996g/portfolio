@@ -139,7 +139,10 @@ const projectsData = {
             "assets/creno/5.jpg",
             "assets/creno/6.jpg",
             "assets/creno/7.jpg",
-            "assets/creno/8.jpg"
+            "assets/creno/8.jpg",
+            "assets/creno/diagramme_de_classes_creneau.png",
+            "assets/creno/diagramme_de_cas_d'utlisation_creneau.png",
+            "assets/creno/architecture_du_systeme_creneau.png",
         ],
         githubLinkFront: { 'owner': 'alaeddinovv', 'projectId': 'PFEprojet' },
         githubLinkBack: { 'owner': 'h0996g', 'projectId': 'creno' },
