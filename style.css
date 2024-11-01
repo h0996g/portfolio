@@ -1230,27 +1230,21 @@ small {
 
 }
 
-.details-container {
+.color-container.details-container {
   position: relative;
   min-height: 400px; /* Adjust this height as needed */
   display: flex;
   flex-direction: column;
 }
 
-.article-container {
-  /* Preserve original image container size */
-  height: auto;
-  width: 100%;
-}
-
-.project-img {
+.color-container .project-img {
   /* Preserve original image size */
   width: 100%;
   height: auto;
-  /* object-fit: cover; */
+  object-fit: cover;
 }
 
-.btn-container {
+.color-container .btn-container {
   margin-top: auto;
   padding-bottom: 20px;
 }
