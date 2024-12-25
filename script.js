@@ -4,6 +4,29 @@ function toggleMenu() {
   menu.classList.toggle("open");
   icon.classList.toggle("open");
 }
+function showPopup() {
+  document.getElementById('comingSoonPopup').style.display = 'block';
+  document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+}
+
+function closePopup() {
+  document.getElementById('comingSoonPopup').style.display = 'none';
+  document.body.style.overflow = 'auto'; // Restore scrolling
+}
+
+// Close popup when clicking outside
+document.getElementById('comingSoonPopup').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closePopup();
+  }
+});
+
+// Close popup when pressing Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closePopup();
+  }
+});
 function showGitHubOptions(front, back) {
   Swal.fire({
     title: 'Select Repository',
