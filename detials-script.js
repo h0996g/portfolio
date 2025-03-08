@@ -470,10 +470,16 @@ function loadProjectDetails() {
     //     e.preventDefault(); // Prevent the default link behavior
     //     window.open(project.demoLink, '_blank'); // Open the demo link in a new window/tab
     // });
-    document.getElementById('playstore-link').addEventListener('click', (e) => {
-        e.preventDefault();
-        window.open(project.playstoreLink, '_blank');
-    });
+    if (project.playstoreLink && project.playstoreLink.trim() !== '' && project.playstoreLink !== '#') {
+        document.getElementById('playstore-link').addEventListener('click', (e) => {
+          e.preventDefault();
+          window.open(project.playstoreLink, '_blank');
+        });
+      } else {
+        // Optionally, hide the button if the link is not valid.
+        document.getElementById('playstore-link').style.display = 'none';
+      }
+      
 
     const keyFeaturesList = document.getElementById('key-features');
     project.keyFeatures.forEach(feature => {
