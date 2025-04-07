@@ -431,17 +431,101 @@ const projectsData = {
         ],
         githubLink: "https://github.com/h0996g/figma",
         demoLink: "#"
-    }
+    },
 
 
 
 
+
+
+"courassy-app": {
+    "title": "Courassy - Mobile Learning App",
+    "subtitle": "Une plateforme mobile éducative fluide avec messagerie en temps réel, design épuré, et support multilingue",
+    "overview": "Courassy est une application mobile intuitive développée avec Flutter. Elle vise à transformer l'éducation à distance en connectant les étudiants avec des instructeurs professionnels via une interface conviviale. Courassy prend en charge plusieurs langues, propose un système de messagerie instantanée avec partage de fichiers, et permet aux apprenants de suivre des cours en ligne en direct ou enregistrés.",
+    "keyFeatures": [
+        "Interface utilisateur simple et moderne",
+        "Connexion sécurisée via Google Sign-In",
+        "Messagerie en temps réel avec fichiers (texte, images, documents)",
+        "Support multilingue (français,, arabe)",
+        "Navigation fluide grâce à GoRouter",
+        "Notifications personnalisées pour les cours et les messages"
+    ],
+    "techStack": {
+        "Frontend": ["Flutter", "BLoC (State Management)"],
+        "Backend": ["REST API", "Real-time messaging system"],
+        "Additional Features": [
+            "Hive Local Database",
+            "Multi-language support",
+            "Google Sign-In Authentication",
+            "GoRouter for efficient navigation",
+            "Push Notifications",
+            "File sharing in chat (images, documents)",
+            "Responsive layout (mobile/tablette)",
+            "Message and media caching"
+        ]
+    },
+    "detailedFeatures": [
+        {
+            "title": "Expérience Étudiant",
+            "details": [
+                "Parcours multilingue avec changement de langue dynamique",
+                "Suivi des cours en direct ou enregistrés",
+                "Messagerie directe avec instructeurs avec partage de fichiers",
+                "Progression visible et notifications personnalisées"
+            ]
+        },
+        {
+            "title": "Expérience Instructeur",
+            "details": [
+                "Création et gestion de cours depuis mobile",
+                "Communication instantanée avec les étudiants",
+                "Tableau de bord pour gérer les sessions et consulter les discussions",
+                "Suivi de l’engagement et feedback des apprenants"
+            ]
+        },
+        {
+            "title": "Fonctionnalités Techniques",
+            "details": [
+                "Navigation rapide avec GoRouter",
+                "Connexion sécurisée via Google Sign-In",
+                "Système de messagerie en temps réel avec prise en charge des fichiers",
+                "Notifications pour rappels, cours, et nouveaux messages",
+                "Mise en cache des médias pour de meilleures performances"
+            ]
+        }
+    ],
+    "screenshots": [
+        "assets/courassy/1.png",
+        "assets/courassy/2.png",
+        "assets/courassy/3.png",
+        "assets/courassy/4.png",
+        "assets/courassy/5.png",
+        "assets/courassy/6.png",
+        "assets/courassy/7.png",
+        "assets/courassy/8.png",
+        "assets/courassy/9.png",
+        "assets/courassy/10.png",
+        "assets/courassy/11.png",
+        "assets/courassy/12.png",
+        "assets/courassy/13.png",
+        "assets/courassy/14.png",
+        "assets/courassy/15.png",
+        "assets/courassy/16.png",
+        "assets/courassy/17.png",
+       
+    ],
+    // "githubLinkFront": { "owner": "yourGithubUsername", "projectId": "courassy-mobile" },
+    // "githubLinkBack": { "owner": "yourGithubUsername", "projectId": "courassy-api" },
+    "demoLink": "#",
+    "playstoreLink": "#", // Coming soon
+    "appstoreLink": "#", // Coming soon
+}
 
 
 
     // Add more projects here
 };
-
+  
 function loadProjectDetails() {
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('id');

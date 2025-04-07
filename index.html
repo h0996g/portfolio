@@ -262,6 +262,62 @@
 
               </div>
             </div>
+        <!-- Courassy Card -->
+<!-- Courassy Card -->
+<div class="details-container color-container">
+  <div class="article-container" onclick="location.href='details.html?id=courassy-app'">
+    <img src="./assets/courassy1.png" alt="Project Courassy" class="project-img" />
+  </div>
+  <h2 class="experience-sub-title project-title">Courassy</h2>
+  <div class="btn-container">
+    <button class="btn btn-color-2 project-btn" onclick="location.href='details.html?id=courassy-app'">
+      Show details
+    </button>
+    <button class="btn btn-color-2 project-btn" onclick="openDownloadModal()">
+      Download
+    </button>
+  </div>
+</div>
+
+<!-- Download Modal -->
+<div id="downloadModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeDownloadModal()">&times;</span>
+    <h3 class="modal-title">Download Courassy</h3>
+    <div class="store-links-row">
+      <a href="javascript:void(0);" onclick="openComingSoonModal()" class="store-button">
+        <img src="./assets/app-store.png" alt="App Store" class="store-icon" />
+        <span>App Store</span>
+      </a>
+      <a href="javascript:void(0);" onclick="openComingSoonModal()" class="store-button">
+        <img src="./assets/play.png" alt="Play Store" class="store-icon" />
+        <span>Play Store</span>
+      </a>
+      
+    </div>
+  </div>
+</div>
+
+
+<!-- Download Modal -->
+<div id="downloadModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeDownloadModal()">&times;</span>
+    <h3>Download Courassy</h3>
+    <div class="store-links">
+      <a href="https://apps.apple.com/hk/app/naviguih/id6739255560?l=en-GB&platform=iphone" target="_blank" class="app-store-link">
+        <img src="./assets/app-store.png" alt="App Store" class="app-store-icon" />
+        <span>App Store</span>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.naviguih.app" target="_blank" class="app-store-link">
+        <img src="./assets/play.png" alt="Play Store" class="play-store-icon" />
+        <span>Play Store</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+            
             <div class="details-container color-container">
               <div class="article-container" onclick="location.href='details.html?id=creno-app'">
                 <img src="./assets/creno.png" alt="Project 1" class="project-img" />
@@ -455,5 +511,15 @@
   </div>
 </div>
 </body>
+<!-- Coming Soon Modal -->
+<div id="comingSoonModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeComingSoonModal()">&times;</span>
+    <h3 class="modal-title">Coming Soon</h3>
+    <p style="margin-top: 1rem; font-size: 1rem; color: #555;">
+      The Courassy app will be available on the selected store very soon.
+    </p>
+  </div>
+</div>
 
 </html>
