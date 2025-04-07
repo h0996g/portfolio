@@ -1515,3 +1515,41 @@ small {
   background-color: #0056b3;
 }
 
+
+
+
+/* in progress */
+.project-status {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 2rem;
+  color: #fff;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 193, 7, 0.25); /* semi-transparent yellow */
+  border: 1px solid rgba(255, 193, 7, 0.4);
+  box-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.project-status.in-progress::before {
+  content: '⏳'; /* Clock emoji */
+  font-size: 1rem;
+}
+
+.project-status.in-progress:hover {
+  transform: scale(1.05);
+}
+
+/* Ensure container allows badge positioning */
+.details-container.color-container {
+  position: relative;
+}
