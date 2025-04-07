@@ -432,12 +432,6 @@ const projectsData = {
         githubLink: "https://github.com/h0996g/figma",
         demoLink: "#"
     },
-
-
-
-
-
-
 "courassy-app": {
     "title": "Courassy - Mobile Learning App",
     "subtitle": "Une plateforme mobile éducative fluide avec messagerie en temps réel, design épuré, et support multilingue",
@@ -514,11 +508,9 @@ const projectsData = {
         "assets/courassy/17.png",
        
     ],
-    // "githubLinkFront": { "owner": "yourGithubUsername", "projectId": "courassy-mobile" },
-    // "githubLinkBack": { "owner": "yourGithubUsername", "projectId": "courassy-api" },
-    "demoLink": "#",
-    "playstoreLink": "#", // Coming soon
-    "appstoreLink": "#", // Coming soon
+"githubLinkFront": null,
+"githubLinkBack": null
+
 }
 
 
@@ -655,6 +647,45 @@ function loadProjectDetails() {
         `;
         featureAccordion.appendChild(accordionItem);
     });
+    const githubLinkBtn = document.getElementById('github-link');
+    githubLinkBtn.style.display = 'none'; // Hide by default
+    
+    if (project.githubLink || project.githubLinkFront || project.githubLinkBack) {
+        githubLinkBtn.style.display = 'inline-block'; // Or 'flex', 'block', depending on your layout
+    
+        githubLinkBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+    
+            if (project.githubLink) {
+                // Simple single-link case
+                window.open(project.githubLink, '_blank');
+            } else if (project.githubLinkFront && project.githubLinkBack) {
+                // Both Front and Back links exist
+                showGitHubOptions(
+                    { owner: project.githubLinkFront.owner, projectId: project.githubLinkFront.projectId },
+                    { owner: project.githubLinkBack.owner, projectId: project.githubLinkBack.projectId }
+                );
+            } else if (project.githubLinkFront) {
+                // Only front-end repo
+                window.open(`https://github.com/${project.githubLinkFront.owner}/${project.githubLinkFront.projectId}`, '_blank');
+            } else if (project.githubLinkBack) {
+                // Only back-end repo
+                window.open(`https://github.com/${project.githubLinkBack.owner}/${project.githubLinkBack.projectId}`, '_blank');
+            }
+        });
+    }
+    
+    
+
+// Play Store Button Handling
+document.getElementById('playstore-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (project.playstoreLink && project.playstoreLink.trim() !== '' && project.playstoreLink !== '#') {
+        window.open(project.playstoreLink, '_blank');
+    } else {
+        showComingSoonModal();
+    }
+});
 
     // const screenshotsDiv = document.getElementById('screenshots');
     // project.screenshots.forEach((screenshot, index) => {
