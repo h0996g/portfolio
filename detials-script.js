@@ -434,15 +434,15 @@ const projectsData = {
     },
 "courassy-app": {
     "title": "Courassy - Mobile Learning App",
-    "subtitle": "Une plateforme mobile éducative fluide avec messagerie en temps réel, design épuré, et support multilingue",
-    "overview": "Courassy est une application mobile intuitive développée avec Flutter. Elle vise à transformer l'éducation à distance en connectant les étudiants avec des instructeurs professionnels via une interface conviviale. Courassy prend en charge plusieurs langues, propose un système de messagerie instantanée avec partage de fichiers, et permet aux apprenants de suivre des cours en ligne en direct ou enregistrés.",
+    "subtitle": "A smooth educational mobile platform with real-time messaging, sleek design, and multilingual support",
+    "overview": "Courassy is an intuitive mobile app developed using Flutter. It aims to transform distance education by connecting students with professional instructors through a user-friendly interface. Courassy supports multiple languages, features an instant messaging system with file sharing, and allows learners to attend live or recorded online courses.",
     "keyFeatures": [
-        "Interface utilisateur simple et moderne",
-        "Connexion sécurisée via Google Sign-In",
-        "Messagerie en temps réel avec fichiers (texte, images, documents)",
-        "Support multilingue (français,, arabe)",
-        "Navigation fluide grâce à GoRouter",
-        "Notifications personnalisées pour les cours et les messages"
+        "Simple and modern user interface",
+        "Secure login via Google Sign-In",
+        "Real-time messaging with file support (text, images, documents)",
+        "Multilingual support (French, Arabic)",
+        "Smooth navigation using GoRouter",
+        "Custom notifications for courses and messages"
     ],
     "techStack": {
         "Frontend": ["Flutter", "BLoC (State Management)"],
@@ -454,37 +454,37 @@ const projectsData = {
             "GoRouter for efficient navigation",
             "Push Notifications",
             "File sharing in chat (images, documents)",
-            "Responsive layout (mobile/tablette)",
+            "Responsive layout (mobile/tablet)",
             "Message and media caching"
         ]
     },
     "detailedFeatures": [
         {
-            "title": "Expérience Étudiant",
+            "title": "Student Experience",
             "details": [
-                "Parcours multilingue avec changement de langue dynamique",
-                "Suivi des cours en direct ou enregistrés",
-                "Messagerie directe avec instructeurs avec partage de fichiers",
-                "Progression visible et notifications personnalisées"
+                "Multilingual journey with dynamic language switching",
+                "Attend live or recorded courses",
+                "Direct messaging with instructors and file sharing",
+                "Progress tracking and personalized notifications"
             ]
         },
         {
-            "title": "Expérience Instructeur",
+            "title": "Instructor Experience",
             "details": [
-                "Création et gestion de cours depuis mobile",
-                "Communication instantanée avec les étudiants",
-                "Tableau de bord pour gérer les sessions et consulter les discussions",
-                "Suivi de l’engagement et feedback des apprenants"
+                "Create and manage courses from mobile",
+                "Instant communication with students",
+                "Dashboard to manage sessions and view discussions",
+                "Track engagement and gather learner feedback"
             ]
         },
         {
-            "title": "Fonctionnalités Techniques",
+            "title": "Technical Features",
             "details": [
-                "Navigation rapide avec GoRouter",
-                "Connexion sécurisée via Google Sign-In",
-                "Système de messagerie en temps réel avec prise en charge des fichiers",
-                "Notifications pour rappels, cours, et nouveaux messages",
-                "Mise en cache des médias pour de meilleures performances"
+                "Fast navigation using GoRouter",
+                "Secure login through Google Sign-In",
+                "Real-time messaging system with file support",
+                "Notifications for reminders, courses, and new messages",
+                "Media caching for better performance"
             ]
         }
     ],
@@ -505,13 +505,12 @@ const projectsData = {
         "assets/courassy/14.png",
         "assets/courassy/15.png",
         "assets/courassy/16.png",
-        "assets/courassy/17.png",
-       
+        "assets/courassy/17.png"
     ],
-"githubLinkFront": null,
-"githubLinkBack": null
-
+    "githubLinkFront": null,
+    "githubLinkBack": null
 }
+
 
 
 
