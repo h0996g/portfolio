@@ -4,6 +4,40 @@ function toggleMenu() {
   menu.classList.toggle("open");
   icon.classList.toggle("open");
 }
+function openComingSoonModal() {
+  document.getElementById('comingSoonModal').classList.remove('hidden');
+}
+
+function closeComingSoonModal() {
+  document.getElementById('comingSoonModal').classList.add('hidden');
+}
+
+// Optional: close on outside click
+window.onclick = function (event) {
+  const comingSoonModal = document.getElementById('comingSoonModal');
+  const downloadModal = document.getElementById('downloadModal');
+
+  if (event.target === comingSoonModal) {
+    comingSoonModal.classList.add('hidden');
+  }
+  if (event.target === downloadModal) {
+    downloadModal.classList.add('hidden');
+  }
+};
+function openDownloadModal() {
+  document.getElementById('downloadModal').classList.remove('hidden');
+}
+
+function closeDownloadModal() {
+  document.getElementById('downloadModal').classList.add('hidden');
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById('downloadModal');
+  if (event.target === modal) {
+    modal.classList.add('hidden');
+  }
+}
 function showPopup() {
   document.getElementById('comingSoonPopup').style.display = 'block';
   document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open

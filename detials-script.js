@@ -431,17 +431,92 @@ const projectsData = {
         ],
         githubLink: "https://github.com/h0996g/figma",
         demoLink: "#"
-    }
-
-
-
+    },
+"courassy-app": {
+    "title": "Courassy - Mobile Learning App",
+    "subtitle": "A smooth educational mobile platform with real-time messaging, sleek design, and multilingual support",
+    "overview": "Courassy is an intuitive mobile app developed using Flutter. It aims to transform distance education by connecting students with professional instructors through a user-friendly interface. Courassy supports multiple languages, features an instant messaging system with file sharing, and allows learners to attend live or recorded online courses.",
+    "keyFeatures": [
+        "Simple and modern user interface",
+        "Secure login via Google Sign-In",
+        "Real-time messaging with file support (text, images, documents)",
+        "Multilingual support (French, Arabic)",
+        "Smooth navigation using GoRouter",
+        "Custom notifications for courses and messages"
+    ],
+    "techStack": {
+        "Frontend": ["Flutter", "BLoC (State Management)"],
+        "Backend": ["REST API", "Real-time messaging system"],
+        "Additional Features": [
+            "Hive Local Database",
+            "Multi-language support",
+            "Google Sign-In Authentication",
+            "GoRouter for efficient navigation",
+            "Push Notifications",
+            "File sharing in chat (images, documents)",
+            "Responsive layout (mobile/tablet)",
+            "Message and media caching"
+        ]
+    },
+    "detailedFeatures": [
+        {
+            "title": "Student Experience",
+            "details": [
+                "Multilingual journey with dynamic language switching",
+                "Attend live or recorded courses",
+                "Direct messaging with instructors and file sharing",
+                "Progress tracking and personalized notifications"
+            ]
+        },
+        {
+            "title": "Instructor Experience",
+            "details": [
+                "Create and manage courses from mobile",
+                "Instant communication with students",
+                "Dashboard to manage sessions and view discussions",
+                "Track engagement and gather learner feedback"
+            ]
+        },
+        {
+            "title": "Technical Features",
+            "details": [
+                "Fast navigation using GoRouter",
+                "Secure login through Google Sign-In",
+                "Real-time messaging system with file support",
+                "Notifications for reminders, courses, and new messages",
+                "Media caching for better performance"
+            ]
+        }
+    ],
+    "screenshots": [
+        "assets/courassy/1.png",
+        "assets/courassy/2.png",
+        "assets/courassy/3.png",
+        "assets/courassy/4.png",
+        "assets/courassy/5.png",
+        "assets/courassy/6.png",
+        "assets/courassy/7.png",
+        "assets/courassy/8.png",
+        "assets/courassy/9.png",
+        "assets/courassy/10.png",
+        "assets/courassy/11.png",
+        "assets/courassy/12.png",
+        "assets/courassy/13.png",
+        "assets/courassy/14.png",
+        "assets/courassy/15.png",
+        "assets/courassy/16.png",
+        "assets/courassy/17.png"
+    ],
+    "githubLinkFront": null,
+    "githubLinkBack": null
+}
 
 
 
 
     // Add more projects here
 };
-
+  
 function loadProjectDetails() {
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('id');
@@ -470,10 +545,16 @@ function loadProjectDetails() {
     //     e.preventDefault(); // Prevent the default link behavior
     //     window.open(project.demoLink, '_blank'); // Open the demo link in a new window/tab
     // });
-    document.getElementById('playstore-link').addEventListener('click', (e) => {
-        e.preventDefault();
-        window.open(project.playstoreLink, '_blank');
-    });
+    if (project.playstoreLink && project.playstoreLink.trim() !== '' && project.playstoreLink !== '#') {
+        document.getElementById('playstore-link').addEventListener('click', (e) => {
+          e.preventDefault();
+          window.open(project.playstoreLink, '_blank');
+        });
+      } else {
+        // Optionally, hide the button if the link is not valid.
+        document.getElementById('playstore-link').style.display = 'none';
+      }
+      
 
     const keyFeaturesList = document.getElementById('key-features');
     project.keyFeatures.forEach(feature => {
@@ -565,6 +646,45 @@ function loadProjectDetails() {
         `;
         featureAccordion.appendChild(accordionItem);
     });
+    const githubLinkBtn = document.getElementById('github-link');
+    githubLinkBtn.style.display = 'none'; // Hide by default
+    
+    if (project.githubLink || project.githubLinkFront || project.githubLinkBack) {
+        githubLinkBtn.style.display = 'inline-block'; // Or 'flex', 'block', depending on your layout
+    
+        githubLinkBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+    
+            if (project.githubLink) {
+                // Simple single-link case
+                window.open(project.githubLink, '_blank');
+            } else if (project.githubLinkFront && project.githubLinkBack) {
+                // Both Front and Back links exist
+                showGitHubOptions(
+                    { owner: project.githubLinkFront.owner, projectId: project.githubLinkFront.projectId },
+                    { owner: project.githubLinkBack.owner, projectId: project.githubLinkBack.projectId }
+                );
+            } else if (project.githubLinkFront) {
+                // Only front-end repo
+                window.open(`https://github.com/${project.githubLinkFront.owner}/${project.githubLinkFront.projectId}`, '_blank');
+            } else if (project.githubLinkBack) {
+                // Only back-end repo
+                window.open(`https://github.com/${project.githubLinkBack.owner}/${project.githubLinkBack.projectId}`, '_blank');
+            }
+        });
+    }
+    
+    
+
+// Play Store Button Handling
+document.getElementById('playstore-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (project.playstoreLink && project.playstoreLink.trim() !== '' && project.playstoreLink !== '#') {
+        window.open(project.playstoreLink, '_blank');
+    } else {
+        showComingSoonModal();
+    }
+});
 
     // const screenshotsDiv = document.getElementById('screenshots');
     // project.screenshots.forEach((screenshot, index) => {
