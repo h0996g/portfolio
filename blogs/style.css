@@ -1,0 +1,160 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  line-height: 1.8;
+}
+
+h1, h2, h3 {
+  color: #007acc;
+}
+
+code {
+  background-color: #f3f3f3;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-family: Consolas, monospace;
+  font-size: 14px;
+  direction: ltr;
+}
+
+pre {
+  background-color: #f3f3f3;
+  color: #111;
+  padding: 1rem;
+  border-radius: 10px;
+  overflow-x: auto;
+  direction: ltr;
+  margin: 0;
+  height: 640px;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
+
+.code-small {
+  height: auto;
+  font-size: 13px;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.video-phone {
+  width: 100%;
+  max-width: 360px;
+  height: 640px;
+  border-radius: 16px;
+  object-fit: cover;
+  background: #000;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.project-header {
+  background-color: #fff;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.project-header h1 {
+  color: #007acc;
+  font-weight: bold;
+}
+/* Floating language switcher */
+.language-switcher {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  z-index: 999;
+}
+
+.language-switcher select {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+/* New Header Design */
+.project-header {
+  background: linear-gradient(to right, #007acc, #0099cc);
+  color: white;
+  padding: 4rem 1rem;
+  margin-bottom: 2rem;
+  border-radius: 0 0 24px 24px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.project-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.project-header p {
+  font-size: 1.25rem;
+  color: #eaf6ff;
+}
+/* Language Switcher Container */
+.language-switcher {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #ffffff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+/* Icon Label */
+.lang-label {
+  margin: 0;
+  font-size: 1.2rem;
+  cursor: default;
+}
+
+/* Styled Select Dropdown */
+.lang-select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  appearance: none;
+  padding: 0.2rem 0.5rem;
+}
+
+/* Custom Arrow (optional for consistent UI) */
+.lang-select::-ms-expand {
+  display: none;
+}
+.lang-select:focus {
+  outline: none;
+}

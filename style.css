@@ -1553,3 +1553,25 @@ small {
 .details-container.color-container {
   position: relative;
 }
+
+
+
+/* #tutorials-content .experience-details-container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0;
+} */
+
+
+#tutorials-content .details-container.color-container {
+  padding: 1rem;
+  margin: 0.5rem;
+  max-width: 500px;
+  min-height: auto;
+}
+
+#tutorials-content .project-img {
+  max-height: 160px;
+  object-fit: cover;
+}
+
