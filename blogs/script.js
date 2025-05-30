@@ -20,9 +20,9 @@ const translations = {
       "إعادة حفظ الصورة"
     ],
     performanceNote: "كل ذلك يتم على الخيط الرئيسي (Main Thread)، وهو ما يؤدي إلى تعطيل قدرة Flutter على إعادة رسم الواجهة أثناء تنفيذ هذه العمليات.",
-    legacyCodeTitle: "🔴 الكود القديم (بدون Isolate)",
-    newCodeTitle: "✅ الكود الجديد (باستخدام Isolate)",
-    codeExplanationTitle: "🔍 شرح التعديل",
+    legacyCodeTitle: "الكود القديم (بدون Isolate)",
+    newCodeTitle: "الكود الجديد (باستخدام Isolate)",
+    codeExplanationTitle: "شرح التعديل",
     codeExplanation: `final mergedPath = await compute(
   _mergeImagesInIsolate,
   MergeImagesArgs(frontImage.path, backImage.path, outputPath),
