@@ -38,11 +38,11 @@ const translations = {
     ],
     whyCompute: "لماذا استخدمنا compute؟",
     resourceLinks: [
-      { text: "📘 دليل Dart الرسمي – Isolates", href: "https://dart.dev/language/isolates" },
-      { text: "🧩 توثيق مكتبة compute – pub.dev", href: "https://pub.dev/documentation/compute/latest/" },
-      { text: "🔍 وثائق Flutter API – دالة compute", href: "https://api.flutter.dev/flutter/foundation/compute.html" },
-      { text: "📺 تحسين الأداء في Flutter باستخدام Isolates – Flutter Explained", href: "https://www.youtube.com/watch?v=PPwJ75vqP_s" },
-      { text: "📺 استخدام Isolate في Flutter (حالة حقيقية) – Tadas Petra", href: "https://www.youtube.com/watch?v=5AxWC49ZMzs" }
+      { text: "دليل Dart الرسمي – Isolates", href: "https://dart.dev/language/isolates" },
+      { text: "توثيق مكتبة compute – pub.dev", href: "https://pub.dev/documentation/compute/latest/" },
+      { text: "وثائق Flutter API – دالة compute", href: "https://api.flutter.dev/flutter/foundation/compute.html" },
+      { text: "تحسين الأداء في Flutter باستخدام Isolates – Flutter Explained", href: "https://www.youtube.com/watch?v=PPwJ75vqP_s" },
+      { text: "استخدام Isolate في Flutter (حالة حقيقية) – Tadas Petra", href: "https://www.youtube.com/watch?v=5AxWC49ZMzs" }
     ],
     footerButton: "العودة إلى المعرض"
   },
@@ -67,9 +67,9 @@ const translations = {
       "Saving the final image"
     ],
     performanceNote: "All of this happens on the main thread (UI thread), which prevents Flutter from redrawing the UI during those operations.",
-    legacyCodeTitle: "🔴 Legacy Code (No Isolate)",
-    newCodeTitle: "✅ New Code (Using Isolate)",
-    codeExplanationTitle: "🔍 Explanation of the Change",
+    legacyCodeTitle: "Legacy Code (No Isolate)",
+    newCodeTitle: "New Code (Using Isolate)",
+    codeExplanationTitle: "Explanation of the Change",
     codeExplanation: `final mergedPath = await compute(
   _mergeImagesInIsolate,
   MergeImagesArgs(frontImage.path, backImage.path, outputPath),
@@ -85,15 +85,27 @@ const translations = {
     ],
     whyCompute: "Why did we use `compute`?",
     resourceLinks: [
-      { text: "📘 Dart Official Guide – Isolates", href: "https://dart.dev/language/isolates" },
-      { text: "🧩 compute Library Documentation – pub.dev", href: "https://pub.dev/documentation/compute/latest/" },
-      { text: "🔍 Flutter API Docs – compute function", href: "https://api.flutter.dev/flutter/foundation/compute.html" },
-      { text: "📺 Improve Flutter Performance with Isolates – Flutter Explained", href: "https://www.youtube.com/watch?v=PPwJ75vqP_s" },
-      { text: "📺 Using Isolate in Flutter (Real Use Case) – Tadas Petra", href: "https://www.youtube.com/watch?v=5AxWC49ZMzs" }
+      { text: "Dart Official Guide – Isolates", href: "https://dart.dev/language/isolates" },
+      { text: "compute Library Documentation – pub.dev", href: "https://pub.dev/documentation/compute/latest/" },
+      { text: "Flutter API Docs – compute function", href: "https://api.flutter.dev/flutter/foundation/compute.html" },
+      { text: "Improve Flutter Performance with Isolates – Flutter Explained", href: "https://www.youtube.com/watch?v=PPwJ75vqP_s" },
+      { text: "Using Isolate in Flutter (Real Use Case) – Tadas Petra", href: "https://www.youtube.com/watch?v=5AxWC49ZMzs" }
     ],
     footerButton: "Back to Portfolio"
   }
 };
+function copyToClipboard(button) {
+  const code = button.closest('.card').querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    const textSpan = button.querySelector('.copy-text');
+    textSpan.textContent = currentLang === "ar" ? "تم النسخ" : "Copied";
+
+    setTimeout(() => {
+      textSpan.textContent = currentLang === "ar" ? "نسخ" : "Copy";
+    }, 1500);
+  });
+}
+
 
 function applyTranslations(lang) {
   const t = translations[lang];

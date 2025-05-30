@@ -158,3 +158,10 @@ a {
 .lang-select:focus {
   outline: none;
 }
+   pre code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      direction: ltr;
+      text-align: left;
+      white-space: pre-wrap;
+    }
