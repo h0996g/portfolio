@@ -507,6 +507,8 @@ const projectsData = {
         "assets/courassy/16.png",
         "assets/courassy/17.png"
     ],
+    playstoreLink: "https://play.google.com/store/apps/details?id=com.courassy.courassy",
+
     "githubLinkFront": null,
     "githubLinkBack": null
 }
