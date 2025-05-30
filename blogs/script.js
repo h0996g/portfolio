@@ -153,7 +153,7 @@ function applyTranslations(lang) {
 }
 
 // Default language
-let currentLang = "ar";
+let currentLang = "en";
 applyTranslations(currentLang);
 
 // If switcher exists
