@@ -42,7 +42,7 @@ const translations = {
       { text: "توثيق مكتبة compute – pub.dev", href: "https://pub.dev/documentation/compute/latest/" },
       { text: "وثائق Flutter API – دالة compute", href: "https://api.flutter.dev/flutter/foundation/compute.html" },
       { text: "تحسين الأداء في Flutter باستخدام Isolates – Flutter Explained", href: "https://www.youtube.com/watch?v=PPwJ75vqP_s" },
-      { text: "استخدام Isolate في Flutter (حالة حقيقية) – Tadas Petra", href: "https://www.youtube.com/watch?v=5AxWC49ZMzs" }
+      { text: "استخدام Isolate في Flutter (حالة حقيقية) ", href: "https://www.youtube.com/watch?v=5AxWC49ZMzs" }
     ],
     footerButton: "العودة إلى المعرض"
   },
@@ -89,7 +89,7 @@ const translations = {
       { text: "compute Library Documentation – pub.dev", href: "https://pub.dev/documentation/compute/latest/" },
       { text: "Flutter API Docs – compute function", href: "https://api.flutter.dev/flutter/foundation/compute.html" },
       { text: "Improve Flutter Performance with Isolates – Flutter Explained", href: "https://www.youtube.com/watch?v=PPwJ75vqP_s" },
-      { text: "Using Isolate in Flutter (Real Use Case) – Tadas Petra", href: "https://www.youtube.com/watch?v=5AxWC49ZMzs" }
+      { text: "Using Isolate in Flutter (Real Use Case) ", href: "https://www.youtube.com/watch?v=5AxWC49ZMzs" }
     ],
     footerButton: "Back to Portfolio"
   }
