@@ -1575,3 +1575,24 @@ small {
   object-fit: cover;
 }
 
+/* grid view 3 items  */
+/* Default: 3 columns for large screens */
+#projects-and-tutorials .about-containers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Medium screens (e.g., 13-inch laptops ~ <1024px): 2 columns */
+@media (max-width: 1024px) {
+  #projects-and-tutorials .about-containers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small screens (e.g., phones ~ <600px): 1 column */
+@media (max-width: 600px) {
+  #projects-and-tutorials .about-containers {
+    grid-template-columns: 1fr;
+  }
+}
