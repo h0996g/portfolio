@@ -1,26 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-poppins: "Poppins", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Hamburger icon transforms */
+.hamburger-icon.open span:first-child {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-icon.open span:last-child {
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Menu links open state */
+.menu-links.open {
+  max-height: 300px;
+}
+
+/* Toggle button active/hover */
+.toggle-btn.active {
+  background: #111827;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.toggle-btn:hover:not(.active) {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* Content container toggle */
+.content-container > div {
+  display: none;
+}
+.content-container > div.active {
+  display: block;
+}
+
+/* SweetAlert custom styles */
+.swal-popup {
+  border-radius: 16px !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15) !important;
+}
+.swal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+.swal-text {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+.swal-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.swal-button {
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  background-color: #111827;
+  color: white;
+}
+.swal-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.swal-close-button {
+  color: #9ca3af;
+  transition: color 0.2s ease;
+}
+.swal-close-button:hover {
+  color: #374151;
 }
