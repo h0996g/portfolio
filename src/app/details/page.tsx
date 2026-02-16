@@ -14,6 +14,7 @@ interface ProjectData {
   detailedFeatures: { title: string; details: string[] }[];
   screenshots: string[];
   playstoreLink?: string;
+  appstoreLink?: string;
   githubLink?: string;
   githubLinkFront?: { owner: string; projectId: string } | null;
   githubLinkBack?: { owner: string; projectId: string } | null;
@@ -674,17 +675,34 @@ function DetailsContent() {
                     ) : null}
                   </div>
                 )}
+                {project.appstoreLink && (
+                  <a
+                    href={project.appstoreLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-black text-white hover:bg-gray-800 transition-all duration-300 no-underline w-full shadow-lg hover:shadow-xl hover:scale-[1.02] group"
+                  >
+                    <i className="fab fa-apple text-2xl group-hover:scale-110 transition-transform"></i>
+                    <div className="flex flex-col items-start leading-tight">
+                      <span className="text-[10px] opacity-90">
+                        Download on the
+                      </span>
+                      <span className="text-sm font-semibold">App Store</span>
+                    </div>
+                  </a>
+                )}
                 {project.playstoreLink && (
                   <a
                     href={project.playstoreLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-4 py-3 rounded-lg bg-green-600 text-white hover:bg-green-500 transition-colors no-underline w-full"
+                    className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-linear-to-r from-teal-500 to-green-600 text-white hover:from-teal-600 hover:to-green-700 transition-all duration-300 no-underline w-full shadow-lg hover:shadow-xl hover:scale-[1.02] group"
                   >
-                    <i className="fab fa-google-play text-xl"></i>
-                    <span className="font-medium text-sm">
-                      Get it on Google Play
-                    </span>
+                    <i className="fab fa-google-play text-2xl group-hover:scale-110 transition-transform"></i>
+                    <div className="flex flex-col items-start leading-tight">
+                      <span className="text-[10px] opacity-90">GET IT ON</span>
+                      <span className="text-sm font-semibold">Google Play</span>
+                    </div>
                   </a>
                 )}
               </div>

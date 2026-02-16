@@ -34,8 +34,7 @@ const projects: ProjectCard[] = [
     inProgress: true,
     appStore:
       "https://apps.apple.com/hk/app/naviguih/id6739255560?l=en-GB&platform=iphone",
-    playStore:
-      "https://play.google.com/store/apps/details?id=com.naviguih.app",
+    playStore: "https://play.google.com/store/apps/details?id=com.naviguih.app",
   },
   {
     title: "NavFood",
@@ -67,8 +66,7 @@ const projects: ProjectCard[] = [
     title: "Adkar",
     image: "/ADKAR0.png",
     github: "https://github.com/h0996g/adkar",
-    playStore:
-      "https://play.google.com/store/apps/details?id=com.h0774g.alhou",
+    playStore: "https://play.google.com/store/apps/details?id=com.h0774g.alhou",
     detailsId: "adkar-app",
   },
   {
@@ -110,7 +108,8 @@ const tutorials: TutorialCard[] = [
     href: "/backend?id=blog-1",
   },
   {
-    title: "BlocProvider.of() called with a context that does not contain a Bloc",
+    title:
+      "BlocProvider.of() called with a context that does not contain a Bloc",
     image: "/stackoverflow.webp",
     href: "/flutter?id=blog-1",
   },
@@ -123,7 +122,7 @@ const tutorials: TutorialCard[] = [
 
 function showGitHubOptions(
   front: { owner: string; projectId: string },
-  back: { owner: string; projectId: string }
+  back: { owner: string; projectId: string },
 ) {
   if (typeof window !== "undefined" && window.Swal) {
     window.Swal.fire({
@@ -147,17 +146,13 @@ function showGitHubOptions(
         document
           .getElementById("frontend-btn")
           ?.addEventListener("click", () => {
-            window.open(
-              `https://github.com/${front.owner}/${front.projectId}`
-            );
+            window.open(`https://github.com/${front.owner}/${front.projectId}`);
             window.Swal.close();
           });
         document
           .getElementById("backend-btn")
           ?.addEventListener("click", () => {
-            window.open(
-              `https://github.com/${back.owner}/${back.projectId}`
-            );
+            window.open(`https://github.com/${back.owner}/${back.projectId}`);
             window.Swal.close();
           });
       },
@@ -178,8 +173,7 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
         className={`aspect-4/3 overflow-hidden bg-gray-100 ${project.detailsId ? "cursor-pointer" : ""}`}
         onClick={
           project.detailsId
-            ? () =>
-                (window.location.href = `/details?id=${project.detailsId}`)
+            ? () => (window.location.href = `/details?id=${project.detailsId}`)
             : undefined
         }
       >
@@ -212,7 +206,7 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
               onClick={() =>
                 showGitHubOptions(
                   project.githubOptions!.front,
-                  project.githubOptions!.back
+                  project.githubOptions!.back,
                 )
               }
             >
@@ -232,9 +226,10 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
               href={project.appStore}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white text-xs font-medium no-underline hover:bg-gray-700 transition-colors duration-200"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-black text-white text-xs font-semibold no-underline hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
             >
-              <i className="fab fa-apple text-base"></i>App Store
+              <i className="fab fa-apple text-lg group-hover:scale-110 transition-transform"></i>
+              <span>App Store</span>
             </a>
           )}
           {project.playStore && (
@@ -242,9 +237,10 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
               href={project.playStore}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white text-xs font-medium no-underline hover:bg-gray-700 transition-colors duration-200"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 text-white text-xs font-semibold no-underline hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
             >
-              <i className="fab fa-google-play text-base"></i>Play Store
+              <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
+              <span>Play Store</span>
             </a>
           )}
         </div>
@@ -284,7 +280,7 @@ function TutorialCardComponent({ tutorial }: { tutorial: TutorialCard }) {
 
 export default function Projects() {
   const [activeTab, setActiveTab] = useState<"projects" | "tutorials">(
-    "projects"
+    "projects",
   );
 
   return (
@@ -327,10 +323,7 @@ export default function Projects() {
         {activeTab === "tutorials" && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tutorials.map((tutorial) => (
-              <TutorialCardComponent
-                key={tutorial.title}
-                tutorial={tutorial}
-              />
+              <TutorialCardComponent key={tutorial.title} tutorial={tutorial} />
             ))}
           </div>
         )}
