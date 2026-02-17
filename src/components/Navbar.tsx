@@ -10,6 +10,7 @@ export default function Navbar() {
   const links = [
     { href: "#about", label: "About" },
     { href: "#experience", label: "Experience" },
+    { href: "#work", label: "Work" },
     { href: "#projects-and-tutorials", label: "Projects" },
     { href: "#contact", label: "Contact" },
   ];
