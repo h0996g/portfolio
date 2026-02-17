@@ -594,7 +594,7 @@ function DetailsContent() {
             <ul className="space-y-2 mb-8">
               {project.keyFeatures.map((feature, i) => (
                 <li key={i} className="flex items-start gap-3 text-gray-700">
-                  <span className="text-green-500 mt-1 shrink-0">✓</span>
+                  <i className="fas fa-check text-green-500 mt-1 shrink-0"></i>
                   {feature}
                 </li>
               ))}
@@ -730,7 +730,7 @@ function DetailsContent() {
                 <span
                   className={`transform transition-transform ${openAccordion === index ? "rotate-180" : ""}`}
                 >
-                  ▼
+                  <i className="fas fa-chevron-down"></i>
                 </span>
               </button>
               {openAccordion === index && (
@@ -799,7 +799,7 @@ function DetailsContent() {
               className="absolute -top-10 right-0 text-white text-3xl hover:text-gray-300 cursor-pointer bg-transparent border-none"
               onClick={() => setModalImage(null)}
             >
-              ✕
+              <i className="fas fa-xmark"></i>
             </button>
             <Image
               src={project.screenshots[modalImage]}

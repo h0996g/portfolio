@@ -221,7 +221,7 @@ function Code({ children, label }: { children: string; label?: string }) {
           }}
           className="text-[11px] text-gray-500 hover:text-gray-300 transition-colors cursor-pointer"
         >
-          {copied ? "✓ Copied" : "Copy"}
+          {copied ? <><i className="fas fa-check"></i> Copied</> : "Copy"}
         </button>
       </div>
       {/* code */}
@@ -296,7 +296,7 @@ function IsolateTutorialContent() {
             ))}
           </div>
           <div className="mt-6 flex items-start gap-3 bg-amber-50/80 border border-amber-200/60 rounded-xl p-4">
-            <span className="text-amber-500 mt-0.5">⚠️</span>
+            <i className="fas fa-triangle-exclamation text-amber-500 mt-0.5"></i>
             <p className="text-sm text-amber-800 leading-relaxed">
               {c.performanceNote}
             </p>

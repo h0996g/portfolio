@@ -62,7 +62,7 @@ function InfoCard({
   children,
   variant = "blue",
 }: {
-  title: string;
+  title: React.ReactNode;
   children: React.ReactNode;
   variant?: "blue" | "green" | "red" | "yellow" | "purple";
 }) {
@@ -212,21 +212,21 @@ function FlutterBlogContent() {
             Key Motivations:
           </h3>
           <div className="grid md:grid-cols-3 gap-4 mb-6">
-            <InfoCard title="🚨 The Problem" variant="red">
+            <InfoCard title={<><i className="fas fa-exclamation-triangle"></i> The Problem</>} variant="red">
               <p>
                 A Stack Overflow answer with 36 upvotes was promoting a global
                 BlocProvider pattern that could lead to serious performance
                 issues and memory leaks.
               </p>
             </InfoCard>
-            <InfoCard title="🎯 The Goal" variant="green">
+            <InfoCard title={<><i className="fas fa-bullseye"></i> The Goal</>} variant="green">
               <p>
                 To provide clear, practical guidance on proper bloc
                 implementation, backed by insights from the bloc library creator
                 himself.
               </p>
             </InfoCard>
-            <InfoCard title="👥 The Impact" variant="blue">
+            <InfoCard title={<><i className="fas fa-users"></i> The Impact</>} variant="blue">
               <p>
                 Help developers avoid common pitfalls and build more
                 maintainable, performant Flutter applications.
@@ -553,25 +553,25 @@ class LoginView extends StatelessWidget {
             Benefits of Proper Disposal:
           </h4>
           <div className="grid md:grid-cols-3 gap-4 mb-6">
-            <InfoCard title="🧠 Memory Efficiency" variant="green">
+            <InfoCard title={<><i className="fas fa-memory"></i> Memory Efficiency</>} variant="green">
               <ul className="space-y-1">
-                <li>✓ Resources freed after use</li>
-                <li>✓ No memory leaks</li>
-                <li>✓ Better app performance</li>
+                <li><i className="fas fa-check text-green-600 mr-1"></i> Resources freed after use</li>
+                <li><i className="fas fa-check text-green-600 mr-1"></i> No memory leaks</li>
+                <li><i className="fas fa-check text-green-600 mr-1"></i> Better app performance</li>
               </ul>
             </InfoCard>
-            <InfoCard title="🛡️ State Management" variant="green">
+            <InfoCard title={<><i className="fas fa-shield-halved"></i> State Management</>} variant="green">
               <ul className="space-y-1">
-                <li>✓ Clean state transitions</li>
-                <li>✓ No state conflicts</li>
-                <li>✓ Predictable behavior</li>
+                <li><i className="fas fa-check text-green-600 mr-1"></i> Clean state transitions</li>
+                <li><i className="fas fa-check text-green-600 mr-1"></i> No state conflicts</li>
+                <li><i className="fas fa-check text-green-600 mr-1"></i> Predictable behavior</li>
               </ul>
             </InfoCard>
-            <InfoCard title="📦 Code Organization" variant="green">
+            <InfoCard title={<><i className="fas fa-cube"></i> Code Organization</>} variant="green">
               <ul className="space-y-1">
-                <li>✓ Better feature isolation</li>
-                <li>✓ Clearer dependencies</li>
-                <li>✓ Easier maintenance</li>
+                <li><i className="fas fa-check text-green-600 mr-1"></i> Better feature isolation</li>
+                <li><i className="fas fa-check text-green-600 mr-1"></i> Clearer dependencies</li>
+                <li><i className="fas fa-check text-green-600 mr-1"></i> Easier maintenance</li>
               </ul>
             </InfoCard>
           </div>
@@ -656,7 +656,7 @@ class DashboardPage extends StatelessWidget {
             Appropriate vs Inappropriate Usage:
           </h4>
           <div className="grid md:grid-cols-2 gap-4 mb-6">
-            <InfoCard title="✅ Good Usage" variant="green">
+            <InfoCard title={<><i className="fas fa-circle-check"></i> Good Usage</>} variant="green">
               <div className="space-y-4">
                 <div>
                   <p className="font-semibold">Feature-Specific Pages:</p>
@@ -689,7 +689,7 @@ class DashboardPage extends StatelessWidget {
                 </div>
               </div>
             </InfoCard>
-            <InfoCard title="❌ Bad Usage" variant="red">
+            <InfoCard title={<><i className="fas fa-circle-xmark"></i> Bad Usage</>} variant="red">
               <div className="space-y-4">
                 <div>
                   <p className="font-semibold">Global App State:</p>
