@@ -170,7 +170,7 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
         </span>
       )}
       <div
-        className={`aspect-4/3 overflow-hidden bg-gray-100 ${project.detailsId ? "cursor-pointer" : ""}`}
+        className={`aspect-4/3 overflow-hidden bg-gray-200 animate-pulse ${project.detailsId ? "cursor-pointer" : ""}`}
         onClick={
           project.detailsId
             ? () => (window.location.href = `/details?id=${project.detailsId}`)
@@ -182,6 +182,8 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
           alt={project.title}
           width={400}
           height={300}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>
@@ -255,12 +257,14 @@ function TutorialCardComponent({ tutorial }: { tutorial: TutorialCard }) {
       href={tutorial.href}
       className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col cursor-pointer no-underline"
     >
-      <div className="aspect-video overflow-hidden bg-gray-100">
+      <div className="aspect-video overflow-hidden bg-gray-200 animate-pulse">
         <Image
           src={tutorial.image}
           alt={tutorial.title}
           width={400}
           height={225}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>

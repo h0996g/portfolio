@@ -760,7 +760,7 @@ function DetailsContent() {
           {project.screenshots.map((screenshot, index) => (
             <div
               key={index}
-              className="cursor-pointer rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-shadow"
+              className="cursor-pointer rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-shadow bg-gray-200 animate-pulse"
               onClick={() => setModalImage(index)}
             >
               <Image
@@ -768,6 +768,8 @@ function DetailsContent() {
                 alt={`Screenshot ${index + 1}`}
                 width={200}
                 height={400}
+                loading="lazy"
+                sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
                 className="w-full h-auto object-cover"
               />
             </div>
