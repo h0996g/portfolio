@@ -181,14 +181,19 @@ export default function WorkExperience() {
               <div className="flex gap-4">
                 <CompanyLogo entry={entry} />
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-semibold text-gray-900">
+                  <h3 className="text-base font-semibold text-gray-900 flex items-center gap-1.5">
+                    {entry.company}
                     <a
                       href={entry.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:underline"
+                      title={`Visit ${entry.company}`}
+                      className="inline-flex items-center justify-center w-5 h-5 rounded text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
                     >
-                      {entry.company}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5">
+                        <path fillRule="evenodd" d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-4.95-4.95l1.5-1.5a.75.75 0 0 1 1.06 1.06l-1.5 1.5a2 2 0 0 0 2.83 2.83l2-2a2 2 0 0 0 0-2.83.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 4.95 4.95l-1.5 1.5a.75.75 0 1 1-1.06-1.06l1.5-1.5a2 2 0 0 0-2.83-2.83l-2 2a2 2 0 0 0 0 2.83.75.75 0 0 1 0 1.06Z" clipRule="evenodd" />
+                      </svg>
                     </a>
                   </h3>
                   {entry.totalDuration && (

@@ -14,6 +14,7 @@ interface ProjectData {
   detailedFeatures: { title: string; details: string[] }[];
   screenshots: string[];
   playstoreLink?: string;
+  playstoreComingSoon?: boolean;
   appstoreLink?: string;
   githubLink?: string;
   githubLinkFront?: { owner: string; projectId: string } | null;
@@ -244,12 +245,12 @@ const projectsData: Record<string, ProjectData> = {
     githubLinkFront: { owner: "h0996g", projectId: "mosqueFlutter" },
     githubLinkBack: { owner: "h0996g", projectId: "mosqueNode" },
   },
-  "adkar-app": {
-    title: "Adkar: Muslim Remembrance App",
+  "ajr-app": {
+    title: "Ajr: Muslim Remembrance App",
     subtitle:
       "A comprehensive application for Muslim daily remembrances and Quranic verses",
     overview:
-      "Adkar is a mobile application designed to assist Muslims with their daily remembrances (adkar), Quranic recitations. It offers a range of features including morning and evening remembrances, Quranic verses with interpretations, Allah's beautiful names, customizable rosary, and timely notifications.",
+      "Ajr is a mobile application designed to assist Muslims with their daily remembrances (adkar), Quranic recitations. It offers a range of features including morning and evening remembrances, Quranic verses with interpretations, Allah's beautiful names, customizable rosary, and timely notifications.",
     keyFeatures: [
       "Morning and evening remembrances with counters",
       "Holy Quran with reading and interpretation",
@@ -302,7 +303,7 @@ const projectsData: Record<string, ProjectData> = {
         details: [
           "Customizable notification system for reminders",
           "In-app feedback and suggestion submission",
-          "Get notified when a new version of Adkar is released, with a brief overview of the changes and improvements made.",
+          "Get notified when a new version of Ajr is released, with a brief overview of the changes and improvements made.",
         ],
       },
       {
@@ -315,8 +316,7 @@ const projectsData: Record<string, ProjectData> = {
     ],
     screenshots: Array.from({ length: 18 }, (_, i) => `/adkar/${i + 1}.jpg`),
     playstoreLink:
-      "https://play.google.com/store/apps/details?id=com.h0774g.alhou",
-    githubLink: "https://github.com/h0996g/adkar",
+      "https://play.google.com/store/apps/details?id=com.ajr.app",
   },
   "tic-tac-toe-app": {
     title: "Tic Tac Toe Game",
@@ -493,10 +493,53 @@ const projectsData: Record<string, ProjectData> = {
     screenshots: Array.from({ length: 17 }, (_, i) => `/courassy/${i + 1}.png`),
     githubLinkFront: null,
     githubLinkBack: null,
-    playstoreLink:
-      "https://play.google.com/store/apps/details?id=com.courassy.courassy",
+    playstoreComingSoon: true,
   },
 };
+
+function ComingSoonModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.45)", backdropFilter: "blur(4px)" }}
+      onClick={onClose}
+    >
+      <div
+        className="relative bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center gap-4 text-center"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer border-0 bg-transparent text-base"
+        >
+          ✕
+        </button>
+
+        {/* @ts-expect-error lottie-player is a web component loaded via CDN */}
+        <lottie-player
+          src="/lottie/Coming soon.json"
+          background="transparent"
+          speed="1"
+          style={{ width: "200px", height: "200px" }}
+          loop
+          autoplay
+        />
+
+        <h2 className="text-2xl font-bold text-gray-900">Coming Soon</h2>
+        <p className="text-gray-500 text-sm leading-relaxed">
+          This app is on its way to the{" "}
+          <span className="font-semibold text-gray-700">Play Store</span>.
+          <br />
+          Stay tuned for the launch!
+        </p>
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          In Development
+        </span>
+      </div>
+    </div>
+  );
+}
 
 function getTechBadgeColor(category: string, tech: string): string {
   switch (category) {
@@ -522,6 +565,7 @@ function DetailsContent() {
   const id = searchParams.get("id");
   const [openAccordion, setOpenAccordion] = useState<number>(0);
   const [modalImage, setModalImage] = useState<number | null>(null);
+  const [showComingSoon, setShowComingSoon] = useState(false);
 
   const project = id ? projectsData[id] : null;
 
@@ -705,6 +749,18 @@ function DetailsContent() {
                     </div>
                   </a>
                 )}
+                {project.playstoreComingSoon && (
+                  <button
+                    onClick={() => setShowComingSoon(true)}
+                    className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-linear-to-r from-teal-500 to-green-600 text-white hover:from-teal-600 hover:to-green-700 transition-all duration-300 w-full shadow-lg hover:shadow-xl hover:scale-[1.02] group cursor-pointer border-0"
+                  >
+                    <i className="fab fa-google-play text-2xl group-hover:scale-110 transition-transform"></i>
+                    <div className="flex flex-col items-start leading-tight">
+                      <span className="text-[10px] opacity-90">GET IT ON</span>
+                      <span className="text-sm font-semibold">Google Play</span>
+                    </div>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -824,6 +880,10 @@ function DetailsContent() {
             </button>
           </div>
         </div>
+      )}
+
+      {showComingSoon && (
+        <ComingSoonModal onClose={() => setShowComingSoon(false)} />
       )}
     </div>
   );

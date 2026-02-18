@@ -19,6 +19,7 @@ interface ProjectCard {
   inProgress?: boolean;
   appStore?: string;
   playStore?: string;
+  playStoreComingSoon?: boolean;
   github?: string;
   githubOptions?: {
     front: { owner: string; projectId: string };
@@ -58,16 +59,14 @@ const projects: ProjectCard[] = [
     title: "Courassy",
     image: "/courassy3.png",
     inProgress: true,
-    playStore:
-      "https://play.google.com/store/apps/details?id=com.courassy.courassy",
+    playStoreComingSoon: true,
     detailsId: "courassy-app",
   },
   {
-    title: "Adkar",
+    title: "Ajr",
     image: "/ADKAR0.png",
-    github: "https://github.com/h0996g/adkar",
-    playStore: "https://play.google.com/store/apps/details?id=com.h0774g.alhou",
-    detailsId: "adkar-app",
+    playStore: "https://play.google.com/store/apps/details?id=com.ajr.app",
+    detailsId: "ajr-app",
   },
   {
     title: "Creno Dz",
@@ -160,6 +159,40 @@ function showGitHubOptions(
   }
 }
 
+function showComingSoon() {
+  if (typeof window !== "undefined" && window.Swal) {
+    window.Swal.fire({
+      title: "Coming Soon",
+      html: `
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:4px 0 8px">
+          <lottie-player
+            src="/lottie/Coming soon.json"
+            background="transparent"
+            speed="1"
+            style="width:200px;height:200px"
+            loop autoplay>
+          </lottie-player>
+          <p style="color:#374151;font-size:15px;margin:0;line-height:1.6;text-align:center">
+            This app is on its way to the <strong>Play Store</strong>.<br/>Stay tuned for the launch!
+          </p>
+          <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;border-radius:999px;padding:4px 14px;font-size:12px;font-weight:600">
+            <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block"></span>
+            In Development
+          </span>
+        </div>
+      `,
+      showConfirmButton: false,
+      showCloseButton: true,
+      background: "#ffffff",
+      customClass: {
+        popup: "swal-popup",
+        title: "swal-title",
+        closeButton: "swal-close-button",
+      },
+    });
+  }
+}
+
 function ProjectCardComponent({ project }: { project: ProjectCard }) {
   return (
     <div className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col relative">
@@ -244,6 +277,15 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
               <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
               <span>Play Store</span>
             </a>
+          )}
+          {project.playStoreComingSoon && (
+            <button
+              onClick={showComingSoon}
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 text-white text-xs font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group cursor-pointer border-0"
+            >
+              <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
+              <span>Play Store</span>
+            </button>
           )}
         </div>
       </div>
