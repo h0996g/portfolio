@@ -57,6 +57,14 @@ const projects: ProjectCard[] = [
       "https://play.google.com/store/apps/details?id=com.sarlkig.navFoodDelivery",
   },
   {
+    title: "NavRestaurant",
+    image: "/navRestaurant.png",
+    inProgress: true,
+    appStore: "https://apps.apple.com/us/app/navrestaurant/id6751362901",
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.sarlkig.NavRestaurant",
+  },
+  {
     title: "Courassy",
     image: "/courassy3.png",
     inProgress: true,
