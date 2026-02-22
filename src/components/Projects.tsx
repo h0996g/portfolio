@@ -25,6 +25,7 @@ interface ProjectCard {
     front: { owner: string; projectId: string };
     back: { owner: string; projectId: string };
   };
+  websiteLink?: string;
   detailsId?: string;
 }
 
@@ -66,6 +67,7 @@ const projects: ProjectCard[] = [
     title: "Ajr",
     image: "/ADKAR0.png",
     playStore: "https://play.google.com/store/apps/details?id=com.ajr.app",
+    websiteLink: "https://h0996g.github.io",
     detailsId: "ajr-app",
   },
   {
@@ -286,6 +288,17 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
               <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
               <span>Play Store</span>
             </button>
+          )}
+          {project.websiteLink && (
+            <a
+              href={project.websiteLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold no-underline hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
+            >
+              <i className="fas fa-globe text-base group-hover:rotate-12 transition-transform"></i>
+              <span>Website</span>
+            </a>
           )}
         </div>
       </div>

@@ -10,6 +10,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Houssam Eddine | Portfolio",
   description: "Full Stack Developer Portfolio",
+  icons: null,
 };
 
 export default function RootLayout({

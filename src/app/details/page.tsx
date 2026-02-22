@@ -16,6 +16,7 @@ interface ProjectData {
   playstoreLink?: string;
   playstoreComingSoon?: boolean;
   appstoreLink?: string;
+  websiteLink?: string;
   githubLink?: string;
   githubLinkFront?: { owner: string; projectId: string } | null;
   githubLinkBack?: { owner: string; projectId: string } | null;
@@ -317,6 +318,7 @@ const projectsData: Record<string, ProjectData> = {
     screenshots: Array.from({ length: 18 }, (_, i) => `/adkar/${i + 1}.jpg`),
     playstoreLink:
       "https://play.google.com/store/apps/details?id=com.ajr.app",
+    websiteLink: "https://h0996g.github.io",
   },
   "tic-tac-toe-app": {
     title: "Tic Tac Toe Game",
@@ -760,6 +762,20 @@ function DetailsContent() {
                       <span className="text-sm font-semibold">Google Play</span>
                     </div>
                   </button>
+                )}
+                {project.websiteLink && (
+                  <a
+                    href={project.websiteLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 no-underline w-full shadow-lg hover:shadow-xl hover:scale-[1.02] group"
+                  >
+                    <i className="fas fa-globe text-2xl group-hover:scale-110 transition-transform"></i>
+                    <div className="flex flex-col items-start leading-tight">
+                      <span className="text-[10px] opacity-90">VISIT</span>
+                      <span className="text-sm font-semibold">Website</span>
+                    </div>
+                  </a>
                 )}
               </div>
             </div>

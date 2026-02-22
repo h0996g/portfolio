@@ -48,6 +48,23 @@ export default function About() {
                   STIC. Masters Degree
                 </p>
               </div>
+              <div className="col-span-2 max-sm:col-span-1 bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center gap-5">
+                <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0">
+                  <i className="fas fa-id-card text-amber-600 text-xl"></i>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <h3 className="font-semibold text-gray-900">Self-Entrepreneur Card</h3>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                      Algeria
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Self-Entrepreneur Card — officially registered freelancer in Algeria, enabling legal contracts and professional engagements.
+                  </p>
+                </div>
+              </div>
             </div>
             <p className="text-gray-600 leading-relaxed max-sm:text-justify">
               I am a passionate 25-year-old mobile application developer with a
