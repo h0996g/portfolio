@@ -64,6 +64,26 @@ const projects: ProjectCard[] = [
     detailsId: "courassy-app",
   },
   {
+    title: "massalah (مسلة)",
+    image: "/مسلة.webp",
+    appStore:
+      "https://apps.apple.com/us/app/%D9%85%D8%B3%D9%84%D8%A9/id6753812374",
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.endpointsoft.massalah",
+  },
+  {
+    title: "massalah Provider (مسلة مقدم الخدمة)",
+    image: "/مسلة_مقدم الخدمة.webp",
+    appStore: "https://apps.apple.com/us/app/مسلة-مقدم-الخدمة/id6753877345",
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.endpointsoft.masallah_provider",
+  },
+  {
+    title: "Feedback",
+    image: "/Feedback.png",
+    websiteLink: "https://endpointsoft.com/feedback/",
+  },
+  {
     title: "Ajr",
     image: "/ADKAR0.png",
     playStore: "https://play.google.com/store/apps/details?id=com.ajr.app",
