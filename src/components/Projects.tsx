@@ -31,9 +31,8 @@ interface ProjectCard {
 
 const projects: ProjectCard[] = [
   {
-    title: "Naviguih",
+    title: "NavMarket",
     image: "/naviguih.png",
-    inProgress: true,
     appStore:
       "https://apps.apple.com/hk/app/naviguih/id6739255560?l=en-GB&platform=iphone",
     playStore: "https://play.google.com/store/apps/details?id=com.naviguih.app",
@@ -41,7 +40,6 @@ const projects: ProjectCard[] = [
   {
     title: "NavFood",
     image: "/navfood.png",
-    inProgress: true,
     appStore:
       "https://apps.apple.com/dz/app/navfood/id6742744572?platform=iphone",
     playStore:
@@ -50,7 +48,6 @@ const projects: ProjectCard[] = [
   {
     title: "NavDelivery",
     image: "/navdelivery.png",
-    inProgress: true,
     appStore:
       "https://apps.apple.com/dz/app/navdelivery/id6745877102?platform=iphone",
     playStore:
@@ -59,7 +56,6 @@ const projects: ProjectCard[] = [
   {
     title: "NavRestaurant",
     image: "/navRestaurant.png",
-    inProgress: true,
     appStore: "https://apps.apple.com/us/app/navrestaurant/id6751362901",
     playStore:
       "https://play.google.com/store/apps/details?id=com.sarlkig.NavRestaurant",
