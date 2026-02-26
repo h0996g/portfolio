@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from "react";
 import Link from "next/link";
+import { useTheme } from "@/components/ThemeProvider";
 
 /* ── translations ─────────────────────────────────────────────── */
 
@@ -248,25 +249,42 @@ function Code({ children, label }: { children: string; label?: string }) {
 
 function IsolateTutorialContent() {
   const [lang, setLang] = useState<Lang>("en");
+  const { theme } = useTheme();
+  const dark = theme === "dark";
   const c = t[lang];
   const rtl = lang === "ar";
+
+  const palette = {
+    bg:             dark ? "#141414" : "#FFFDF1",
+    topbar:         dark ? "#141414" : "#FFFDF1",
+    border:         dark ? "#2E2015" : "#FFCE99",
+    heading:        dark ? "#FFE4C2" : "#562F00",
+    body:           dark ? "#BFA080" : "#562F00",
+    accent:         "#FF9644",
+    stepBg:         dark ? "#261500" : "#FFCE99",
+    stepBorder:     dark ? "#FF964450" : "#FF9644",
+    calloutBg:      dark ? "#FF964412" : "#FFCE9940",
+    toggleActive:   "#FF9644",
+    toggleInactive: dark ? "#141414" : "transparent",
+    toggleText:     dark ? "#BFA080" : "#562F00",
+  };
 
   return (
     <div
       className="min-h-screen transition-colors"
-      style={{ background: "#FFFDF1", color: "#562F00" }}
+      style={{ background: palette.bg, color: palette.body }}
       dir={rtl ? "rtl" : "ltr"}
     >
       {/* ── top bar ── */}
       <div
         className="sticky top-0 z-40 border-b"
-        style={{ background: "#FFFDF1", borderColor: "#FFCE99" }}
+        style={{ background: palette.topbar, borderColor: palette.border }}
       >
         <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
           <Link
             href="/"
             className="flex items-center gap-2 text-sm font-medium transition-colors no-underline"
-            style={{ color: "#FF9644" }}
+            style={{ color: palette.accent }}
           >
             <i className={`fas fa-arrow-${rtl ? "right" : "left"} text-xs`} />
             {c.back}
@@ -276,7 +294,7 @@ function IsolateTutorialContent() {
           <div style={{ direction: "ltr" }}>
             <div
               className="flex items-center rounded-lg overflow-hidden"
-              style={{ border: "1px solid #FFCE99" }}
+              style={{ border: `1px solid ${palette.border}` }}
             >
               {(["en", "ar"] as Lang[]).map((l, i) => (
                 <button
@@ -284,9 +302,9 @@ function IsolateTutorialContent() {
                   onClick={() => setLang(l)}
                   className="px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer"
                   style={{
-                    borderLeft: i !== 0 ? "1px solid #FFCE99" : undefined,
-                    background: lang === l ? "#FF9644" : "transparent",
-                    color: lang === l ? "#FFFDF1" : "#562F00",
+                    borderLeft: i !== 0 ? `1px solid ${palette.border}` : undefined,
+                    background: lang === l ? palette.toggleActive : palette.toggleInactive,
+                    color: lang === l ? "#FFFDF1" : palette.toggleText,
                   }}
                 >
                   {l === "en" ? "EN" : "AR"}
@@ -302,29 +320,29 @@ function IsolateTutorialContent() {
         {/* header */}
         <header
           className="mb-12 pb-10"
-          style={{ borderBottom: "1px solid #FFCE99" }}
+          style={{ borderBottom: `1px solid ${palette.border}` }}
         >
           <p
             className="text-sm font-mono font-semibold mb-3"
-            style={{ color: "#FF9644" }}
+            style={{ color: palette.accent }}
           >
             {c.sub}
           </p>
           <h1
             className="text-3xl md:text-4xl font-bold leading-snug mb-4"
-            style={{ color: "#562F00" }}
+            style={{ color: palette.heading }}
           >
             {c.header}
           </h1>
           <p
             className="text-lg leading-relaxed mb-5"
-            style={{ color: "#562F00", opacity: 0.7 }}
+            style={{ color: palette.body, opacity: 0.8 }}
           >
             {c.lead}
           </p>
           <span
             className="text-xs font-mono"
-            style={{ color: "#FF9644", opacity: 0.7 }}
+            style={{ color: palette.accent, opacity: 0.8 }}
           >
             {c.readTime}
           </span>
@@ -332,12 +350,12 @@ function IsolateTutorialContent() {
 
         {/* ── the problem ── */}
         <section className="mb-14">
-          <h2 className="text-xl font-bold mb-5" style={{ color: "#562F00" }}>
+          <h2 className="text-xl font-bold mb-5" style={{ color: palette.heading }}>
             {c.introTitle}
           </h2>
           <div
             className="space-y-3 leading-relaxed mb-8"
-            style={{ color: "#562F00", opacity: 0.75 }}
+            style={{ color: palette.body, opacity: 0.85 }}
           >
             {c.explanation.map((p, i) => (
               <p key={i}>{p}</p>
@@ -350,14 +368,14 @@ function IsolateTutorialContent() {
               <li
                 key={i}
                 className="flex items-center gap-3 text-sm"
-                style={{ color: "#562F00", opacity: 0.8 }}
+                style={{ color: palette.body }}
               >
                 <span
                   className="w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center shrink-0"
                   style={{
-                    background: "#FFCE99",
-                    color: "#562F00",
-                    border: "1px solid #FF9644",
+                    background: palette.stepBg,
+                    color: palette.heading,
+                    border: `1px solid ${palette.stepBorder}`,
                   }}
                 >
                   {i + 1}
@@ -371,17 +389,17 @@ function IsolateTutorialContent() {
           <div
             className="flex gap-3 px-4 py-3 rounded-lg"
             style={{
-              background: "#FFCE9940",
-              borderLeft: rtl ? undefined : "4px solid #FF9644",
-              borderRight: rtl ? "4px solid #FF9644" : undefined,
+              background: palette.calloutBg,
+              borderLeft: rtl ? undefined : `4px solid ${palette.accent}`,
+              borderRight: rtl ? `4px solid ${palette.accent}` : undefined,
               borderRadius: rtl ? "0.5rem 0 0 0.5rem" : "0 0.5rem 0.5rem 0",
             }}
           >
             <i
               className="fas fa-triangle-exclamation mt-0.5 shrink-0"
-              style={{ color: "#FF9644" }}
+              style={{ color: palette.accent }}
             />
-            <p className="text-sm leading-relaxed" style={{ color: "#562F00" }}>
+            <p className="text-sm leading-relaxed" style={{ color: palette.body }}>
               {c.performanceNote}
             </p>
           </div>
@@ -391,7 +409,7 @@ function IsolateTutorialContent() {
         <section className="mb-14">
           <div className="flex items-center gap-2.5 mb-5">
             <span className="w-2 h-2 rounded-full bg-red-400" />
-            <h2 className="text-xl font-bold" style={{ color: "#562F00" }}>
+            <h2 className="text-xl font-bold" style={{ color: palette.heading }}>
               {c.beforeTitle}
             </h2>
           </div>
@@ -399,7 +417,7 @@ function IsolateTutorialContent() {
             <div className="flex flex-col items-center gap-2">
               <div
                 className="w-full rounded-xl overflow-hidden shadow-sm bg-black"
-                style={{ border: "1px solid #FFCE99" }}
+                style={{ border: `1px solid ${palette.border}` }}
               >
                 <video
                   src="/video/slow.mp4"
@@ -410,7 +428,7 @@ function IsolateTutorialContent() {
               </div>
               <span
                 className="text-[11px] text-center leading-tight"
-                style={{ color: "#562F00", opacity: 0.5 }}
+                style={{ color: palette.body, opacity: 0.6 }}
               >
                 {c.beforeLabel}
               </span>
@@ -423,7 +441,7 @@ function IsolateTutorialContent() {
         <section className="mb-14">
           <div className="flex items-center gap-2.5 mb-5">
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <h2 className="text-xl font-bold" style={{ color: "#562F00" }}>
+            <h2 className="text-xl font-bold" style={{ color: palette.heading }}>
               {c.afterTitle}
             </h2>
           </div>
@@ -431,7 +449,7 @@ function IsolateTutorialContent() {
             <div className="flex flex-col items-center gap-2">
               <div
                 className="w-full rounded-xl overflow-hidden shadow-sm bg-black"
-                style={{ border: "1px solid #FFCE99" }}
+                style={{ border: `1px solid ${palette.border}` }}
               >
                 <video
                   src="/video/fast.mp4"
@@ -442,7 +460,7 @@ function IsolateTutorialContent() {
               </div>
               <span
                 className="text-[11px] text-center leading-tight"
-                style={{ color: "#562F00", opacity: 0.5 }}
+                style={{ color: palette.body, opacity: 0.6 }}
               >
                 {c.afterLabel}
               </span>
@@ -453,7 +471,7 @@ function IsolateTutorialContent() {
 
         {/* ── key change ── */}
         <section className="mb-14">
-          <h2 className="text-xl font-bold mb-5" style={{ color: "#562F00" }}>
+          <h2 className="text-xl font-bold mb-5" style={{ color: palette.heading }}>
             {c.explainTitle}
           </h2>
           <Code label="dart">{keySnippet}</Code>
@@ -462,11 +480,11 @@ function IsolateTutorialContent() {
               <li
                 key={i}
                 className="flex items-start gap-3 text-sm leading-relaxed"
-                style={{ color: "#562F00", opacity: 0.8 }}
+                style={{ color: palette.body }}
               >
                 <span
                   className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
-                  style={{ background: "#FF9644" }}
+                  style={{ background: palette.accent }}
                 />
                 {point}
               </li>
@@ -476,7 +494,7 @@ function IsolateTutorialContent() {
 
         {/* ── resources ── */}
         <section>
-          <h2 className="text-xl font-bold mb-5" style={{ color: "#562F00" }}>
+          <h2 className="text-xl font-bold mb-5" style={{ color: palette.heading }}>
             {c.resourcesTitle}
           </h2>
           <ul className="space-y-2">
@@ -487,7 +505,7 @@ function IsolateTutorialContent() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 text-sm font-medium hover:underline no-underline"
-                  style={{ color: "#FF9644" }}
+                  style={{ color: palette.accent }}
                 >
                   <i className="fas fa-arrow-up-right-from-square text-[10px] opacity-70 group-hover:opacity-100 transition-opacity" />
                   {r.text}
@@ -505,10 +523,7 @@ export default function IsolateTutorialPage() {
   return (
     <Suspense
       fallback={
-        <div
-          className="min-h-screen flex items-center justify-center"
-          style={{ background: "#FFFDF1" }}
-        >
+        <div className="min-h-screen flex items-center justify-center bg-[#FFFDF1] dark:bg-[#1A1008]">
           <div
             className="w-5 h-5 border-2 rounded-full animate-spin"
             style={{ borderColor: "#FFCE99", borderTopColor: "#FF9644" }}
