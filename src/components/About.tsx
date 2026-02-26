@@ -30,7 +30,9 @@ export default function About() {
                 <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center mx-auto mb-3">
                   <i className="fas fa-briefcase text-gray-700 dark:text-gray-300 text-xl"></i>
                 </div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Experience</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                  Experience
+                </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   4+ years
                   <br />
@@ -41,27 +43,26 @@ export default function About() {
                 <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center mx-auto mb-3">
                   <i className="fas fa-graduation-cap text-gray-700 dark:text-gray-300 text-xl"></i>
                 </div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Education</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                  Education
+                </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   IT. Bachelors Degree
                   <br />
                   STIC. Masters Degree
                 </p>
               </div>
-              <div className="col-span-2 max-sm:col-span-1 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md dark:hover:shadow-black/30 transition-shadow duration-300 flex items-center gap-5">
-                <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/30 border border-amber-100 dark:border-amber-800/50 flex items-center justify-center shrink-0">
-                  <i className="fas fa-id-card text-amber-600 dark:text-amber-400 text-xl"></i>
-                </div>
+              <div className="col-span-2 max-sm:col-span-1 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md dark:hover:shadow-black/30 transition-shadow duration-300">
                 <div>
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Self-Entrepreneur Card</h3>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700/50 text-amber-700 dark:text-amber-400 text-xs font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                      Algeria
-                    </span>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">
+                      Self-Entrepreneur Card
+                    </h3>
                   </div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Self-Entrepreneur Card — officially registered freelancer in Algeria, enabling legal contracts and professional engagements.
+                    Self-Entrepreneur Card — officially registered freelancer in
+                    Algeria, enabling legal contracts and professional
+                    engagements.
                   </p>
                 </div>
               </div>
@@ -73,12 +74,12 @@ export default function About() {
               in 2024. My journey into mobile development began when I tested
               Flutter for the first time while working on my Bachelor&apos;s
               degree project, a mobile application developed using Flutter and
-              Laravel. This experience ignited my enthusiasm for building dynamic
-              and user-friendly mobile applications. Since then, I have been
-              continuously enhancing my skills, refining my experiences, and
-              developing more Flutter projects to deliver seamless and impactful
-              user experiences. I&apos;m always updating myself with the latest
-              trends in this field.
+              Laravel. This experience ignited my enthusiasm for building
+              dynamic and user-friendly mobile applications. Since then, I have
+              been continuously enhancing my skills, refining my experiences,
+              and developing more Flutter projects to deliver seamless and
+              impactful user experiences. I&apos;m always updating myself with
+              the latest trends in this field.
             </p>
           </div>
         </div>

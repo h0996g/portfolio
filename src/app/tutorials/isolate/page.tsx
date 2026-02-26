@@ -3,19 +3,19 @@
 import { Suspense, useState } from "react";
 import Link from "next/link";
 
-/* ── translations (same content) ─────────────────────────────── */
+/* ── translations ─────────────────────────────────────────────── */
 
 const t = {
   en: {
     header: "Merging Images with Isolate",
-    sub: "Flutter Performance",
-    lead: "Learn how to merge two images using Isolate in Flutter — keeping your UI buttery smooth while doing heavy image processing in the background.",
+    sub: "Flutter · isolate",
+    lead: "How I fixed a frozen loading spinner by moving heavy image processing off the main thread.",
     introTitle: "The Problem",
     explanation: [
-      "I had a real project where users needed to upload both sides of their ID card as a single merged image.",
+      "In a real project, users needed to upload both sides of their ID card as a single merged image.",
       "I found a merge function online — but the merge itself wasn't the issue.",
       "The submit button showed a CircularProgressIndicator… but the moment the merge ran, the spinner froze. The whole app stuttered.",
-      "Why? Because the merge function does all of this on the main thread:",
+      "Why? Because the merge function runs all of this on the main thread:",
     ],
     mergeSteps: [
       "Read image files from storage",
@@ -37,7 +37,7 @@ const t = {
       "It receives a `MergeImagesArgs` with front path, back path, and output path.",
       "Returns the merged image path. Main thread stays free to animate the UI.",
     ],
-    resourcesTitle: "Resources",
+    resourcesTitle: "Further Reading",
     resources: [
       {
         text: "Dart Guide — Isolates",
@@ -57,14 +57,15 @@ const t = {
       },
     ],
     back: "Back to Portfolio",
+    readTime: "5 min read",
   },
   ar: {
     header: "دمج الصور باستخدام Isolate",
-    sub: "أداء Flutter",
-    lead: "تعلّم كيف تدمج صورتين باستخدام Isolate في Flutter — مع الحفاظ على واجهة سلسة أثناء المعالجة الثقيلة في الخلفية.",
+    sub: "Flutter · الأداء",
+    lead: "كيف أصلحت تجمّد مؤشر التحميل بنقل معالجة الصور الثقيلة خارج الخيط الرئيسي.",
     introTitle: "المشكلة",
     explanation: [
-      "صادفتني حالة في مشروع حقيقي حيث يُطلب من المستخدم رفع وجهي البطاقة الوطنية كصورة واحدة مدموجة.",
+      "في مشروع حقيقي، كان المستخدم يُطلب منه رفع وجهي البطاقة الوطنية كصورة واحدة مدموجة.",
       "وجدت دالة جاهزة للدمج — لكن المشكلة لم تكن في الدمج نفسه.",
       "زر الإرسال يعرض CircularProgressIndicator… لكن بمجرد بدء الدمج، يتجمد المؤشر. التطبيق كله يتوقف لحظياً.",
       "السبب؟ لأن دالة الدمج تنفّذ كل هذا على الخيط الرئيسي:",
@@ -89,7 +90,7 @@ const t = {
       "تستقبل `MergeImagesArgs` مع مسار الصورة الأمامية والخلفية ومسار الحفظ.",
       "تُرجع مسار الصورة المدموجة. الخيط الرئيسي يبقى حراً لتحريك الواجهة.",
     ],
-    resourcesTitle: "مصادر",
+    resourcesTitle: "مصادر إضافية",
     resources: [
       {
         text: "دليل Dart الرسمي — Isolates",
@@ -109,6 +110,7 @@ const t = {
       },
     ],
     back: "العودة إلى المعرض",
+    readTime: "٥ دقائق قراءة",
   },
 };
 
@@ -195,20 +197,22 @@ const keySnippet = `final mergedPath = await compute(
   MergeImagesArgs(frontImage.path, backImage.path, outputPath),
 );`;
 
-/* ── code block component ────────────────────────────────────── */
+/* ── code block ──────────────────────────────────────────────── */
 
 function Code({ children, label }: { children: string; label?: string }) {
   const [copied, setCopied] = useState(false);
   return (
-    <div className="relative group rounded-2xl overflow-hidden bg-[#0d1117] shadow-xl">
-      {/* top bar */}
+    <div
+      className="rounded-xl overflow-hidden bg-[#0d1117] border border-white/5 shadow-lg text-left"
+      dir="ltr"
+    >
       <div className="flex items-center justify-between px-4 py-2.5 bg-[#161b22] border-b border-white/5">
-        <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-          <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
-          <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+        <div className="flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
           {label && (
-            <span className="ml-3 text-[11px] font-mono text-gray-500 uppercase tracking-wide">
+            <span className="ml-2 text-[10px] font-mono text-gray-500 uppercase tracking-wider">
               {label}
             </span>
           )}
@@ -219,13 +223,21 @@ function Code({ children, label }: { children: string; label?: string }) {
             setCopied(true);
             setTimeout(() => setCopied(false), 1500);
           }}
-          className="text-[11px] text-gray-500 hover:text-gray-300 transition-colors cursor-pointer"
+          className="text-[11px] text-gray-500 hover:text-gray-200 transition-colors cursor-pointer flex items-center gap-1"
         >
-          {copied ? <><i className="fas fa-check"></i> Copied</> : "Copy"}
+          {copied ? (
+            <>
+              <i className="fas fa-check" style={{ color: "#FF9644" }} />{" "}
+              <span style={{ color: "#FF9644" }}>Copied</span>
+            </>
+          ) : (
+            <>
+              <i className="fas fa-copy" /> Copy
+            </>
+          )}
         </button>
       </div>
-      {/* code */}
-      <pre className="p-5 overflow-auto max-h-96 text-[13px] leading-6 text-gray-300">
+      <pre className="p-5 overflow-x-auto max-h-105 text-[13px] leading-[1.7] text-gray-300 font-mono">
         <code>{children}</code>
       </pre>
     </div>
@@ -240,123 +252,208 @@ function IsolateTutorialContent() {
   const rtl = lang === "ar";
 
   return (
-    <div className="min-h-screen bg-[#fafafa] dark:bg-gray-950 transition-colors duration-300" dir={rtl ? "rtl" : "ltr"}>
-      {/* language toggle */}
-      <div className="fixed top-5 right-5 z-50">
-        <select
-          value={lang}
-          onChange={(e) => setLang(e.target.value as Lang)}
-          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600 rounded-full px-4 py-2 shadow-sm outline-none cursor-pointer hover:border-gray-300 dark:hover:border-gray-500 transition-colors"
-        >
-          <option value="en">🌐 English</option>
-          <option value="ar">🌐 العربية</option>
-        </select>
+    <div
+      className="min-h-screen transition-colors"
+      style={{ background: "#FFFDF1", color: "#562F00" }}
+      dir={rtl ? "rtl" : "ltr"}
+    >
+      {/* ── top bar ── */}
+      <div
+        className="sticky top-0 z-40 border-b"
+        style={{ background: "#FFFDF1", borderColor: "#FFCE99" }}
+      >
+        <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-sm font-medium transition-colors no-underline"
+            style={{ color: "#FF9644" }}
+          >
+            <i className={`fas fa-arrow-${rtl ? "right" : "left"} text-xs`} />
+            {c.back}
+          </Link>
+
+          {/* lang toggle — always physical left-to-right */}
+          <div style={{ direction: "ltr" }}>
+            <div
+              className="flex items-center rounded-lg overflow-hidden"
+              style={{ border: "1px solid #FFCE99" }}
+            >
+              {(["en", "ar"] as Lang[]).map((l, i) => (
+                <button
+                  key={l}
+                  onClick={() => setLang(l)}
+                  className="px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer"
+                  style={{
+                    borderLeft: i !== 0 ? "1px solid #FFCE99" : undefined,
+                    background: lang === l ? "#FF9644" : "transparent",
+                    color: lang === l ? "#FFFDF1" : "#562F00",
+                  }}
+                >
+                  {l === "en" ? "EN" : "AR"}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* ── hero ── */}
-      <header className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-b from-violet-50 dark:from-violet-950/30 via-white dark:via-gray-950 to-[#fafafa] dark:to-gray-950" />
-        <div className="relative max-w-3xl mx-auto px-6 pt-24 pb-16 text-center">
-          <p className="text-xs font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400 mb-3">
+      {/* ── article ── */}
+      <article className="max-w-3xl mx-auto px-6 py-14">
+        {/* header */}
+        <header
+          className="mb-12 pb-10"
+          style={{ borderBottom: "1px solid #FFCE99" }}
+        >
+          <p
+            className="text-sm font-mono font-semibold mb-3"
+            style={{ color: "#FF9644" }}
+          >
             {c.sub}
           </p>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-none mb-6">
+          <h1
+            className="text-3xl md:text-4xl font-bold leading-snug mb-4"
+            style={{ color: "#562F00" }}
+          >
             {c.header}
           </h1>
-          <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto">
+          <p
+            className="text-lg leading-relaxed mb-5"
+            style={{ color: "#562F00", opacity: 0.7 }}
+          >
             {c.lead}
           </p>
-        </div>
-      </header>
+          <span
+            className="text-xs font-mono"
+            style={{ color: "#FF9644", opacity: 0.7 }}
+          >
+            {c.readTime}
+          </span>
+        </header>
 
-      <main className="max-w-4xl mx-auto px-6 pb-24 space-y-16">
         {/* ── the problem ── */}
-        <section>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+        <section className="mb-14">
+          <h2 className="text-xl font-bold mb-5" style={{ color: "#562F00" }}>
             {c.introTitle}
           </h2>
-          <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+          <div
+            className="space-y-3 leading-relaxed mb-8"
+            style={{ color: "#562F00", opacity: 0.75 }}
+          >
             {c.explanation.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-6">
+
+          {/* numbered steps */}
+          <ol className="space-y-2 mb-6">
             {c.mergeSteps.map((step, i) => (
-              <div
+              <li
                 key={i}
-                className="flex flex-col items-center gap-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-4 text-center shadow-xs"
+                className="flex items-center gap-3 text-sm"
+                style={{ color: "#562F00", opacity: 0.8 }}
               >
-                <span className="w-7 h-7 rounded-full bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-400 text-xs font-bold flex items-center justify-center">
+                <span
+                  className="w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center shrink-0"
+                  style={{
+                    background: "#FFCE99",
+                    color: "#562F00",
+                    border: "1px solid #FF9644",
+                  }}
+                >
                   {i + 1}
                 </span>
-                <span className="text-xs text-gray-600 dark:text-gray-400 leading-snug">
-                  {step}
-                </span>
-              </div>
+                {step}
+              </li>
             ))}
-          </div>
-          <div className="mt-6 flex items-start gap-3 bg-amber-50/80 dark:bg-amber-900/10 border border-amber-200/60 dark:border-amber-700/30 rounded-xl p-4">
-            <i className="fas fa-triangle-exclamation text-amber-500 mt-0.5"></i>
-            <p className="text-sm text-amber-800 dark:text-amber-300 leading-relaxed">
+          </ol>
+
+          {/* callout */}
+          <div
+            className="flex gap-3 px-4 py-3 rounded-lg"
+            style={{
+              background: "#FFCE9940",
+              borderLeft: rtl ? undefined : "4px solid #FF9644",
+              borderRight: rtl ? "4px solid #FF9644" : undefined,
+              borderRadius: rtl ? "0.5rem 0 0 0.5rem" : "0 0.5rem 0.5rem 0",
+            }}
+          >
+            <i
+              className="fas fa-triangle-exclamation mt-0.5 shrink-0"
+              style={{ color: "#FF9644" }}
+            />
+            <p className="text-sm leading-relaxed" style={{ color: "#562F00" }}>
               {c.performanceNote}
             </p>
           </div>
         </section>
 
-        {/* ── before vs after ── */}
-        <section className="space-y-12">
-          {/* BEFORE */}
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-400 animate-pulse" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {c.beforeTitle}
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-6 items-start">
-              <div className="flex flex-col items-center">
+        {/* ── before ── */}
+        <section className="mb-14">
+          <div className="flex items-center gap-2.5 mb-5">
+            <span className="w-2 h-2 rounded-full bg-red-400" />
+            <h2 className="text-xl font-bold" style={{ color: "#562F00" }}>
+              {c.beforeTitle}
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-4 items-start">
+            <div className="flex flex-col items-center gap-2">
+              <div
+                className="w-full rounded-xl overflow-hidden shadow-sm bg-black"
+                style={{ border: "1px solid #FFCE99" }}
+              >
                 <video
                   src="/video/slow.mp4"
                   controls
                   muted
-                  className="rounded-2xl shadow-md w-full border border-gray-200 dark:border-gray-700"
+                  className="w-full"
                 />
-                <span className="mt-2 text-[11px] text-gray-400 dark:text-gray-500">
-                  {c.beforeLabel}
-                </span>
               </div>
-              <Code label="dart">{legacyCode}</Code>
+              <span
+                className="text-[11px] text-center leading-tight"
+                style={{ color: "#562F00", opacity: 0.5 }}
+              >
+                {c.beforeLabel}
+              </span>
             </div>
+            <Code label="dart">{legacyCode}</Code>
           </div>
+        </section>
 
-          {/* AFTER */}
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {c.afterTitle}
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-6 items-start">
-              <div className="flex flex-col items-center">
+        {/* ── after ── */}
+        <section className="mb-14">
+          <div className="flex items-center gap-2.5 mb-5">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <h2 className="text-xl font-bold" style={{ color: "#562F00" }}>
+              {c.afterTitle}
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-4 items-start">
+            <div className="flex flex-col items-center gap-2">
+              <div
+                className="w-full rounded-xl overflow-hidden shadow-sm bg-black"
+                style={{ border: "1px solid #FFCE99" }}
+              >
                 <video
                   src="/video/fast.mp4"
                   controls
                   muted
-                  className="rounded-2xl shadow-md w-full border border-gray-200 dark:border-gray-700"
+                  className="w-full"
                 />
-                <span className="mt-2 text-[11px] text-gray-400 dark:text-gray-500">
-                  {c.afterLabel}
-                </span>
               </div>
-              <Code label="dart">{isolateCode}</Code>
+              <span
+                className="text-[11px] text-center leading-tight"
+                style={{ color: "#562F00", opacity: 0.5 }}
+              >
+                {c.afterLabel}
+              </span>
             </div>
+            <Code label="dart">{isolateCode}</Code>
           </div>
         </section>
 
-        {/* ── the key change ── */}
-        <section>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-5">
+        {/* ── key change ── */}
+        <section className="mb-14">
+          <h2 className="text-xl font-bold mb-5" style={{ color: "#562F00" }}>
             {c.explainTitle}
           </h2>
           <Code label="dart">{keySnippet}</Code>
@@ -364,9 +461,13 @@ function IsolateTutorialContent() {
             {c.computePoints.map((point, i) => (
               <li
                 key={i}
-                className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400 leading-relaxed"
+                className="flex items-start gap-3 text-sm leading-relaxed"
+                style={{ color: "#562F00", opacity: 0.8 }}
               >
-                <span className="mt-1 w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0" />
+                <span
+                  className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
+                  style={{ background: "#FF9644" }}
+                />
                 {point}
               </li>
             ))}
@@ -375,40 +476,27 @@ function IsolateTutorialContent() {
 
         {/* ── resources ── */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-5">
+          <h2 className="text-xl font-bold mb-5" style={{ color: "#562F00" }}>
             {c.resourcesTitle}
           </h2>
-          <div className="grid sm:grid-cols-2 gap-3">
+          <ul className="space-y-2">
             {c.resources.map((r, i) => (
-              <a
-                key={i}
-                href={r.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-4 no-underline hover:border-violet-200 dark:hover:border-violet-600 hover:shadow-sm transition-all group"
-              >
-                <span className="w-9 h-9 rounded-lg bg-violet-50 dark:bg-violet-900/30 text-violet-500 dark:text-violet-400 flex items-center justify-center group-hover:bg-violet-100 dark:group-hover:bg-violet-900/50 transition-colors shrink-0">
-                  <i className="fas fa-arrow-up-right-from-square text-xs" />
-                </span>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-violet-700 dark:group-hover:text-violet-400 transition-colors">
+              <li key={i}>
+                <a
+                  href={r.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 text-sm font-medium hover:underline no-underline"
+                  style={{ color: "#FF9644" }}
+                >
+                  <i className="fas fa-arrow-up-right-from-square text-[10px] opacity-70 group-hover:opacity-100 transition-opacity" />
                   {r.text}
-                </span>
-              </a>
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
-
-        {/* ── footer ── */}
-        <div className="text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-medium hover:bg-gray-800 dark:hover:bg-white transition-colors no-underline shadow-md"
-          >
-            <i className={`fas fa-arrow-${rtl ? "right" : "left"} text-xs`} />
-            {c.back}
-          </Link>
-        </div>
-      </main>
+      </article>
     </div>
   );
 }
@@ -417,8 +505,14 @@ export default function IsolateTutorialPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#fafafa] dark:bg-gray-950">
-          <div className="w-5 h-5 border-2 border-violet-300 border-t-violet-600 rounded-full animate-spin" />
+        <div
+          className="min-h-screen flex items-center justify-center"
+          style={{ background: "#FFFDF1" }}
+        >
+          <div
+            className="w-5 h-5 border-2 rounded-full animate-spin"
+            style={{ borderColor: "#FFCE99", borderTopColor: "#FF9644" }}
+          />
         </div>
       }
     >
