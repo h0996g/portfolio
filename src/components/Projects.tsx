@@ -221,15 +221,15 @@ function showComingSoon() {
 
 function ProjectCardComponent({ project }: { project: ProjectCard }) {
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col relative">
+    <div className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl dark:hover:shadow-black/40 transition-all duration-300 hover:-translate-y-1 flex flex-col relative">
       {project.inProgress && (
-        <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-700 border border-amber-200">
+        <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-700/50">
           <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
           In Progress
         </span>
       )}
       <div
-        className={`aspect-4/3 overflow-hidden bg-gray-200 animate-pulse ${project.detailsId ? "cursor-pointer" : ""}`}
+        className={`aspect-4/3 overflow-hidden bg-gray-200 dark:bg-gray-700 animate-pulse ${project.detailsId ? "cursor-pointer" : ""}`}
         onClick={
           project.detailsId
             ? () => (window.location.href = `/details?id=${project.detailsId}`)
@@ -247,7 +247,7 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
         />
       </div>
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-lg font-bold text-gray-900 mb-3">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
           {project.title}
         </h3>
         <div className="flex items-center gap-3 mt-auto flex-wrap">
@@ -256,14 +256,14 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200"
+              className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
             >
               <i className="fab fa-github mr-1"></i>Github
             </a>
           )}
           {project.githubOptions && (
             <button
-              className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
+              className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
               onClick={() =>
                 showGitHubOptions(
                   project.githubOptions!.front,
@@ -277,7 +277,7 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
           {project.detailsId && (
             <Link
               href={`/details?id=${project.detailsId}`}
-              className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200 no-underline"
+              className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200 no-underline"
             >
               Details
             </Link>
@@ -334,9 +334,9 @@ function TutorialCardComponent({ tutorial }: { tutorial: TutorialCard }) {
   return (
     <Link
       href={tutorial.href}
-      className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col cursor-pointer no-underline"
+      className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl dark:hover:shadow-black/40 transition-all duration-300 hover:-translate-y-1 flex flex-col cursor-pointer no-underline"
     >
-      <div className="aspect-video overflow-hidden bg-gray-200 animate-pulse">
+      <div className="aspect-video overflow-hidden bg-gray-200 dark:bg-gray-700 animate-pulse">
         <Image
           src={tutorial.image}
           alt={tutorial.title}
@@ -348,11 +348,11 @@ function TutorialCardComponent({ tutorial }: { tutorial: TutorialCard }) {
         />
       </div>
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-base font-bold text-gray-900 mb-3 leading-snug">
+        <h3 className="text-base font-bold text-gray-900 dark:text-white mb-3 leading-snug">
           {tutorial.title}
         </h3>
         <div className="mt-auto">
-          <span className="inline-flex items-center gap-1.5 text-gray-900 text-sm font-medium">
+          <span className="inline-flex items-center gap-1.5 text-gray-900 dark:text-gray-300 text-sm font-medium">
             Read More <i className="fas fa-arrow-right text-xs"></i>
           </span>
         </div>
@@ -367,13 +367,13 @@ export default function Projects() {
   );
 
   return (
-    <section id="projects-and-tutorials" className="py-20 px-6">
+    <section id="projects-and-tutorials" className="py-20 px-6 dark:bg-gray-950 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-sm font-medium text-gray-500 tracking-wide uppercase mb-2">
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 tracking-wide uppercase mb-2">
             Browse My Recent
           </p>
-          <h2 className="text-4xl max-sm:text-2xl font-bold text-gray-900">
+          <h2 className="text-4xl max-sm:text-2xl font-bold text-gray-900 dark:text-white">
             Projects & Tutorials
           </h2>
         </div>
@@ -381,13 +381,13 @@ export default function Projects() {
         {/* Toggle Buttons */}
         <div className="flex justify-center mb-10 gap-2">
           <button
-            className={`toggle-btn px-6 py-2.5 text-sm font-semibold rounded-full border-2 border-transparent bg-white text-gray-600 cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "projects" ? "active" : ""}`}
+            className={`toggle-btn px-6 py-2.5 text-sm font-semibold rounded-full border-2 border-transparent bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "projects" ? "active" : ""}`}
             onClick={() => setActiveTab("projects")}
           >
             <i className="fas fa-briefcase mr-2"></i>Projects
           </button>
           <button
-            className={`toggle-btn px-6 py-2.5 text-sm font-semibold rounded-full border-2 border-transparent bg-white text-gray-600 cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "tutorials" ? "active" : ""}`}
+            className={`toggle-btn px-6 py-2.5 text-sm font-semibold rounded-full border-2 border-transparent bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "tutorials" ? "active" : ""}`}
             onClick={() => setActiveTab("tutorials")}
           >
             <i className="fas fa-book-open mr-2"></i>Tutorials

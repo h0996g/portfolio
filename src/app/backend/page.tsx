@@ -31,8 +31,8 @@ function SectionCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 p-6 md:p-8 mb-6 transition-all duration-300 hover:-translate-y-0.5">
-      <h2 className="flex items-center gap-3 text-xl md:text-2xl font-bold text-emerald-600 mb-5">
+    <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 p-6 md:p-8 mb-6 transition-all duration-300 hover:-translate-y-0.5">
+      <h2 className="flex items-center gap-3 text-xl md:text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-5">
         <i className={`${icon} text-lg`}></i>
         {title}
       </h2>
@@ -49,10 +49,10 @@ function AlertBox({
   variant?: "info" | "warning" | "success" | "danger";
 }) {
   const styles = {
-    info: "bg-blue-50 border-blue-200 text-blue-800",
-    warning: "bg-amber-50 border-amber-200 text-amber-800",
-    success: "bg-emerald-50 border-emerald-200 text-emerald-800",
-    danger: "bg-red-50 border-red-200 text-red-800",
+    info: "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700/50 text-blue-800 dark:text-blue-300",
+    warning: "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-700/50 text-amber-800 dark:text-amber-300",
+    success: "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-700/50 text-emerald-800 dark:text-emerald-300",
+    danger: "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700/50 text-red-800 dark:text-red-300",
   };
   const icons = {
     info: "fas fa-info-circle",
@@ -85,17 +85,17 @@ function BackendBlogContent() {
 
   if (id !== "blog-1") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Blog Not Found
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             The blog post you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-900 text-white font-medium hover:bg-gray-700 transition-colors no-underline"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium hover:bg-gray-700 dark:hover:bg-white transition-colors no-underline"
           >
             ← Back to Portfolio
           </Link>
@@ -105,7 +105,7 @@ function BackendBlogContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
       {/* ── Hero Header ── */}
       <header className="relative bg-gray-900 text-white overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-teal-600/20 to-cyan-600/20"></div>
@@ -126,7 +126,7 @@ function BackendBlogContent() {
           </p>
         </div>
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-gray-50"
+          className="absolute bottom-0 left-0 right-0 h-16 bg-gray-50 dark:bg-gray-950"
           style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}
         ></div>
       </header>
@@ -138,7 +138,7 @@ function BackendBlogContent() {
           icon="fas fa-code"
           title="Understanding How the Code Works"
         >
-          <p className="text-gray-700 text-sm mb-4">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
             The core of this system is a Node.js Express server that serves a
             1x1 transparent PNG image. When an email containing this image is
             opened, the recipient&apos;s email client sends a request to our
@@ -155,7 +155,7 @@ function BackendBlogContent() {
             ].map((item) => (
               <li
                 key={item}
-                className="flex items-center gap-2 text-sm text-gray-700 bg-gray-50 rounded-lg p-3 border border-gray-100"
+                className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 border border-gray-100 dark:border-gray-600"
               >
                 <i className="fas fa-chevron-right text-emerald-500 text-xs"></i>
                 {item}
@@ -234,27 +234,27 @@ app.listen(PORT, () => {
           icon="fas fa-cogs"
           title="Step 1: Setting Up the Environment"
         >
-          <p className="text-gray-700 text-sm mb-3">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
             Before you start coding, ensure that you have Node.js installed on
             your system. If not, you can download it from{" "}
             <a
               href="https://nodejs.org/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-emerald-600 hover:text-emerald-700 underline"
+              className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline"
             >
               Node.js
             </a>
             .
           </p>
-          <p className="text-gray-700 text-sm mb-3">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
             Next, install the necessary packages by running the following
             commands in your terminal:
           </p>
           <CodeBlock lang="bash">{`npm install express`}</CodeBlock>
-          <p className="text-gray-700 text-sm mb-2">These packages include:</p>
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-2">These packages include:</p>
           <ul className="space-y-2">
-            <li className="flex items-start gap-2 text-sm text-gray-700 bg-gray-50 rounded-lg p-3 border border-gray-100">
+            <li className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 border border-gray-100 dark:border-gray-600">
               <i className="fas fa-check-circle text-emerald-500 mt-0.5"></i>
               <span>
                 <strong>Express:</strong> A minimal and flexible Node.js web
@@ -269,23 +269,23 @@ app.listen(PORT, () => {
           icon="fas fa-image"
           title="Step 2: Understanding Jimp Usage"
         >
-          <p className="text-gray-700 text-sm mb-4">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
             Jimp (JavaScript Image Manipulation Program) is used in this code to
             create a 1x1 transparent PNG image. Here&apos;s how it works:
           </p>
 
           <div className="space-y-4">
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">1.</span> Jimp
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">1.</span> Jimp
                 is imported at the beginning of the file:
               </p>
               <CodeBlock lang="javascript">{`const Jimp = require('jimp');`}</CodeBlock>
             </div>
 
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">2.</span> In
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">2.</span> In
                 the route handler for &apos;/image/:filename.png&apos;, Jimp
                 creates the image:
               </p>
@@ -314,14 +314,14 @@ new Jimp(width, height, 0x00000000, (err, image) => {
 });`}</CodeBlock>
             </div>
 
-            <div className="space-y-2 text-sm text-gray-700">
+            <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
               <p>
-                <span className="font-semibold text-emerald-600">3.</span> The
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">3.</span> The
                 image is created with a width and height of 1 pixel, and a fully
                 transparent color (0x00000000).
               </p>
               <p>
-                <span className="font-semibold text-emerald-600">4.</span> The
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">4.</span> The
                 image is then converted to a buffer in PNG format and sent as
                 the response.
               </p>
@@ -340,21 +340,21 @@ new Jimp(width, height, 0x00000000, (err, image) => {
           icon="fas fa-cloud-upload-alt"
           title="Step 3: Deploying the Project on Vercel"
         >
-          <p className="text-gray-700 text-sm mb-4">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
             Deploying your Node.js application on Vercel is straightforward.
             Here&apos;s the process:
           </p>
 
           <div className="space-y-5">
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">1.</span>{" "}
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">1.</span>{" "}
                 Create a Vercel account if you don&apos;t have one:{" "}
                 <a
                   href="https://vercel.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-700 underline"
+                  className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline"
                 >
                   Vercel
                 </a>
@@ -362,8 +362,8 @@ new Jimp(width, height, 0x00000000, (err, image) => {
             </div>
 
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">2.</span>{" "}
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">2.</span>{" "}
                 Install the Vercel CLI by running the following command in your
                 terminal:
               </p>
@@ -371,10 +371,10 @@ new Jimp(width, height, 0x00000000, (err, image) => {
             </div>
 
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">3.</span>{" "}
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">3.</span>{" "}
                 Configure your project with a{" "}
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs text-gray-800">
+                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
                   vercel.json
                 </code>{" "}
                 file to specify build and routing configurations. Here is an
@@ -398,8 +398,8 @@ new Jimp(width, height, 0x00000000, (err, image) => {
             </div>
 
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">4.</span>{" "}
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">4.</span>{" "}
                 Connect your local project with your Vercel account using the
                 command:
               </p>
@@ -407,8 +407,8 @@ new Jimp(width, height, 0x00000000, (err, image) => {
             </div>
 
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">5.</span>{" "}
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">5.</span>{" "}
                 Upload any changes to Vercel with the command:
               </p>
               <CodeBlock lang="bash">{`vercel --prod`}</CodeBlock>
@@ -421,17 +421,17 @@ new Jimp(width, height, 0x00000000, (err, image) => {
           icon="fas fa-database"
           title="Step 4: Setting Up Vercel Blob for Storing Logs"
         >
-          <p className="text-gray-700 text-sm mb-4">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
             To store the logs of when emails are opened, I used Vercel&apos;s
             Blob storage. Here&apos;s how to set it up:
           </p>
 
           <div className="space-y-5">
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">1.</span>{" "}
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">1.</span>{" "}
                 Install the{" "}
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs text-gray-800">
+                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
                   @vercel/blob
                 </code>{" "}
                 package by running the following command in your terminal:
@@ -440,8 +440,8 @@ new Jimp(width, height, 0x00000000, (err, image) => {
             </div>
 
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">2.</span>{" "}
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">2.</span>{" "}
                 Configure Vercel Blob in your project settings:
               </p>
               <ul className="space-y-2 ml-4">
@@ -452,7 +452,7 @@ new Jimp(width, height, 0x00000000, (err, image) => {
                 ].map((item) => (
                   <li
                     key={item}
-                    className="flex items-center gap-2 text-sm text-gray-700"
+                    className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300"
                   >
                     <i className="fas fa-chevron-right text-emerald-500 text-xs"></i>
                     {item}
@@ -462,14 +462,14 @@ new Jimp(width, height, 0x00000000, (err, image) => {
             </div>
 
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">3.</span> Use
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">3.</span> Use
                 the{" "}
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs text-gray-800">
+                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
                   put
                 </code>{" "}
                 function from the{" "}
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs text-gray-800">
+                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
                   @vercel/blob
                 </code>{" "}
                 package to store logs. Here&apos;s a code snippet demonstrating
@@ -486,8 +486,8 @@ await put(\`logs/\${imageName}.txt\`, log, {
             </div>
 
             <div>
-              <p className="text-sm text-gray-700">
-                <span className="font-semibold text-emerald-600">4.</span>{" "}
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">4.</span>{" "}
                 Implement error handling for any failed log writes to ensure
                 that your application can handle issues gracefully.
               </p>
@@ -500,7 +500,7 @@ await put(\`logs/\${imageName}.txt\`, log, {
           icon="fas fa-envelope"
           title="Step 5: Testing Your Email Tracking Script"
         >
-          <p className="text-gray-700 text-sm mb-4">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
             Moving on to testing, we&apos;ll use Gmail to verify your Vercel
             deployment. Follow along:
           </p>
@@ -512,30 +512,30 @@ await put(\`logs/\${imageName}.txt\`, log, {
               'To insert the tracking image, click on the "Insert photo" icon in the formatting toolbar (it looks like a picture).',
               'In the "Insert photo" dialog, choose "Web address (URL)".',
             ].map((step, i) => (
-              <p key={i} className="text-sm text-gray-700">
-                <span className="font-semibold text-emerald-600">{i + 1}.</span>{" "}
+              <p key={i} className="text-sm text-gray-700 dark:text-gray-300">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">{i + 1}.</span>{" "}
                 {step}
               </p>
             ))}
 
             <div>
-              <p className="text-sm text-gray-700 mb-2">
-                <span className="font-semibold text-emerald-600">5.</span> In
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">5.</span> In
                 the URL field, paste your Vercel deployment URL followed by the
                 endpoint{" "}
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs text-gray-800">
+                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
                   /image/
                 </code>{" "}
                 and then add a unique name for the image. For example:
               </p>
               <CodeBlock lang="plaintext">{`https://your-vercel-app.vercel.app/image/uniqueimagename.png`}</CodeBlock>
-              <p className="text-sm text-gray-600 ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400 ml-4">
                 Replace{" "}
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs">
+                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">
                   your-vercel-app
                 </code>{" "}
                 with your actual Vercel app name, and{" "}
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs">
+                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">
                   uniqueimagename
                 </code>{" "}
                 with a name of your choice.
@@ -549,8 +549,8 @@ await put(\`logs/\${imageName}.txt\`, log, {
               "Your app will log this request, storing information about when the email was opened in Vercel Blob storage.",
               "After sending your email, you can monitor your Vercel Blob storage for real-time tracking data. This storage contains logs that record each instance when a recipient opens your email.",
             ].map((step, i) => (
-              <p key={i} className="text-sm text-gray-700">
-                <span className="font-semibold text-emerald-600">{i + 6}.</span>{" "}
+              <p key={i} className="text-sm text-gray-700 dark:text-gray-300">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">{i + 6}.</span>{" "}
                 {step}
               </p>
             ))}
@@ -575,7 +575,7 @@ await put(\`logs/\${imageName}.txt\`, log, {
 
         {/* Conclusion */}
         <SectionCard icon="fas fa-flag-checkered" title="Conclusion">
-          <p className="text-gray-700 text-sm mb-4">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
             With these steps, We successfully created and deployed a simple
             email tracking system using Node.js and Vercel. The key to this
             project was understanding how to serve and log image requests, as
@@ -583,11 +583,11 @@ await put(\`logs/\${imageName}.txt\`, log, {
             guide helps you in building your own email tracking systems or
             similar projects!
           </p>
-          <div className="bg-teal-50 border border-teal-200 rounded-xl p-5">
-            <h4 className="flex items-center gap-2 font-semibold text-teal-800 mb-2">
+          <div className="bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700/50 rounded-xl p-5">
+            <h4 className="flex items-center gap-2 font-semibold text-teal-800 dark:text-teal-300 mb-2">
               <i className="fas fa-rocket"></i> Coming Soon
             </h4>
-            <p className="text-sm text-teal-700">
+            <p className="text-sm text-teal-700 dark:text-teal-400">
               As an upcoming feature, We plan to add functionality &quot;receive
               SMS notifications on your phone when someone opens your
               email&quot;. This will provide real-time alerts and further
@@ -601,7 +601,7 @@ await put(\`logs/\${imageName}.txt\`, log, {
         <div className="text-center pt-6 pb-12">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-900 text-white font-medium hover:bg-gray-700 transition-all duration-200 no-underline shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium hover:bg-gray-700 dark:hover:bg-white transition-all duration-200 no-underline shadow-lg hover:shadow-xl"
           >
             <i className="fas fa-arrow-left text-sm"></i>
             Back to Portfolio
@@ -616,7 +616,7 @@ export default function BackendBlogPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
           <div className="animate-pulse text-gray-400">Loading...</div>
         </div>
       }

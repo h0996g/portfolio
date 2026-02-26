@@ -5,6 +5,9 @@
   --font-poppins: "Poppins", sans-serif;
 }
 
+/* ── Dark mode variant ── */
+@variant dark (&:is(.dark *));
+
 /* Hamburger icon transforms */
 .hamburger-icon.open span:first-child {
   transform: rotate(45deg) translate(6px, 6px);
@@ -32,6 +35,17 @@
   border-color: #e5e7eb;
   background: #f9fafb;
   color: #111827;
+}
+
+/* Dark mode toggle button */
+.dark .toggle-btn.active {
+  background: #f9fafb;
+  color: #111827;
+}
+.dark .toggle-btn:hover:not(.active) {
+  border-color: #374151;
+  background: #1f2937;
+  color: #f9fafb;
 }
 
 /* Content container toggle */

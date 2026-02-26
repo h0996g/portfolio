@@ -141,16 +141,16 @@ function RoleItem({ role, isLast }: { role: Role; isLast: boolean }) {
   return (
     <div className={`relative pl-6 ${!isLast ? "pb-5" : ""}`}>
       {!isLast && (
-        <div className="absolute left-1.25 top-3 bottom-0 w-px bg-gray-300"></div>
+        <div className="absolute left-1.25 top-3 bottom-0 w-px bg-gray-300 dark:bg-gray-600"></div>
       )}
-      <div className="absolute left-0 top-1.5 w-2.75 h-2.75 rounded-full bg-gray-400 border-2 border-white"></div>
-      <h4 className="text-sm font-semibold text-gray-900">{role.title}</h4>
-      <p className="text-xs text-gray-500">
+      <div className="absolute left-0 top-1.5 w-2.75 h-2.75 rounded-full bg-gray-400 dark:bg-gray-500 border-2 border-white dark:border-gray-800"></div>
+      <h4 className="text-sm font-semibold text-gray-900 dark:text-white">{role.title}</h4>
+      <p className="text-xs text-gray-500 dark:text-gray-400">
         {role.type} &middot; {role.dates} &middot; {role.duration}
       </p>
-      <p className="text-xs text-gray-500">{role.workMode}</p>
+      <p className="text-xs text-gray-500 dark:text-gray-400">{role.workMode}</p>
       {role.skills && (
-        <p className="text-xs text-gray-600 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">
           <span className="inline-block mr-1">&#9672;</span>
           {role.skills}
         </p>
@@ -161,13 +161,13 @@ function RoleItem({ role, isLast }: { role: Role; isLast: boolean }) {
 
 export default function WorkExperience() {
   return (
-    <section id="work" className="py-20 px-6 bg-gray-50">
+    <section id="work" className="py-20 px-6 bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-sm font-medium text-gray-500 tracking-wide uppercase mb-2">
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 tracking-wide uppercase mb-2">
             Where I&apos;ve Worked
           </p>
-          <h2 className="text-4xl max-sm:text-2xl font-bold text-gray-900">
+          <h2 className="text-4xl max-sm:text-2xl font-bold text-gray-900 dark:text-white">
             Work Experience
           </h2>
         </div>
@@ -176,19 +176,19 @@ export default function WorkExperience() {
           {workEntries.map((entry) => (
             <div
               key={entry.company}
-              className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm"
+              className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm dark:shadow-black/20"
             >
               <div className="flex gap-4">
                 <CompanyLogo entry={entry} />
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-semibold text-gray-900 flex items-center gap-1.5">
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white flex items-center gap-1.5">
                     {entry.company}
                     <a
                       href={entry.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       title={`Visit ${entry.company}`}
-                      className="inline-flex items-center justify-center w-5 h-5 rounded text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                      className="inline-flex items-center justify-center w-5 h-5 rounded text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5">
                         <path fillRule="evenodd" d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-4.95-4.95l1.5-1.5a.75.75 0 0 1 1.06 1.06l-1.5 1.5a2 2 0 0 0 2.83 2.83l2-2a2 2 0 0 0 0-2.83.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
@@ -197,26 +197,26 @@ export default function WorkExperience() {
                     </a>
                   </h3>
                   {entry.totalDuration && (
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       {entry.totalDuration}
                     </p>
                   )}
-                  <p className="text-xs text-gray-500">{entry.location}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{entry.location}</p>
 
                   {entry.roles.length === 1 ? (
                     <div className="mt-3">
-                      <p className="text-sm font-medium text-gray-800">
+                      <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
                         {entry.roles[0].title}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
                         {entry.roles[0].type} &middot; {entry.roles[0].dates}{" "}
                         &middot; {entry.roles[0].duration}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
                         {entry.roles[0].workMode}
                       </p>
                       {entry.roles[0].skills && (
-                        <p className="text-xs text-gray-600 mt-1">
+                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">
                           <span className="inline-block mr-1">&#9672;</span>
                           {entry.roles[0].skills}
                         </p>

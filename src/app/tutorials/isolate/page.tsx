@@ -240,13 +240,13 @@ function IsolateTutorialContent() {
   const rtl = lang === "ar";
 
   return (
-    <div className="min-h-screen bg-[#fafafa]" dir={rtl ? "rtl" : "ltr"}>
+    <div className="min-h-screen bg-[#fafafa] dark:bg-gray-950 transition-colors duration-300" dir={rtl ? "rtl" : "ltr"}>
       {/* language toggle */}
       <div className="fixed top-5 right-5 z-50">
         <select
           value={lang}
           onChange={(e) => setLang(e.target.value as Lang)}
-          className="bg-white/80 backdrop-blur-md text-sm font-medium text-gray-600 border border-gray-200 rounded-full px-4 py-2 shadow-sm outline-none cursor-pointer hover:border-gray-300 transition-colors"
+          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600 rounded-full px-4 py-2 shadow-sm outline-none cursor-pointer hover:border-gray-300 dark:hover:border-gray-500 transition-colors"
         >
           <option value="en">🌐 English</option>
           <option value="ar">🌐 العربية</option>
@@ -255,15 +255,15 @@ function IsolateTutorialContent() {
 
       {/* ── hero ── */}
       <header className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-b from-violet-50 via-white to-[#fafafa]" />
+        <div className="absolute inset-0 bg-linear-to-b from-violet-50 dark:from-violet-950/30 via-white dark:via-gray-950 to-[#fafafa] dark:to-gray-950" />
         <div className="relative max-w-3xl mx-auto px-6 pt-24 pb-16 text-center">
-          <p className="text-xs font-semibold tracking-widest uppercase text-violet-500 mb-3">
+          <p className="text-xs font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400 mb-3">
             {c.sub}
           </p>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight leading-none mb-6">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-none mb-6">
             {c.header}
           </h1>
-          <p className="text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto">
             {c.lead}
           </p>
         </div>
@@ -272,10 +272,10 @@ function IsolateTutorialContent() {
       <main className="max-w-4xl mx-auto px-6 pb-24 space-y-16">
         {/* ── the problem ── */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             {c.introTitle}
           </h2>
-          <div className="space-y-4 text-gray-600 leading-relaxed">
+          <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed">
             {c.explanation.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
@@ -284,20 +284,20 @@ function IsolateTutorialContent() {
             {c.mergeSteps.map((step, i) => (
               <div
                 key={i}
-                className="flex flex-col items-center gap-2 bg-white rounded-xl border border-gray-100 p-4 text-center shadow-xs"
+                className="flex flex-col items-center gap-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-4 text-center shadow-xs"
               >
-                <span className="w-7 h-7 rounded-full bg-violet-100 text-violet-600 text-xs font-bold flex items-center justify-center">
+                <span className="w-7 h-7 rounded-full bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-400 text-xs font-bold flex items-center justify-center">
                   {i + 1}
                 </span>
-                <span className="text-xs text-gray-600 leading-snug">
+                <span className="text-xs text-gray-600 dark:text-gray-400 leading-snug">
                   {step}
                 </span>
               </div>
             ))}
           </div>
-          <div className="mt-6 flex items-start gap-3 bg-amber-50/80 border border-amber-200/60 rounded-xl p-4">
+          <div className="mt-6 flex items-start gap-3 bg-amber-50/80 dark:bg-amber-900/10 border border-amber-200/60 dark:border-amber-700/30 rounded-xl p-4">
             <i className="fas fa-triangle-exclamation text-amber-500 mt-0.5"></i>
-            <p className="text-sm text-amber-800 leading-relaxed">
+            <p className="text-sm text-amber-800 dark:text-amber-300 leading-relaxed">
               {c.performanceNote}
             </p>
           </div>
@@ -309,7 +309,7 @@ function IsolateTutorialContent() {
           <div>
             <div className="flex items-center gap-3 mb-5">
               <span className="w-2.5 h-2.5 rounded-full bg-red-400 animate-pulse" />
-              <h2 className="text-2xl font-bold text-gray-900">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                 {c.beforeTitle}
               </h2>
             </div>
@@ -319,9 +319,9 @@ function IsolateTutorialContent() {
                   src="/video/slow.mp4"
                   controls
                   muted
-                  className="rounded-2xl shadow-md w-full border border-gray-200"
+                  className="rounded-2xl shadow-md w-full border border-gray-200 dark:border-gray-700"
                 />
-                <span className="mt-2 text-[11px] text-gray-400">
+                <span className="mt-2 text-[11px] text-gray-400 dark:text-gray-500">
                   {c.beforeLabel}
                 </span>
               </div>
@@ -333,7 +333,7 @@ function IsolateTutorialContent() {
           <div>
             <div className="flex items-center gap-3 mb-5">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-              <h2 className="text-2xl font-bold text-gray-900">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                 {c.afterTitle}
               </h2>
             </div>
@@ -343,9 +343,9 @@ function IsolateTutorialContent() {
                   src="/video/fast.mp4"
                   controls
                   muted
-                  className="rounded-2xl shadow-md w-full border border-gray-200"
+                  className="rounded-2xl shadow-md w-full border border-gray-200 dark:border-gray-700"
                 />
-                <span className="mt-2 text-[11px] text-gray-400">
+                <span className="mt-2 text-[11px] text-gray-400 dark:text-gray-500">
                   {c.afterLabel}
                 </span>
               </div>
@@ -356,7 +356,7 @@ function IsolateTutorialContent() {
 
         {/* ── the key change ── */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-5">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-5">
             {c.explainTitle}
           </h2>
           <Code label="dart">{keySnippet}</Code>
@@ -364,7 +364,7 @@ function IsolateTutorialContent() {
             {c.computePoints.map((point, i) => (
               <li
                 key={i}
-                className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed"
+                className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400 leading-relaxed"
               >
                 <span className="mt-1 w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0" />
                 {point}
@@ -375,7 +375,7 @@ function IsolateTutorialContent() {
 
         {/* ── resources ── */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-5">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-5">
             {c.resourcesTitle}
           </h2>
           <div className="grid sm:grid-cols-2 gap-3">
@@ -385,12 +385,12 @@ function IsolateTutorialContent() {
                 href={r.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-white rounded-xl border border-gray-100 p-4 no-underline hover:border-violet-200 hover:shadow-sm transition-all group"
+                className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-4 no-underline hover:border-violet-200 dark:hover:border-violet-600 hover:shadow-sm transition-all group"
               >
-                <span className="w-9 h-9 rounded-lg bg-violet-50 text-violet-500 flex items-center justify-center group-hover:bg-violet-100 transition-colors shrink-0">
+                <span className="w-9 h-9 rounded-lg bg-violet-50 dark:bg-violet-900/30 text-violet-500 dark:text-violet-400 flex items-center justify-center group-hover:bg-violet-100 dark:group-hover:bg-violet-900/50 transition-colors shrink-0">
                   <i className="fas fa-arrow-up-right-from-square text-xs" />
                 </span>
-                <span className="text-sm font-medium text-gray-700 group-hover:text-violet-700 transition-colors">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-violet-700 dark:group-hover:text-violet-400 transition-colors">
                   {r.text}
                 </span>
               </a>
@@ -402,7 +402,7 @@ function IsolateTutorialContent() {
         <div className="text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors no-underline shadow-md"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-medium hover:bg-gray-800 dark:hover:bg-white transition-colors no-underline shadow-md"
           >
             <i className={`fas fa-arrow-${rtl ? "right" : "left"} text-xs`} />
             {c.back}
@@ -417,7 +417,7 @@ export default function IsolateTutorialPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#fafafa]">
+        <div className="min-h-screen flex items-center justify-center bg-[#fafafa] dark:bg-gray-950">
           <div className="w-5 h-5 border-2 border-violet-300 border-t-violet-600 rounded-full animate-spin" />
         </div>
       }

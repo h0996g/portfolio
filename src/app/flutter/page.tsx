@@ -35,9 +35,9 @@ function SectionCard({
   link?: never;
 }) {
   return (
-    <section className="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 p-6 md:p-8 mb-6 transition-all duration-300 hover:-translate-y-0.5">
+    <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 p-6 md:p-8 mb-6 transition-all duration-300 hover:-translate-y-0.5">
       <div className="flex items-center justify-between flex-wrap gap-3 mb-5">
-        <h2 className="flex items-center gap-3 text-xl md:text-2xl font-bold text-emerald-600">
+        <h2 className="flex items-center gap-3 text-xl md:text-2xl font-bold text-emerald-600 dark:text-emerald-400">
           <i className={`${icon} text-lg`}></i>
           {title}
         </h2>
@@ -46,7 +46,7 @@ function SectionCard({
             href={badge.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors no-underline"
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline"
           >
             <i className={badge.icon}></i> {badge.text}
           </a>
@@ -67,11 +67,11 @@ function InfoCard({
   variant?: "blue" | "green" | "red" | "yellow" | "purple";
 }) {
   const colors = {
-    blue: "border-blue-200 bg-blue-50/50",
-    green: "border-emerald-200 bg-emerald-50/50",
-    red: "border-red-200 bg-red-50/50",
-    yellow: "border-amber-200 bg-amber-50/50",
-    purple: "border-purple-200 bg-purple-50/50",
+    blue: "border-blue-200 dark:border-blue-700/50 bg-blue-50/50 dark:bg-blue-900/10",
+    green: "border-emerald-200 dark:border-emerald-700/50 bg-emerald-50/50 dark:bg-emerald-900/10",
+    red: "border-red-200 dark:border-red-700/50 bg-red-50/50 dark:bg-red-900/10",
+    yellow: "border-amber-200 dark:border-amber-700/50 bg-amber-50/50 dark:bg-amber-900/10",
+    purple: "border-purple-200 dark:border-purple-700/50 bg-purple-50/50 dark:bg-purple-900/10",
   };
   const headerColors = {
     blue: "bg-blue-600",
@@ -89,7 +89,7 @@ function InfoCard({
       >
         {title}
       </div>
-      <div className="p-4 text-sm text-gray-700">{children}</div>
+      <div className="p-4 text-sm text-gray-700 dark:text-gray-300">{children}</div>
     </div>
   );
 }
@@ -102,10 +102,10 @@ function AlertBox({
   variant?: "info" | "warning" | "success" | "danger";
 }) {
   const styles = {
-    info: "bg-blue-50 border-blue-200 text-blue-800",
-    warning: "bg-amber-50 border-amber-200 text-amber-800",
-    success: "bg-emerald-50 border-emerald-200 text-emerald-800",
-    danger: "bg-red-50 border-red-200 text-red-800",
+    info: "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700/50 text-blue-800 dark:text-blue-300",
+    warning: "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-700/50 text-amber-800 dark:text-amber-300",
+    success: "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-700/50 text-emerald-800 dark:text-emerald-300",
+    danger: "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700/50 text-red-800 dark:text-red-300",
   };
   const icons = {
     info: "fas fa-info-circle",
@@ -138,17 +138,17 @@ function FlutterBlogContent() {
 
   if (id !== "blog-1") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Blog Not Found
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             The blog post you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-900 text-white font-medium hover:bg-gray-700 transition-colors no-underline"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium hover:bg-gray-700 dark:hover:bg-white transition-colors no-underline"
           >
             ← Back to Portfolio
           </Link>
@@ -158,7 +158,7 @@ function FlutterBlogContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
       {/* ── Hero Header ── */}
       <header className="relative bg-gray-900 text-white overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-emerald-600/20 to-blue-600/20"></div>
@@ -182,7 +182,7 @@ function FlutterBlogContent() {
           </p>
         </div>
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-gray-50"
+          className="absolute bottom-0 left-0 right-0 h-16 bg-gray-50 dark:bg-gray-950"
           style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}
         ></div>
       </header>
@@ -190,14 +190,14 @@ function FlutterBlogContent() {
       {/* ── Content ── */}
       <main className="max-w-5xl mx-auto px-6 py-12 space-y-6">
         {/* Why This Tutorial Exists */}
-        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 mb-6">
-          <h2 className="flex items-center gap-3 text-xl md:text-2xl font-bold text-emerald-600 mb-5">
+        <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 md:p-8 mb-6">
+          <h2 className="flex items-center gap-3 text-xl md:text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-5">
             <i className="fas fa-pen-fancy text-lg"></i>
             Why This Tutorial Exists
           </h2>
-          <div className="bg-gray-50 rounded-xl p-5 mb-6 border-l-4 border-emerald-500">
-            <p className="text-gray-700 leading-relaxed italic">
-              <i className="fas fa-quote-left text-gray-300 mr-2"></i>
+          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6 border-l-4 border-emerald-500">
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">
+              <i className="fas fa-quote-left text-gray-300 dark:text-gray-500 mr-2"></i>
               This tutorial aims to share some insights about BlocProvider
               implementation patterns in Flutter. Through community discussions
               and shared experiences on platforms like Stack Overflow, I noticed
@@ -208,7 +208,7 @@ function FlutterBlogContent() {
             </p>
           </div>
 
-          <h3 className="text-lg font-bold text-gray-900 mb-4">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
             Key Motivations:
           </h3>
           <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -234,7 +234,7 @@ function FlutterBlogContent() {
             </InfoCard>
           </div>
 
-          <h3 className="text-lg font-bold text-gray-900 mb-4">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
             What You&apos;ll Learn:
           </h3>
           <div className="grid md:grid-cols-2 gap-4 mb-6">
@@ -246,7 +246,7 @@ function FlutterBlogContent() {
               ].map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2 text-sm text-gray-700 bg-gray-50 rounded-lg p-3"
+                  className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3"
                 >
                   <i className="fas fa-check-circle text-emerald-500 mt-0.5"></i>
                   {item}
@@ -261,7 +261,7 @@ function FlutterBlogContent() {
               ].map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2 text-sm text-gray-700 bg-gray-50 rounded-lg p-3"
+                  className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3"
                 >
                   <i className="fas fa-check-circle text-emerald-500 mt-0.5"></i>
                   {item}
@@ -290,22 +290,22 @@ function FlutterBlogContent() {
             icon: "fab fa-stack-overflow",
           }}
         >
-          <div className="bg-amber-50/50 border border-amber-200 rounded-xl p-5 mb-5">
-            <span className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-amber-200 text-amber-800 mb-3">
+          <div className="bg-amber-50/50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/50 rounded-xl p-5 mb-5">
+            <span className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 mb-3">
               Stack Overflow Question
             </span>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
               Understanding Context Issues with BlocProvider
             </h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               <i className="fas fa-exclamation-circle text-amber-500 mr-1"></i>
               Common Error: &quot;BlocProvider.of() called with a context that
               does not contain a Bloc&quot;
             </p>
           </div>
 
-          <h4 className="font-semibold text-gray-900 mb-3">Typical Scenario</h4>
-          <p className="text-gray-700 text-sm mb-3">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Typical Scenario</h4>
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
             Consider a common Flutter application structure with authentication
             flow:
           </p>
@@ -315,7 +315,7 @@ function FlutterBlogContent() {
             Many developers start with this seemingly correct implementation:
           </AlertBox>
 
-          <h4 className="font-semibold text-gray-900 mb-3">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
             Initial Implementation
           </h4>
           <CodeBlock lang="dart">{`void main() => runApp(App());
@@ -338,7 +338,7 @@ class App extends StatelessWidget {
             navigating between pages
           </AlertBox>
 
-          <h4 className="font-semibold text-gray-900 mb-3">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
             Why This Can Be Problematic:
           </h4>
           <ul className="space-y-2 mb-4">
@@ -349,7 +349,7 @@ class App extends StatelessWidget {
             ].map((item) => (
               <li
                 key={item}
-                className="flex items-center gap-2 text-sm text-gray-700 bg-red-50 rounded-lg p-3 border border-red-100"
+                className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 bg-red-50 dark:bg-red-900/10 rounded-lg p-3 border border-red-100 dark:border-red-700/30"
               >
                 <i className="fas fa-times-circle text-red-500"></i>
                 {item}
@@ -372,7 +372,7 @@ class App extends StatelessWidget {
             Warning: This approach can lead to performance issues
           </AlertBox>
 
-          <p className="text-gray-700 text-sm mb-3">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
             A highly upvoted answer suggested wrapping the entire app with
             MultiBlocProvider:
           </p>
@@ -390,7 +390,7 @@ class App extends StatelessWidget {
   );
 }`}</CodeBlock>
 
-          <h4 className="font-semibold text-gray-900 mb-4">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
             Why This Solution Is Problematic:
           </h4>
           <div className="grid md:grid-cols-2 gap-4">
@@ -440,14 +440,14 @@ class App extends StatelessWidget {
             icon: "fab fa-github",
           }}
         >
-          <div className="bg-emerald-50/50 border-l-4 border-emerald-500 rounded-r-xl p-5 mb-6">
+          <div className="bg-emerald-50/50 dark:bg-emerald-900/10 border-l-4 border-emerald-500 rounded-r-xl p-5 mb-6">
             <div className="flex items-center gap-2 mb-3">
-              <span className="px-2.5 py-1 text-xs font-semibold rounded-md bg-emerald-200 text-emerald-800">
+              <span className="px-2.5 py-1 text-xs font-semibold rounded-md bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200">
                 Felix Angelov (bloc library creator)
               </span>
-              <span className="text-xs text-gray-500">March 10, 2022</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">March 10, 2022</span>
             </div>
-            <blockquote className="text-gray-700 text-sm leading-relaxed">
+            <blockquote className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
               <p className="mb-3">
                 The main disadvantages of providing all blocs globally are:
               </p>
@@ -465,34 +465,34 @@ class App extends StatelessWidget {
                   event to revert back to the initial state
                 </li>
               </ul>
-              <p className="text-emerald-700 font-medium italic border-t border-emerald-200 pt-3">
+              <p className="text-emerald-700 dark:text-emerald-400 font-medium italic border-t border-emerald-200 dark:border-emerald-700 pt-3">
                 Recommendation: Create a bloc per feature and provide that bloc
                 only to the specific subtree that needs it.
               </p>
             </blockquote>
           </div>
 
-          <h4 className="font-semibold text-gray-900 mb-4">Key Takeaways:</h4>
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Key Takeaways:</h4>
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-gray-50 rounded-xl p-5 border border-gray-100 text-center">
-              <h5 className="font-bold text-gray-900 mb-2">Scoped Access</h5>
-              <p className="text-sm text-gray-600">
+            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 border border-gray-100 dark:border-gray-600 text-center">
+              <h5 className="font-bold text-gray-900 dark:text-white mb-2">Scoped Access</h5>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Limit bloc access to only the widgets that need it
               </p>
             </div>
-            <div className="bg-gray-50 rounded-xl p-5 border border-gray-100 text-center">
-              <h5 className="font-bold text-gray-900 mb-2">
+            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 border border-gray-100 dark:border-gray-600 text-center">
+              <h5 className="font-bold text-gray-900 dark:text-white mb-2">
                 Resource Management
               </h5>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Ensure proper disposal of blocs when not needed
               </p>
             </div>
-            <div className="bg-gray-50 rounded-xl p-5 border border-gray-100 text-center">
-              <h5 className="font-bold text-gray-900 mb-2">
+            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 border border-gray-100 dark:border-gray-600 text-center">
+              <h5 className="font-bold text-gray-900 dark:text-white mb-2">
                 Feature Isolation
               </h5>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Maintain clear boundaries between features
               </p>
             </div>
@@ -504,10 +504,10 @@ class App extends StatelessWidget {
           icon="fas fa-trash-alt"
           title="Proper BlocProvider Disposal"
         >
-          <span className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-blue-100 text-blue-700 mb-4">
+          <span className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mb-4">
             Best Practice
           </span>
-          <h3 className="text-lg font-bold text-gray-900 mb-3">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
             Login Flow Example
           </h3>
 
@@ -516,7 +516,7 @@ class App extends StatelessWidget {
             authentication
           </AlertBox>
 
-          <h4 className="font-semibold text-gray-900 mb-3">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
             Proper Implementation:
           </h4>
           <CodeBlock lang="dart">{`class LoginPage extends StatelessWidget {
@@ -549,7 +549,7 @@ class LoginView extends StatelessWidget {
   }
 }`}</CodeBlock>
 
-          <h4 className="font-semibold text-gray-900 mb-4">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
             Benefits of Proper Disposal:
           </h4>
           <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -576,18 +576,18 @@ class LoginView extends StatelessWidget {
             </InfoCard>
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-            <h4 className="flex items-center gap-2 font-semibold text-amber-800 mb-3">
+          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700/50 rounded-xl p-5">
+            <h4 className="flex items-center gap-2 font-semibold text-amber-800 dark:text-amber-300 mb-3">
               <i className="fas fa-lightbulb"></i> Pro Tips:
             </h4>
-            <ul className="space-y-2 text-sm text-amber-900">
+            <ul className="space-y-2 text-sm text-amber-900 dark:text-amber-300">
               <li>
                 • Use{" "}
-                <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">
+                <code className="bg-amber-100 dark:bg-amber-900/50 px-1.5 py-0.5 rounded text-xs">
                   pushReplacement
                 </code>{" "}
                 instead of{" "}
-                <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">
+                <code className="bg-amber-100 dark:bg-amber-900/50 px-1.5 py-0.5 rounded text-xs">
                   push
                 </code>{" "}
                 to remove the login page from navigation stack
@@ -602,7 +602,7 @@ class LoginView extends StatelessWidget {
               </li>
               <li>
                 • Consider using{" "}
-                <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">
+                <code className="bg-amber-100 dark:bg-amber-900/50 px-1.5 py-0.5 rounded text-xs">
                   BlocProvider.value
                 </code>{" "}
                 only when passing existing bloc instances
@@ -616,10 +616,10 @@ class LoginView extends StatelessWidget {
           icon="fas fa-layer-group"
           title="Understanding MultiBlocProvider Usage"
         >
-          <span className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-blue-100 text-blue-700 mb-4">
+          <span className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mb-4">
             Best Practice
           </span>
-          <h3 className="text-lg font-bold text-gray-900 mb-3">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
             When and How to Use MultiBlocProvider
           </h3>
 
@@ -628,7 +628,7 @@ class LoginView extends StatelessWidget {
             it correctly and when necessary.
           </AlertBox>
 
-          <h4 className="font-semibold text-gray-900 mb-3">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
             Good Use Cases for MultiBlocProvider:
           </h4>
           <CodeBlock lang="dart">{`// Example: Dashboard page requiring multiple related features
@@ -652,7 +652,7 @@ class DashboardPage extends StatelessWidget {
   }
 }`}</CodeBlock>
 
-          <h4 className="font-semibold text-gray-900 mb-4">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
             Appropriate vs Inappropriate Usage:
           </h4>
           <div className="grid md:grid-cols-2 gap-4 mb-6">
@@ -660,30 +660,30 @@ class DashboardPage extends StatelessWidget {
               <div className="space-y-4">
                 <div>
                   <p className="font-semibold">Feature-Specific Pages:</p>
-                  <p className="text-gray-600 text-xs">
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">
                     When multiple blocs are needed for a specific feature&apos;s
                     functionality
                   </p>
-                  <code className="text-xs text-emerald-700 bg-emerald-50 px-2 py-1 rounded block mt-1">
+                  <code className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded block mt-1">
                     DashboardPage with related stats, notifications, and
                     activity blocs
                   </code>
                 </div>
                 <div>
                   <p className="font-semibold">Related Data Management:</p>
-                  <p className="text-gray-600 text-xs">
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">
                     When blocs have interdependent functionality
                   </p>
-                  <code className="text-xs text-emerald-700 bg-emerald-50 px-2 py-1 rounded block mt-1">
+                  <code className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded block mt-1">
                     Shopping cart with inventory and payment blocs
                   </code>
                 </div>
                 <div>
                   <p className="font-semibold">Scoped Feature Sets:</p>
-                  <p className="text-gray-600 text-xs">
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">
                     When multiple blocs share the same lifecycle
                   </p>
-                  <code className="text-xs text-emerald-700 bg-emerald-50 px-2 py-1 rounded block mt-1">
+                  <code className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded block mt-1">
                     User profile with settings and preferences blocs
                   </code>
                 </div>
@@ -693,29 +693,29 @@ class DashboardPage extends StatelessWidget {
               <div className="space-y-4">
                 <div>
                   <p className="font-semibold">Global App State:</p>
-                  <p className="text-gray-600 text-xs">
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">
                     Don&apos;t wrap MaterialApp with unrelated blocs
                   </p>
-                  <code className="text-xs text-red-700 bg-red-50 px-2 py-1 rounded block mt-1">
+                  <code className="text-xs text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded block mt-1">
                     Wrapping entire app with authentication, settings, and cart
                     blocs
                   </code>
                 </div>
                 <div>
                   <p className="font-semibold">Unrelated Features:</p>
-                  <p className="text-gray-600 text-xs">
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">
                     Don&apos;t combine blocs that serve different purposes
                   </p>
-                  <code className="text-xs text-red-700 bg-red-50 px-2 py-1 rounded block mt-1">
+                  <code className="text-xs text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded block mt-1">
                     Mixing login bloc with product catalog bloc
                   </code>
                 </div>
                 <div>
                   <p className="font-semibold">Different Lifecycles:</p>
-                  <p className="text-gray-600 text-xs">
+                  <p className="text-gray-600 dark:text-gray-400 text-xs">
                     Don&apos;t combine blocs with different disposal needs
                   </p>
-                  <code className="text-xs text-red-700 bg-red-50 px-2 py-1 rounded block mt-1">
+                  <code className="text-xs text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded block mt-1">
                     Combining temporary chat bloc with persistent theme bloc
                   </code>
                 </div>
@@ -723,7 +723,7 @@ class DashboardPage extends StatelessWidget {
             </InfoCard>
           </div>
 
-          <h4 className="font-semibold text-gray-900 mb-3">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
             Practical Implementation Example:
           </h4>
           <CodeBlock lang="dart">{`// E-commerce product detail page example
@@ -756,11 +756,11 @@ class ProductDetailPage extends StatelessWidget {
 
 // These blocs will be disposed when leaving ProductDetailPage`}</CodeBlock>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-4">
-            <h4 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+          <div className="bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl p-5 mb-4">
+            <h4 className="flex items-center gap-2 font-semibold text-gray-900 dark:text-white mb-3">
               <i className="fas fa-star text-amber-500"></i> Best Practices:
             </h4>
-            <ul className="space-y-2 text-sm text-gray-700">
+            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
               <li>
                 • Group blocs that are logically related and share the same
                 lifecycle
@@ -803,7 +803,7 @@ class ProductDetailPage extends StatelessWidget {
         <div className="text-center pt-6 pb-12">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-900 text-white font-medium hover:bg-gray-700 transition-all duration-200 no-underline shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium hover:bg-gray-700 dark:hover:bg-white transition-all duration-200 no-underline shadow-lg hover:shadow-xl"
           >
             <i className="fas fa-arrow-left text-sm"></i>
             Back to Portfolio
@@ -818,7 +818,7 @@ export default function FlutterBlogPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
           <div className="animate-pulse text-gray-400">Loading...</div>
         </div>
       }

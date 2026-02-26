@@ -507,12 +507,12 @@ function ComingSoonModal({ onClose }: { onClose: () => void }) {
       onClick={onClose}
     >
       <div
-        className="relative bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center gap-4 text-center"
+        className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center gap-4 text-center"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer border-0 bg-transparent text-base"
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer border-0 bg-transparent text-base"
         >
           ✕
         </button>
@@ -527,14 +527,14 @@ function ComingSoonModal({ onClose }: { onClose: () => void }) {
           autoplay
         />
 
-        <h2 className="text-2xl font-bold text-gray-900">Coming Soon</h2>
-        <p className="text-gray-500 text-sm leading-relaxed">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Coming Soon</h2>
+        <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
           This app is on its way to the{" "}
-          <span className="font-semibold text-gray-700">Play Store</span>.
+          <span className="font-semibold text-gray-700 dark:text-gray-200">Play Store</span>.
           <br />
           Stay tuned for the launch!
         </p>
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold">
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-700/50 text-emerald-700 dark:text-emerald-400 text-xs font-semibold">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           In Development
         </span>
@@ -586,17 +586,17 @@ function DetailsContent() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Project Not Found
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             The project you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-900 text-white font-medium hover:bg-gray-700 transition-colors no-underline"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium hover:bg-gray-700 dark:hover:bg-white transition-colors no-underline"
           >
             ← Back to Portfolio
           </Link>
@@ -609,9 +609,9 @@ function DetailsContent() {
     project.githubLink || project.githubLinkFront || project.githubLinkBack;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
       {/* Header */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-700 text-white py-16 px-6">
+      <div className="bg-linear-to-br from-gray-900 to-gray-700 dark:from-gray-950 dark:to-gray-800 text-white py-16 px-6">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {project.title}
@@ -627,33 +627,33 @@ function DetailsContent() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Main Content */}
           <div className="lg:col-span-2">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Project Overview
             </h2>
-            <p className="text-gray-700 leading-relaxed mb-8">
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
               {project.overview}
             </p>
 
-            <h3 className="text-xl font-bold text-gray-900 mb-4">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Key Features
             </h3>
             <ul className="space-y-2 mb-8">
               {project.keyFeatures.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3 text-gray-700">
+                <li key={i} className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
                   <i className="fas fa-check text-green-500 mt-1 shrink-0"></i>
                   {feature}
                 </li>
               ))}
             </ul>
 
-            <h3 className="text-xl font-bold text-gray-900 mb-4">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Technology Stack
             </h3>
             <div className="space-y-4 mb-8">
               {Object.entries(project.techStack).map(
                 ([category, technologies]) => (
                   <div key={category}>
-                    <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                    <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                       {category}
                     </h4>
                     <div className="flex flex-wrap gap-2">
@@ -674,8 +674,8 @@ function DetailsContent() {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-6">
-              <h5 className="text-lg font-bold text-gray-900 mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm p-6 sticky top-6">
+              <h5 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
                 Project Links
               </h5>
               <div className="space-y-3">
@@ -686,7 +686,7 @@ function DetailsContent() {
                         href={project.githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-900 text-white hover:bg-gray-700 transition-colors no-underline w-full"
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-700 text-white hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors no-underline w-full"
                       >
                         <i className="fab fa-github text-xl"></i>
                         <span className="font-medium text-sm">
@@ -699,7 +699,7 @@ function DetailsContent() {
                           href={`https://github.com/${project.githubLinkFront.owner}/${project.githubLinkFront.projectId}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-900 text-white hover:bg-gray-700 transition-colors no-underline w-full"
+                          className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-700 text-white hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors no-underline w-full"
                         >
                           <i className="fab fa-github text-xl"></i>
                           <span className="font-medium text-sm">
@@ -710,7 +710,7 @@ function DetailsContent() {
                           href={`https://github.com/${project.githubLinkBack.owner}/${project.githubLinkBack.projectId}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-800 text-white hover:bg-gray-600 transition-colors no-underline w-full"
+                          className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-800 dark:bg-gray-600 text-white hover:bg-gray-600 dark:hover:bg-gray-500 transition-colors no-underline w-full"
                         >
                           <i className="fab fa-github text-xl"></i>
                           <span className="font-medium text-sm">
@@ -783,17 +783,17 @@ function DetailsContent() {
         </div>
 
         {/* Detailed Features Accordion */}
-        <h3 className="text-xl font-bold text-gray-900 mb-4 mt-10">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 mt-10">
           Detailed Features
         </h3>
         <div className="space-y-3 mb-12">
           {project.detailedFeatures.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden"
+              className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden"
             >
               <button
-                className="w-full px-6 py-4 text-left font-semibold text-gray-900 hover:bg-gray-50 transition-colors flex items-center justify-between cursor-pointer"
+                className="w-full px-6 py-4 text-left font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center justify-between cursor-pointer"
                 onClick={() =>
                   setOpenAccordion(openAccordion === index ? -1 : index)
                 }
@@ -811,7 +811,7 @@ function DetailsContent() {
                     {feature.details.map((detail, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-3 text-gray-700"
+                        className="flex items-start gap-3 text-gray-700 dark:text-gray-300"
                       >
                         <span className="text-blue-500 mt-1 shrink-0">•</span>
                         {detail}
@@ -825,14 +825,14 @@ function DetailsContent() {
         </div>
 
         {/* Screenshots */}
-        <h3 className="text-xl font-bold text-gray-900 mb-4">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
           App Screenshots
         </h3>
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-12">
           {project.screenshots.map((screenshot, index) => (
             <div
               key={index}
-              className="cursor-pointer rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-shadow bg-gray-200 animate-pulse"
+              className="cursor-pointer rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow bg-gray-200 dark:bg-gray-700 animate-pulse"
               onClick={() => setModalImage(index)}
             >
               <Image
@@ -852,7 +852,7 @@ function DetailsContent() {
         <div className="text-center mt-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition-colors no-underline font-medium"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline font-medium"
           >
             ← Back to Portfolio
           </Link>
@@ -909,8 +909,8 @@ export default function DetailsPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-          <div className="text-gray-500">Loading...</div>
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+          <div className="text-gray-500 dark:text-gray-400">Loading...</div>
         </div>
       }
     >

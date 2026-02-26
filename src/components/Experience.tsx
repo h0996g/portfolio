@@ -5,13 +5,13 @@ interface Skill {
 
 function SkillItem({ skill }: { skill: Skill }) {
   return (
-    <div className="flex items-center gap-3 bg-white rounded-xl p-4 border border-gray-100">
+    <div className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
       <div
-        className={`w-2 h-2 rounded-full shrink-0 ${skill.level === "Experienced" ? "bg-gray-900" : "bg-gray-400"}`}
+        className={`w-2 h-2 rounded-full shrink-0 ${skill.level === "Experienced" ? "bg-gray-900 dark:bg-gray-100" : "bg-gray-400 dark:bg-gray-500"}`}
       ></div>
       <div>
-        <h4 className="text-sm font-semibold text-gray-900">{skill.name}</h4>
-        <p className="text-xs text-gray-500">{skill.level}</p>
+        <h4 className="text-sm font-semibold text-gray-900 dark:text-white">{skill.name}</h4>
+        <p className="text-xs text-gray-500 dark:text-gray-400">{skill.level}</p>
       </div>
     </div>
   );
@@ -41,20 +41,20 @@ const backendExtra: Skill = { name: "Git", level: "Intermediate" };
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 px-6 bg-white">
+    <section id="experience" className="py-20 px-6 bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-sm font-medium text-gray-500 tracking-wide uppercase mb-2">
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 tracking-wide uppercase mb-2">
             Explore My
           </p>
-          <h2 className="text-4xl max-sm:text-2xl font-bold text-gray-900">
+          <h2 className="text-4xl max-sm:text-2xl font-bold text-gray-900 dark:text-white">
             Experience
           </h2>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Frontend */}
-          <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-900 mb-6 text-center">
+          <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 text-center">
               Frontend & Mobile
             </h3>
             <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
@@ -68,8 +68,8 @@ export default function Experience() {
           </div>
 
           {/* Backend */}
-          <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-900 mb-6 text-center">
+          <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 text-center">
               Backend & Tools
             </h3>
             <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">

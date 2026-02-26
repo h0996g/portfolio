@@ -5,16 +5,16 @@ export default function About() {
     <section id="about" className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-sm font-medium text-gray-500 tracking-wide uppercase mb-2">
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 tracking-wide uppercase mb-2">
             Get To Know More
           </p>
-          <h2 className="text-4xl max-sm:text-2xl font-bold text-gray-900">
+          <h2 className="text-4xl max-sm:text-2xl font-bold text-gray-900 dark:text-white">
             About Me
           </h2>
         </div>
         <div className="flex gap-16 flex-col lg:flex-row lg:items-start items-center">
           <div className="shrink-0">
-            <div className="w-80 h-80 max-sm:w-56 max-sm:h-56 rounded-3xl overflow-hidden shadow-xl">
+            <div className="w-80 h-80 max-sm:w-56 max-sm:h-56 rounded-3xl overflow-hidden shadow-xl dark:shadow-black/40">
               <Image
                 src="/8.jpg"
                 alt="Profile picture"
@@ -26,47 +26,47 @@ export default function About() {
           </div>
           <div className="flex-1 space-y-8">
             <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center hover:shadow-md transition-shadow duration-300">
-                <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                  <i className="fas fa-briefcase text-gray-700 text-xl"></i>
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm text-center hover:shadow-md dark:hover:shadow-black/30 transition-shadow duration-300">
+                <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center mx-auto mb-3">
+                  <i className="fas fa-briefcase text-gray-700 dark:text-gray-300 text-xl"></i>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-1">Experience</h3>
-                <p className="text-sm text-gray-500">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Experience</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   4+ years
                   <br />
                   Full Stack Development
                 </p>
               </div>
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center hover:shadow-md transition-shadow duration-300">
-                <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                  <i className="fas fa-graduation-cap text-gray-700 text-xl"></i>
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm text-center hover:shadow-md dark:hover:shadow-black/30 transition-shadow duration-300">
+                <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center mx-auto mb-3">
+                  <i className="fas fa-graduation-cap text-gray-700 dark:text-gray-300 text-xl"></i>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-1">Education</h3>
-                <p className="text-sm text-gray-500">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Education</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   IT. Bachelors Degree
                   <br />
                   STIC. Masters Degree
                 </p>
               </div>
-              <div className="col-span-2 max-sm:col-span-1 bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center gap-5">
-                <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0">
-                  <i className="fas fa-id-card text-amber-600 text-xl"></i>
+              <div className="col-span-2 max-sm:col-span-1 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md dark:hover:shadow-black/30 transition-shadow duration-300 flex items-center gap-5">
+                <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/30 border border-amber-100 dark:border-amber-800/50 flex items-center justify-center shrink-0">
+                  <i className="fas fa-id-card text-amber-600 dark:text-amber-400 text-xl"></i>
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <h3 className="font-semibold text-gray-900">Self-Entrepreneur Card</h3>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-medium">
+                    <h3 className="font-semibold text-gray-900 dark:text-white">Self-Entrepreneur Card</h3>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700/50 text-amber-700 dark:text-amber-400 text-xs font-medium">
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
                       Algeria
                     </span>
                   </div>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     Self-Entrepreneur Card — officially registered freelancer in Algeria, enabling legal contracts and professional engagements.
                   </p>
                 </div>
               </div>
             </div>
-            <p className="text-gray-600 leading-relaxed max-sm:text-justify">
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-sm:text-justify">
               I am a passionate 25-year-old mobile application developer with a
               master&apos;s degree in Computer Science, specializing in Sciences
               and Technologies of Information and Communication, which I earned
