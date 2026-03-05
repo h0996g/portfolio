@@ -91,7 +91,7 @@ const projects: ProjectCard[] = [
     title: "Ajr",
     image: "/ADKAR0.png",
     playStore: "https://play.google.com/store/apps/details?id=com.ajr.app",
-    websiteLink: "https://h0996g.github.io",
+    websiteLink: "https://ajr-flutter.netlify.app/",
     detailsId: "ajr-app",
   },
   {
