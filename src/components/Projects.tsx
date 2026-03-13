@@ -17,6 +17,7 @@ interface ProjectCard {
   title: string;
   image: string;
   video?: string;
+  themeColor?: string;
   inProgress?: boolean;
   appStore?: string;
   playStore?: string;
@@ -34,7 +35,8 @@ const projects: ProjectCard[] = [
   {
     title: "NavMarket",
     image: "/naviguih.png",
-    video: "/pub/navMarket.mp4",
+    video: "/pub/navMarket2.mp4",
+    themeColor: "rgb(246, 133, 31)",
     appStore:
       "https://apps.apple.com/hk/app/naviguih/id6739255560?l=en-GB&platform=iphone",
     playStore: "https://play.google.com/store/apps/details?id=com.naviguih.app",
@@ -43,6 +45,7 @@ const projects: ProjectCard[] = [
     title: "NavFood",
     image: "/navfood.png",
     video: "/pub/navFood.mp4",
+    themeColor: "rgb(211, 33, 41)",
     appStore:
       "https://apps.apple.com/dz/app/navfood/id6742744572?platform=iphone",
     playStore:
@@ -52,6 +55,7 @@ const projects: ProjectCard[] = [
     title: "NavDelivery",
     image: "/navdelivery.png",
     video: "/pub/navDelivery.mp4",
+    themeColor: "rgb(0, 206, 181)",
     appStore:
       "https://apps.apple.com/dz/app/navdelivery/id6745877102?platform=iphone",
     playStore:
@@ -61,6 +65,7 @@ const projects: ProjectCard[] = [
     title: "NavRestaurant",
     image: "/navRestaurant.png",
     video: "/pub/navRestaurant.mp4",
+    themeColor: "rgb(93, 12, 102)",
     appStore: "https://apps.apple.com/us/app/navrestaurant/id6751362901",
     playStore:
       "https://play.google.com/store/apps/details?id=com.sarlkig.NavRestaurant",
@@ -227,10 +232,12 @@ function showComingSoon() {
 function VideoDialog({
   src,
   title,
+  themeColor,
   onClose,
 }: {
   src: string;
   title: string;
+  themeColor: string;
   onClose: () => void;
 }) {
   const dialogVideoRef = useRef<HTMLVideoElement>(null);
@@ -240,18 +247,33 @@ function VideoDialog({
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
+      {/* Backdrop with theme color tint */}
+      <div
+        className="absolute inset-0 backdrop-blur-md"
+        style={{
+          backgroundColor: `color-mix(in srgb, ${themeColor} 25%, black 75%)`,
+        }}
+      />
 
       {/* Modal */}
       <div
         className="relative z-10 w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl"
+        style={{
+          boxShadow: `0 0 60px 0 color-mix(in srgb, ${themeColor} 40%, transparent)`,
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header bar */}
-        <div className="flex items-center justify-between px-5 py-3 bg-gradient-to-r from-rose-600 to-pink-600">
+        <div
+          className="flex items-center justify-between px-5 py-3"
+          style={{ backgroundColor: themeColor }}
+        >
           <div className="flex items-center gap-2.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-white/40 animate-pulse"></span>
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-60"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white/80"></span>
+            </span>
+            <i className="fas fa-clapperboard text-white text-sm"></i>
             <span className="text-white text-sm font-bold tracking-widest uppercase">
               Promo · {title}
             </span>
@@ -277,6 +299,9 @@ function VideoDialog({
             onEnded={onClose}
           />
         </div>
+
+        {/* Bottom accent bar */}
+        <div className="h-1" style={{ backgroundColor: themeColor }} />
       </div>
     </div>
   );
@@ -292,6 +317,7 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
         <VideoDialog
           src={project.video}
           title={project.title}
+          themeColor={project.themeColor ?? "rgb(244, 63, 94)"}
           onClose={() => setShowDialog(false)}
         />
       )}
@@ -316,7 +342,9 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </span>
             <i className="fas fa-clapperboard text-white text-[11px]"></i>
-            <span className="text-white text-[11px] font-extrabold tracking-widest uppercase">Promo</span>
+            <span className="text-white text-[11px] font-extrabold tracking-widest uppercase">
+              Promo
+            </span>
           </button>
         )}
 
@@ -324,7 +352,8 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
           className={`aspect-4/3 overflow-hidden bg-gray-200 dark:bg-gray-700 relative ${project.detailsId ? "cursor-pointer" : ""}`}
           onClick={
             project.detailsId
-              ? () => (window.location.href = `/details?id=${project.detailsId}`)
+              ? () =>
+                  (window.location.href = `/details?id=${project.detailsId}`)
               : undefined
           }
         >
@@ -480,7 +509,10 @@ export default function Projects() {
   );
 
   return (
-    <section id="projects-and-tutorials" className="py-20 px-6 dark:bg-gray-950 transition-colors duration-300">
+    <section
+      id="projects-and-tutorials"
+      className="py-20 px-6 dark:bg-gray-950 transition-colors duration-300"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400 tracking-wide uppercase mb-2">
