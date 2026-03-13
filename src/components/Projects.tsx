@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,6 +16,7 @@ declare global {
 interface ProjectCard {
   title: string;
   image: string;
+  video?: string;
   inProgress?: boolean;
   appStore?: string;
   playStore?: string;
@@ -33,6 +34,7 @@ const projects: ProjectCard[] = [
   {
     title: "NavMarket",
     image: "/naviguih.png",
+    video: "/pub/navMarket.mp4",
     appStore:
       "https://apps.apple.com/hk/app/naviguih/id6739255560?l=en-GB&platform=iphone",
     playStore: "https://play.google.com/store/apps/details?id=com.naviguih.app",
@@ -40,6 +42,7 @@ const projects: ProjectCard[] = [
   {
     title: "NavFood",
     image: "/navfood.png",
+    video: "/pub/navFood.mp4",
     appStore:
       "https://apps.apple.com/dz/app/navfood/id6742744572?platform=iphone",
     playStore:
@@ -48,6 +51,7 @@ const projects: ProjectCard[] = [
   {
     title: "NavDelivery",
     image: "/navdelivery.png",
+    video: "/pub/navDelivery.mp4",
     appStore:
       "https://apps.apple.com/dz/app/navdelivery/id6745877102?platform=iphone",
     playStore:
@@ -56,6 +60,7 @@ const projects: ProjectCard[] = [
   {
     title: "NavRestaurant",
     image: "/navRestaurant.png",
+    video: "/pub/navRestaurant.mp4",
     appStore: "https://apps.apple.com/us/app/navrestaurant/id6751362901",
     playStore:
       "https://play.google.com/store/apps/details?id=com.sarlkig.NavRestaurant",
@@ -219,114 +224,222 @@ function showComingSoon() {
   }
 }
 
-function ProjectCardComponent({ project }: { project: ProjectCard }) {
+function VideoDialog({
+  src,
+  title,
+  onClose,
+}: {
+  src: string;
+  title: string;
+  onClose: () => void;
+}) {
+  const dialogVideoRef = useRef<HTMLVideoElement>(null);
+
   return (
-    <div className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl dark:hover:shadow-black/40 transition-all duration-300 hover:-translate-y-1 flex flex-col relative">
-      {project.inProgress && (
-        <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-700/50">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-          In Progress
-        </span>
-      )}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
+
+      {/* Modal */}
       <div
-        className={`aspect-4/3 overflow-hidden bg-gray-200 dark:bg-gray-700 animate-pulse ${project.detailsId ? "cursor-pointer" : ""}`}
-        onClick={
-          project.detailsId
-            ? () => (window.location.href = `/details?id=${project.detailsId}`)
-            : undefined
-        }
+        className="relative z-10 w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
       >
-        <Image
-          src={project.image}
-          alt={project.title}
-          width={400}
-          height={300}
-          loading="lazy"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-      </div>
-      <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
-          {project.title}
-        </h3>
-        <div className="flex items-center gap-3 mt-auto flex-wrap">
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
-            >
-              <i className="fab fa-github mr-1"></i>Github
-            </a>
-          )}
-          {project.githubOptions && (
-            <button
-              className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
-              onClick={() =>
-                showGitHubOptions(
-                  project.githubOptions!.front,
-                  project.githubOptions!.back,
-                )
-              }
-            >
-              <i className="fab fa-github mr-1"></i>Github
-            </button>
-          )}
-          {project.detailsId && (
-            <Link
-              href={`/details?id=${project.detailsId}`}
-              className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200 no-underline"
-            >
-              Details
-            </Link>
-          )}
-          {project.appStore && (
-            <a
-              href={project.appStore}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-black text-white text-xs font-semibold no-underline hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
-            >
-              <i className="fab fa-apple text-lg group-hover:scale-110 transition-transform"></i>
-              <span>App Store</span>
-            </a>
-          )}
-          {project.playStore && (
-            <a
-              href={project.playStore}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 text-white text-xs font-semibold no-underline hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
-            >
-              <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
-              <span>Play Store</span>
-            </a>
-          )}
-          {project.playStoreComingSoon && (
-            <button
-              onClick={showComingSoon}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 text-white text-xs font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group cursor-pointer border-0"
-            >
-              <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
-              <span>Play Store</span>
-            </button>
-          )}
-          {project.websiteLink && (
-            <a
-              href={project.websiteLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold no-underline hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
-            >
-              <i className="fas fa-globe text-base group-hover:rotate-12 transition-transform"></i>
-              <span>Website</span>
-            </a>
-          )}
+        {/* Header bar */}
+        <div className="flex items-center justify-between px-5 py-3 bg-gradient-to-r from-rose-600 to-pink-600">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-white/40 animate-pulse"></span>
+            <span className="text-white text-sm font-bold tracking-widest uppercase">
+              Promo · {title}
+            </span>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors duration-200 cursor-pointer border-0"
+            aria-label="Close"
+          >
+            <i className="fas fa-times text-sm"></i>
+          </button>
+        </div>
+
+        {/* Video */}
+        <div className="bg-black aspect-video">
+          <video
+            ref={dialogVideoRef}
+            src={src}
+            className="w-full h-full object-contain"
+            autoPlay
+            playsInline
+            controls
+            onEnded={onClose}
+          />
         </div>
       </div>
     </div>
+  );
+}
+
+function ProjectCardComponent({ project }: { project: ProjectCard }) {
+  const [showDialog, setShowDialog] = useState(false);
+
+  return (
+    <>
+      {/* Video dialog modal */}
+      {project.video && showDialog && (
+        <VideoDialog
+          src={project.video}
+          title={project.title}
+          onClose={() => setShowDialog(false)}
+        />
+      )}
+
+      <div className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl dark:hover:shadow-black/40 transition-all duration-300 hover:-translate-y-1 flex flex-col relative">
+        {project.inProgress && (
+          <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-700/50">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+            In Progress
+          </span>
+        )}
+
+        {/* Beautiful PROMO badge */}
+        {project.video && (
+          <button
+            onClick={() => setShowDialog(true)}
+            className="absolute top-3 right-3 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full cursor-pointer border-0 bg-linear-to-r from-rose-500 via-pink-500 to-orange-400 shadow-[0_0_12px_rgba(244,63,94,0.6)] hover:shadow-[0_0_20px_rgba(244,63,94,0.85)] transition-all duration-300 hover:scale-105"
+            aria-label="Watch promo video"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            </span>
+            <i className="fas fa-clapperboard text-white text-[11px]"></i>
+            <span className="text-white text-[11px] font-extrabold tracking-widest uppercase">Promo</span>
+          </button>
+        )}
+
+        <div
+          className={`aspect-4/3 overflow-hidden bg-gray-200 dark:bg-gray-700 relative ${project.detailsId ? "cursor-pointer" : ""}`}
+          onClick={
+            project.detailsId
+              ? () => (window.location.href = `/details?id=${project.detailsId}`)
+              : undefined
+          }
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={400}
+            height={300}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+
+          {/* Play overlay on image hover */}
+          {project.video && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowDialog(true);
+              }}
+              className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/30 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer border-0"
+              aria-label="Play promo video"
+            >
+              <div className="w-16 h-16 rounded-full bg-linear-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-200 ring-4 ring-white/30">
+                <i className="fas fa-play text-white text-xl ml-1"></i>
+              </div>
+              <span className="text-white text-sm font-semibold tracking-wide drop-shadow-lg">
+                Watch Promo
+              </span>
+            </button>
+          )}
+        </div>
+
+        <div className="p-5 flex flex-col flex-1">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
+            {project.title}
+          </h3>
+          <div className="flex items-center gap-3 mt-auto flex-wrap">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
+              >
+                <i className="fab fa-github mr-1"></i>Github
+              </a>
+            )}
+            {project.githubOptions && (
+              <button
+                className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
+                onClick={() =>
+                  showGitHubOptions(
+                    project.githubOptions!.front,
+                    project.githubOptions!.back,
+                  )
+                }
+              >
+                <i className="fab fa-github mr-1"></i>Github
+              </button>
+            )}
+            {project.detailsId && (
+              <Link
+                href={`/details?id=${project.detailsId}`}
+                className="px-4 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200 no-underline"
+              >
+                Details
+              </Link>
+            )}
+            {project.appStore && (
+              <a
+                href={project.appStore}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-black text-white text-xs font-semibold no-underline hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
+              >
+                <i className="fab fa-apple text-lg group-hover:scale-110 transition-transform"></i>
+                <span>App Store</span>
+              </a>
+            )}
+            {project.playStore && (
+              <a
+                href={project.playStore}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 text-white text-xs font-semibold no-underline hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
+              >
+                <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
+                <span>Play Store</span>
+              </a>
+            )}
+            {project.playStoreComingSoon && (
+              <button
+                onClick={showComingSoon}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 text-white text-xs font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group cursor-pointer border-0"
+              >
+                <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
+                <span>Play Store</span>
+              </button>
+            )}
+            {project.websiteLink && (
+              <a
+                href={project.websiteLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold no-underline hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
+              >
+                <i className="fas fa-globe text-base group-hover:rotate-12 transition-transform"></i>
+                <span>Website</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 

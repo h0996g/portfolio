@@ -36,10 +36,10 @@ export default function RootLayout({
           async
         ></script>
       </head>
-      <body className={`${poppins.className} bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-gray-100`}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+      <body
+        className={`${poppins.className} bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-gray-100`}
+      >
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
