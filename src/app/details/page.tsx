@@ -1,9 +1,15 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useState, useCallback } from "react";
+import { Suspense, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+interface ScreenshotGroup {
+  id: string;
+  label: string;
+  screenshots: string[];
+}
 
 interface ProjectData {
   title: string;
@@ -13,6 +19,7 @@ interface ProjectData {
   techStack: Record<string, string[]>;
   detailedFeatures: { title: string; details: string[] }[];
   screenshots: string[];
+  screenshotGroups?: ScreenshotGroup[];
   playstoreLink?: string;
   playstoreComingSoon?: boolean;
   appstoreLink?: string;
@@ -316,8 +323,7 @@ const projectsData: Record<string, ProjectData> = {
       },
     ],
     screenshots: Array.from({ length: 18 }, (_, i) => `/adkar/${i + 1}.jpg`),
-    playstoreLink:
-      "https://play.google.com/store/apps/details?id=com.ajr.app",
+    playstoreLink: "https://play.google.com/store/apps/details?id=com.ajr.app",
     websiteLink: "https://h0996g.github.io",
   },
   "tic-tac-toe-app": {
@@ -497,6 +503,107 @@ const projectsData: Record<string, ProjectData> = {
     githubLinkBack: null,
     playstoreComingSoon: true,
   },
+  "vtc-platform": {
+    title: "VTC Platform",
+    subtitle:
+      "A ride-hailing ecosystem with two mobile apps and a web admin dashboard",
+    overview:
+      "VTC Platform is a connected transportation product made of two Flutter mobile applications and one web admin dashboard working together: a passenger app for booking and tracking rides, a driver app for accepting trips and managing earnings, and an admin dashboard for operating the platform. The project focuses on real-time ride flow, location-aware booking, account and vehicle management, wallet operations, and internal admin tools for onboarding drivers and managing platform activity.",
+    keyFeatures: [
+      "Passenger app for authentication, booking rides, live ride tracking, and ride history",
+      "Driver app for trip intake, current ride handling, wallet access, and profile or vehicle updates",
+      "Web admin dashboard for secure access, creating admins, registering drivers, and managing operations",
+      "Location picker and route preview flows for origin and destination selection",
+      "Real-time ride updates and socket-based synchronization between apps",
+      "Ride status lifecycle support from request to completion or cancellation",
+      "Rating flow and profile management features inside the mobile experience",
+      "Wallet and gift-card management tools inside the admin side",
+    ],
+    techStack: {
+      Frontend: ["Flutter", "flutter_bloc / Cubit", "GoRouter"],
+      "Maps & Realtime": [
+        "Flutter Map / geolocation flows",
+        "Socket-based real-time updates",
+        "Foreground tracking service",
+      ],
+      "Data & Networking": [
+        "Dio",
+        "REST API integration",
+        "Local cache / secure storage",
+      ],
+      "Admin Tools": [
+        "Responsive Flutter web dashboard",
+        "Driver onboarding flows",
+        "Wallet management",
+        "Gift card management",
+      ],
+    },
+    detailedFeatures: [
+      {
+        title: "Passenger App",
+        details: [
+          "Email authentication flow with register, login, and forgot-password screens",
+          "Pickup and destination selection with a dedicated location picker map",
+          "Ride creation flow backed by live ride status checks and route preview widgets",
+          "Current ride tracking, ride completion dialog, and post-ride rating flow",
+          "Ride history page with filtering and status-aware presentation",
+          "Profile editing and password update screens for account management",
+        ],
+      },
+      {
+        title: "Driver App",
+        details: [
+          "Driver onboarding with authentication and profile retrieval at startup",
+          "Pending rides list with real-time updates and current-ride navigation",
+          "Ride details flow that protects against invalid transitions during navigation",
+          "Wallet section for drivers to monitor account-related information",
+          "Profile and vehicle editing flows for keeping driver information up to date",
+          "Cancellation handling with socket listeners and automatic state reset",
+        ],
+      },
+      {
+        title: "Admin Dashboard",
+        details: [
+          "Protected admin login with session restore and redirect-based routing",
+          "Dashboard shell for navigating operational tools in a single web app",
+          "Create-admin flow for internal team management",
+          "Register-driver flow with vehicle details to onboard new drivers",
+          "Wallet management pages for reviewing platform financial activity",
+          "Gift card creation and listing interfaces for promotional or balance workflows",
+          "Profile and password management for administrators",
+        ],
+      },
+    ],
+    screenshots: [],
+    playstoreComingSoon: true,
+    websiteLink: "https://vtc-admin.netlify.app/",
+    screenshotGroups: [
+      {
+        id: "user-app",
+        label: "User App",
+        screenshots: Array.from(
+          { length: 10 },
+          (_, i) => `/vtc/user/user${i}.jpeg`,
+        ),
+      },
+      {
+        id: "driver-app",
+        label: "Driver App",
+        screenshots: Array.from(
+          { length: 8 },
+          (_, i) => `/vtc/driver/driver${i}.jpeg`,
+        ),
+      },
+      {
+        id: "admin-dashboard",
+        label: "Admin Dashboard",
+        screenshots: Array.from(
+          { length: 8 },
+          (_, i) => `/vtc/admin/admin${i}.png`,
+        ),
+      },
+    ],
+  },
 };
 
 function ComingSoonModal({ onClose }: { onClose: () => void }) {
@@ -527,10 +634,15 @@ function ComingSoonModal({ onClose }: { onClose: () => void }) {
           autoplay
         />
 
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Coming Soon</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Coming Soon
+        </h2>
         <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
           This app is on its way to the{" "}
-          <span className="font-semibold text-gray-700 dark:text-gray-200">Play Store</span>.
+          <span className="font-semibold text-gray-700 dark:text-gray-200">
+            Play Store
+          </span>
+          .
           <br />
           Stay tuned for the launch!
         </p>
@@ -568,21 +680,40 @@ function DetailsContent() {
   const [openAccordion, setOpenAccordion] = useState<number>(0);
   const [modalImage, setModalImage] = useState<number | null>(null);
   const [showComingSoon, setShowComingSoon] = useState(false);
+  const [activeScreenshotGroup, setActiveScreenshotGroup] = useState(0);
 
   const project = id ? projectsData[id] : null;
+  const screenshotGroups =
+    project?.screenshotGroups && project.screenshotGroups.length > 0
+      ? project.screenshotGroups
+      : project
+        ? [
+            {
+              id: "all-screenshots",
+              label: "All Screenshots",
+              screenshots: project.screenshots,
+            },
+          ]
+        : [];
+  const currentScreenshotGroup =
+    screenshotGroups[activeScreenshotGroup] ?? screenshotGroups[0];
+  const activeScreenshots = currentScreenshotGroup?.screenshots ?? [];
 
-  const handlePrev = useCallback(() => {
-    if (!project || modalImage === null) return;
+  const handlePrev = () => {
+    if (!project || modalImage === null || activeScreenshots.length === 0) {
+      return;
+    }
     setModalImage(
-      (modalImage - 1 + project.screenshots.length) %
-        project.screenshots.length,
+      (modalImage - 1 + activeScreenshots.length) % activeScreenshots.length,
     );
-  }, [project, modalImage]);
+  };
 
-  const handleNext = useCallback(() => {
-    if (!project || modalImage === null) return;
-    setModalImage((modalImage + 1) % project.screenshots.length);
-  }, [project, modalImage]);
+  const handleNext = () => {
+    if (!project || modalImage === null || activeScreenshots.length === 0) {
+      return;
+    }
+    setModalImage((modalImage + 1) % activeScreenshots.length);
+  };
 
   if (!project) {
     return (
@@ -639,7 +770,10 @@ function DetailsContent() {
             </h3>
             <ul className="space-y-2 mb-8">
               {project.keyFeatures.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                <li
+                  key={i}
+                  className="flex items-start gap-3 text-gray-700 dark:text-gray-300"
+                >
                   <i className="fas fa-check text-green-500 mt-1 shrink-0"></i>
                   {feature}
                 </li>
@@ -828,25 +962,68 @@ function DetailsContent() {
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
           App Screenshots
         </h3>
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-12">
-          {project.screenshots.map((screenshot, index) => (
-            <div
-              key={index}
-              className="cursor-pointer rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow bg-gray-200 dark:bg-gray-700 animate-pulse"
-              onClick={() => setModalImage(index)}
-            >
-              <Image
-                src={screenshot}
-                alt={`Screenshot ${index + 1}`}
-                width={200}
-                height={400}
-                loading="lazy"
-                sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
-                className="w-full h-auto object-cover"
-              />
+        {screenshotGroups.length > 1 && (
+          <div className="flex flex-wrap gap-3 mb-6">
+            {screenshotGroups.map((group, index) => {
+              const isActive =
+                (screenshotGroups[activeScreenshotGroup] ?? screenshotGroups[0])
+                  ?.id === group.id;
+
+              return (
+                <button
+                  key={group.id}
+                  onClick={() => {
+                    setActiveScreenshotGroup(index);
+                    setModalImage(null);
+                  }}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer border ${
+                    isActive
+                      ? "bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-gray-900 dark:border-white"
+                      : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
+                  }`}
+                >
+                  {group.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
+        {activeScreenshots.length > 0 ? (
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-12">
+            {activeScreenshots.map((screenshot, index) => (
+              <div
+                key={index}
+                className="cursor-pointer rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow bg-gray-200 dark:bg-gray-700 animate-pulse"
+                onClick={() => setModalImage(index)}
+              >
+                <Image
+                  src={screenshot}
+                  alt={`Screenshot ${index + 1}`}
+                  width={200}
+                  height={400}
+                  loading="lazy"
+                  sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mb-12 rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-900/60 px-6 py-10 text-center">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+              <i className="fas fa-images text-lg"></i>
             </div>
-          ))}
-        </div>
+            <p className="text-base font-semibold text-gray-900 dark:text-white mb-2">
+              {currentScreenshotGroup
+                ? `${currentScreenshotGroup.label} screenshots will be added soon`
+                : "Screenshots will be added soon"}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              This project entry is ready, and the visual gallery will be
+              updated once the final screenshots are available.
+            </p>
+          </div>
+        )}
 
         {/* Back button */}
         <div className="text-center mt-8">
@@ -876,7 +1053,7 @@ function DetailsContent() {
               <i className="fas fa-xmark"></i>
             </button>
             <Image
-              src={project.screenshots[modalImage]}
+              src={activeScreenshots[modalImage]}
               alt={`Screenshot ${modalImage + 1}`}
               width={800}
               height={600}

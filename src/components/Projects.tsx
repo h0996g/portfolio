@@ -78,6 +78,13 @@ const projects: ProjectCard[] = [
     detailsId: "courassy-app",
   },
   {
+    title: "VTC Platform",
+    image: "/vtc_app.png",
+    playStoreComingSoon: true,
+    websiteLink: "https://vtc-admin.netlify.app/",
+    detailsId: "vtc-platform",
+  },
+  {
     title: "massalah (مسلة)",
     image: "/مسلة.webp",
     appStore:
