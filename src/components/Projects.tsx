@@ -86,7 +86,7 @@ const projects: ProjectCard[] = [
   },
   {
     title: "massalah (مسلة)",
-    image: "/مسلة.webp",
+    image: "/مسلة.png",
     appStore:
       "https://apps.apple.com/us/app/%D9%85%D8%B3%D9%84%D8%A9/id6753812374",
     playStore:
@@ -94,7 +94,7 @@ const projects: ProjectCard[] = [
   },
   {
     title: "massalah Provider (مسلة مقدم الخدمة)",
-    image: "/مسلة_مقدم الخدمة.webp",
+    image: "/مسلة.png",
     appStore: "https://apps.apple.com/us/app/مسلة-مقدم-الخدمة/id6753877345",
     playStore:
       "https://play.google.com/store/apps/details?id=com.endpointsoft.masallah_provider",
