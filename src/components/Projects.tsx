@@ -71,20 +71,6 @@ const projects: ProjectCard[] = [
       "https://play.google.com/store/apps/details?id=com.sarlkig.NavRestaurant",
   },
   {
-    title: "Courassy",
-    image: "/courassy3.png",
-    inProgress: true,
-    playStoreComingSoon: true,
-    detailsId: "courassy-app",
-  },
-  {
-    title: "VTC Platform",
-    image: "/vtc_app.png",
-    playStoreComingSoon: true,
-    websiteLink: "https://vtc-admin.netlify.app/",
-    detailsId: "vtc-platform",
-  },
-  {
     title: "massalah (مسلة)",
     image: "/مسلة.png",
     appStore:
@@ -103,6 +89,32 @@ const projects: ProjectCard[] = [
     title: "Feedback",
     image: "/Feedback.png",
     websiteLink: "https://endpointsoft.com/feedback/",
+  },
+  {
+    title: "Courassy",
+    image: "/courassy3.png",
+    inProgress: true,
+    playStoreComingSoon: true,
+    detailsId: "courassy-app",
+  },
+  {
+    title: "Naqlax",
+    image: "/naqlax/cover.png",
+    playStoreComingSoon: true,
+    detailsId: "naqlax-app",
+  },
+  {
+    title: "Umrah Guide (دليل العمرة)",
+    image: "/umrah-client/cover.png",
+    playStoreComingSoon: true,
+    detailsId: "umrah-guide-app",
+  },
+  {
+    title: "VTC Platform",
+    image: "/vtc_app.png",
+    playStoreComingSoon: true,
+    websiteLink: "https://vtc-admin.netlify.app/",
+    detailsId: "vtc-platform",
   },
   {
     title: "Ajr",

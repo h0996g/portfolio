@@ -30,6 +30,179 @@ interface ProjectData {
 }
 
 const projectsData: Record<string, ProjectData> = {
+  "umrah-guide-app": {
+    title: "Umrah Guide (دليل العمرة)",
+    subtitle:
+      "A multilingual Umrah travel companion connecting pilgrims with agencies — browse trips, book, and manage the journey",
+    overview:
+      "Umrah Guide is an Arabic-first (RTL) Flutter app that connects pilgrims with travel agencies offering Umrah packages. Pilgrims — or guests browsing without an account — can explore agency offers, open rich trip details with Makkah and Madinah hotels, ratings, distances, and room-type pricing, then send a booking request. Day to day, the home screen surfaces prayer times with the Hijri date, the user's active trip (agency, route, guide, and hotel), an emergency-assistance request, and a location-sharing toggle. The interface is fully multilingual across Arabic, English, and French.",
+    keyFeatures: [
+      "Email authentication with forgot-password reset and guest browsing mode",
+      "Two account roles: pilgrim (معتمر) and agency owner (صاحب الوكالة)",
+      "Multilingual interface — Arabic, English, and French with full RTL support",
+      "Prayer-times and Hijri-date widget on the home screen",
+      "Browse Umrah offers with detailed hotels, star ratings, distances, and room-type pricing",
+      "In-app booking requests (room type, number of travelers, notes)",
+      "Offer filtering by departure date, price range, distance, and sort order",
+      "\"My Umrah Trip\" tracking with agency, route, guide, and hotel details",
+      "Emergency-assistance request and live location sharing",
+      "Profile and edit-profile with avatar upload and account management",
+    ],
+    techStack: {
+      Frontend: ["Flutter", "Cubit (State Management)"],
+      Networking: ["Dio", "REST API integration"],
+      Localization: ["Arabic / English / French", "Full RTL support"],
+      Notifications: ["Firebase Cloud Messaging (FCM)"],
+      Location: ["Location sharing", "Emergency assistance"],
+      "Islamic Utilities": ["Prayer times", "Hijri calendar"],
+      "UI/UX": [
+        "Shimmer loading placeholders",
+        "cached_network_image",
+        "image_picker (avatar)",
+      ],
+    },
+    detailedFeatures: [
+      {
+        title: "Authentication & Roles",
+        details: [
+          "Email and password sign in with forgot-password email reset",
+          "Registration as a pilgrim (معتمر) or an agency owner (صاحب الوكالة)",
+          "Wilaya and daira selection captured during sign up",
+          "Guest mode to browse offers without creating an account",
+          "Terms and privacy acceptance before account creation",
+        ],
+      },
+      {
+        title: "Browsing Trips & Offers",
+        details: [
+          "Popular offers on the home screen plus a full all-offers list",
+          "Rich trip detail with description, duration, seats, and dates",
+          "Makkah and Madinah accommodation with star ratings and distance",
+          "Room-type pricing table (quad, triple, double)",
+          "Filter offers by departure date range, price range, distance, and sort",
+        ],
+      },
+      {
+        title: "Booking",
+        details: [
+          "Send a booking request directly from a trip's detail page",
+          "Choose preferred room type and the number of travelers",
+          "Add special requests or notes to the request",
+          "Track the active trip from the home screen",
+        ],
+      },
+      {
+        title: "Home & Daily Tools",
+        details: [
+          "Prayer times (Fajr, Dhuhr, Asr, Maghrib, Isha) with the Hijri date",
+          "Quick category shortcuts: trips, hotels, visa, and VIP",
+          "\"My Umrah Trip\" card with agency, route, guide phone, and hotel",
+          "Emergency-assistance request for urgent help during the trip",
+          "Location-sharing toggle to share position with the group",
+        ],
+      },
+      {
+        title: "Profile & Account",
+        details: [
+          "View personal information and account details (member since, verification, password updates)",
+          "Edit profile: name, surname, phone, email, and address",
+          "Change profile photo and update the password",
+          "Switch the app language between Arabic, English, and French",
+        ],
+      },
+    ],
+    screenshots: Array.from(
+      { length: 12 },
+      (_, i) => `/umrah-client/${i + 1}.png`,
+    ),
+    playstoreComingSoon: true,
+  },
+  "naqlax-app": {
+    title: "Naqlax — On-Demand Truck Booking",
+    subtitle:
+      "A freight logistics app for booking trucks on demand, with Google Maps location picking and real-time delivery tracking",
+    overview:
+      "Naqlax is a Flutter mobile app for on-demand freight logistics. Users pick up and drop off locations on a Google Map, choose a truck size, and either book instantly or schedule a delivery for later. Once a booking is placed, its progress is streamed live over a WebSocket and surfaced as a delivery-status timeline, while Firebase Cloud Messaging keeps users notified even when the app is closed. The app also supports phone-OTP plus Google and Apple sign-in, saved addresses, promotional offers, and full profile management.",
+    keyFeatures: [
+      "Phone-number (OTP) authentication with Google and Apple sign-in",
+      "Instant booking and scheduled (\"Book now\") truck delivery flows",
+      "Google Maps pickup/drop-off picker with address search and current location",
+      "Saved addresses with contact details and a default selection",
+      "Real-time delivery-status tracking over WebSocket",
+      "Push notifications via Firebase Cloud Messaging (FCM)",
+      "Limited-time offers and promo codes",
+      "Profile management with avatar upload, settings, and support",
+    ],
+    techStack: {
+      Frontend: ["Flutter", "Cubit (State Management)"],
+      Networking: ["Dio", "REST API integration"],
+      "Maps & Location": [
+        "Google Maps",
+        "Location picker",
+        "Saved addresses",
+      ],
+      "Realtime & Notifications": [
+        "WebSocket (live booking/delivery updates)",
+        "Firebase Cloud Messaging (FCM)",
+      ],
+      Auth: ["Phone OTP", "Google Sign-In", "Apple Sign-In"],
+      "UI/UX": [
+        "Shimmer loading placeholders",
+        "cached_network_image",
+        "image_picker (avatar)",
+      ],
+    },
+    detailedFeatures: [
+      {
+        title: "Authentication",
+        details: [
+          "Phone-number sign in with multi-country code selection and OTP verification",
+          "Social login via Google Sign-In and Apple Sign-In",
+          "Email registration with full name, phone, password, and terms acceptance",
+          "Persistent sessions so users stay logged in across launches",
+        ],
+      },
+      {
+        title: "Booking Flow",
+        details: [
+          "Toggle between Instant Book and scheduled \"Book now\" delivery",
+          "Select pickup and drop-off locations before confirming a truck",
+          "Choose truck size (e.g. 5-ton, 10-ton) and the delivery date",
+          "Apply promo codes from limited-time offers for discounts",
+          "Review past bookings with IDs, routes, and dates in Recent Bookings",
+        ],
+      },
+      {
+        title: "Maps & Location",
+        details: [
+          "Google Maps pickup and drop-off pickers with draggable map selection",
+          "Address search and a one-tap current-location control",
+          "Save frequently used locations as favorites for faster booking",
+          "Saved-address book with contact name, phone, and full address",
+        ],
+      },
+      {
+        title: "Real-time & Notifications",
+        details: [
+          "Live delivery-status timeline updated over a WebSocket connection",
+          "Firebase Cloud Messaging (FCM) push notifications for booking updates",
+          "Status lifecycle from picked up, to in transit, to delivered",
+          "Shimmer placeholders while booking and tracking data loads",
+        ],
+      },
+      {
+        title: "Profile & Addresses",
+        details: [
+          "Edit profile with name, phone (country code), email, and avatar upload",
+          "Manage the saved-address book and choose a default address",
+          "Settings, About us, Terms & Conditions, Help & Support, and Privacy Policy",
+          "Secure log out and account management",
+        ],
+      },
+    ],
+    screenshots: Array.from({ length: 8 }, (_, i) => `/naqlax/${i + 1}.png`),
+    playstoreComingSoon: true,
+  },
   "memory-card-game": {
     title: "Memory Card Game",
     subtitle:
