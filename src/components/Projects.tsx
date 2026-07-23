@@ -95,6 +95,7 @@ const projects: ProjectCard[] = [
     image: "/courassy3.png",
     inProgress: true,
     playStoreComingSoon: true,
+    websiteLink: "https://courassy.com/",
     detailsId: "courassy-app",
   },
   {

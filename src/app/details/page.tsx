@@ -675,6 +675,7 @@ const projectsData: Record<string, ProjectData> = {
     githubLinkFront: null,
     githubLinkBack: null,
     playstoreComingSoon: true,
+    websiteLink: "https://courassy.com/",
   },
   "vtc-platform": {
     title: "VTC Platform",
