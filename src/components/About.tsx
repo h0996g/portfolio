@@ -68,7 +68,7 @@ export default function About() {
               </div>
             </div>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-sm:text-justify">
-              I am a passionate 25-year-old mobile application developer with a
+              I am a passionate 26-year-old mobile application developer with a
               master&apos;s degree in Computer Science, specializing in Sciences
               and Technologies of Information and Communication, which I earned
               in 2024. My journey into mobile development began when I tested
