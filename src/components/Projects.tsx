@@ -387,14 +387,14 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
 
-          {/* Play overlay on image hover */}
+          {/* Play overlay — always visible, darkens on hover */}
           {project.video && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setShowDialog(true);
               }}
-              className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/30 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer border-0"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/20 group-hover:bg-black/30 group-hover:backdrop-blur-[2px] transition-all duration-300 cursor-pointer border-0"
               aria-label="Play promo video"
             >
               <div className="w-16 h-16 rounded-full bg-linear-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-200 ring-4 ring-white/30">
