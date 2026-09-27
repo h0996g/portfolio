@@ -33,7 +33,7 @@ export default function Hero() {
           </div>
           <div className="flex gap-4 lg:justify-start justify-center max-sm:flex-wrap">
             <a
-              href="https://drive.google.com/file/d/1KKzHRsjS-INkPZyNpqiJayHZMs6QLvyz/view?usp=sharing"
+              href="https://drive.google.com/file/d/1dyUSGrS7cHyidAKFB5MwkeaaYMreEA6t/view?usp=drivesdk"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-full text-sm font-semibold border-2 border-gray-900 dark:border-gray-400 text-gray-900 dark:text-gray-100 bg-transparent hover:bg-gray-900 dark:hover:bg-gray-100 hover:text-white dark:hover:text-gray-900 transition-all duration-300"
