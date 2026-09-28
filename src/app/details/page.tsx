@@ -30,12 +30,12 @@ interface ProjectData {
 }
 
 const projectsData: Record<string, ProjectData> = {
-  "umrah-guide-app": {
-    title: "Umrah Guide (دليل العمرة)",
+  "dalil-umrah-app": {
+    title: "Dalil Umrah App",
     subtitle:
       "A multilingual Umrah travel companion connecting pilgrims with agencies — browse trips, book, and manage the journey",
     overview:
-      "Umrah Guide is an Arabic-first (RTL) Flutter app that connects pilgrims with travel agencies offering Umrah packages. Pilgrims — or guests browsing without an account — can explore agency offers, open rich trip details with Makkah and Madinah hotels, ratings, distances, and room-type pricing, then send a booking request. Day to day, the home screen surfaces prayer times with the Hijri date, the user's active trip (agency, route, guide, and hotel), an emergency-assistance request, and a location-sharing toggle. The interface is fully multilingual across Arabic, English, and French.",
+      "Dalil Umrah is an Arabic-first (RTL) Flutter app that connects pilgrims with travel agencies offering Umrah packages. Pilgrims — or guests browsing without an account — can explore agency offers, open rich trip details with Makkah and Madinah hotels, ratings, distances, and room-type pricing, then send a booking request. Day to day, the home screen surfaces prayer times with the Hijri date, the user's active trip (agency, route, guide, and hotel), an emergency-assistance request, and a location-sharing toggle. The interface is fully multilingual across Arabic, English, and French.",
     keyFeatures: [
       "Email authentication with forgot-password reset and guest browsing mode",
       "Two account roles: pilgrim (معتمر) and agency owner (صاحب الوكالة)",
@@ -116,6 +116,7 @@ const projectsData: Record<string, ProjectData> = {
       (_, i) => `/umrah-client/${i + 1}.png`,
     ),
     playstoreComingSoon: true,
+    websiteLink: "https://dalilumrah.com/ar",
   },
   "naqlax-app": {
     title: "Naqlax — On-Demand Truck Booking",

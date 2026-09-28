@@ -105,10 +105,11 @@ const projects: ProjectCard[] = [
     detailsId: "naqlax-app",
   },
   {
-    title: "Umrah Guide (دليل العمرة)",
+    title: "Dalil Umrah App",
     image: "/umrah-client/cover.png",
     playStoreComingSoon: true,
-    detailsId: "umrah-guide-app",
+    websiteLink: "https://dalilumrah.com/ar",
+    detailsId: "dalil-umrah-app",
   },
   {
     title: "VTC Platform",
