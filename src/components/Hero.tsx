@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const CV_LINKS = {
   en: "https://drive.google.com/file/d/1H_ymsMuJQlgaeOCP1aH1bcWx2x5Zmt9D/view?usp=drivesdk",
-  fr: "https://drive.google.com/file/d/1_7lSWwl-LjJnwkcnqVCSw2nnGbQ4wWxM/view?usp=drivesdk",
+  fr: "https://drive.google.com/file/d/1MRbIxsxLdpPNKbR4jui9yATuBDzrMmoi/view?usp=drivesdk",
 };
 
 function showCvLanguageOptions() {
