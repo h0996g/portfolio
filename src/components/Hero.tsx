@@ -1,4 +1,42 @@
+"use client";
+
 import Image from "next/image";
+
+const CV_LINKS = {
+  en: "https://drive.google.com/file/d/1H_ymsMuJQlgaeOCP1aH1bcWx2x5Zmt9D/view?usp=drivesdk",
+  fr: "https://drive.google.com/file/d/1_7lSWwl-LjJnwkcnqVCSw2nnGbQ4wWxM/view?usp=drivesdk",
+};
+
+function showCvLanguageOptions() {
+  window.Swal.fire({
+    title: "Download CV",
+    html: `
+      <p class="swal-text">Choose the language of the CV:</p>
+      <div class="swal-button-container">
+        <button id="cv-en-btn" class="swal-button">English</button>
+        <button id="cv-fr-btn" class="swal-button">Français</button>
+      </div>
+    `,
+    showConfirmButton: false,
+    showCloseButton: true,
+    background: "#f8f9fa",
+    customClass: {
+      popup: "swal-popup",
+      title: "swal-title",
+      closeButton: "swal-close-button",
+    },
+    didOpen: () => {
+      document.getElementById("cv-en-btn")?.addEventListener("click", () => {
+        window.open(CV_LINKS.en, "_blank", "noopener,noreferrer");
+        window.Swal.close();
+      });
+      document.getElementById("cv-fr-btn")?.addEventListener("click", () => {
+        window.open(CV_LINKS.fr, "_blank", "noopener,noreferrer");
+        window.Swal.close();
+      });
+    },
+  });
+}
 
 export default function Hero() {
   return (
@@ -33,9 +71,16 @@ export default function Hero() {
           </div>
           <div className="flex gap-4 lg:justify-start justify-center max-sm:flex-wrap">
             <a
-              href="https://drive.google.com/file/d/1_7lSWwl-LjJnwkcnqVCSw2nnGbQ4wWxM/view?usp=drivesdk"
+              href={CV_LINKS.en}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                // Fall back to the plain link if SweetAlert hasn't loaded yet
+                if (window.Swal) {
+                  e.preventDefault();
+                  showCvLanguageOptions();
+                }
+              }}
               className="px-6 py-3 rounded-full text-sm font-semibold border-2 border-gray-900 dark:border-gray-400 text-gray-900 dark:text-gray-100 bg-transparent hover:bg-gray-900 dark:hover:bg-gray-100 hover:text-white dark:hover:text-gray-900 transition-all duration-300"
             >
               <i className="fas fa-download mr-2"></i>Download CV
