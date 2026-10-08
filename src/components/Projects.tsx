@@ -20,6 +20,7 @@ interface ProjectCard {
   themeColor?: string;
   inProgress?: boolean;
   appStore?: string;
+  appStoreComingSoon?: boolean;
   playStore?: string;
   playStoreComingSoon?: boolean;
   github?: string;
@@ -32,6 +33,33 @@ interface ProjectCard {
 }
 
 const projects: ProjectCard[] = [
+  {
+    title: "Nouba Plus",
+    image: "/noubaplus.png",
+    playStore: "https://play.google.com/store/apps/details?id=com.noubaplus.app",
+    appStoreComingSoon: true,
+    websiteLink: "https://noubaplus.com/",
+  },
+  {
+    title: "massalah (مسلة)",
+    image: "/مسلة.png",
+    appStore:
+      "https://apps.apple.com/us/app/%D9%85%D8%B3%D9%84%D8%A9/id6753812374",
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.endpointsoft.massalah",
+  },
+  {
+    title: "massalah Provider (مسلة مقدم الخدمة)",
+    image: "/مسلة.png",
+    appStore: "https://apps.apple.com/us/app/مسلة-مقدم-الخدمة/id6753877345",
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.endpointsoft.masallah_provider",
+  },
+  {
+    title: "Feedback",
+    image: "/Feedback.png",
+    websiteLink: "https://endpointsoft.com/feedback/",
+  },
   {
     title: "NavMarket",
     image: "/naviguih.png",
@@ -69,26 +97,6 @@ const projects: ProjectCard[] = [
     appStore: "https://apps.apple.com/us/app/navrestaurant/id6751362901",
     playStore:
       "https://play.google.com/store/apps/details?id=com.sarlkig.NavRestaurant",
-  },
-  {
-    title: "massalah (مسلة)",
-    image: "/مسلة.png",
-    appStore:
-      "https://apps.apple.com/us/app/%D9%85%D8%B3%D9%84%D8%A9/id6753812374",
-    playStore:
-      "https://play.google.com/store/apps/details?id=com.endpointsoft.massalah",
-  },
-  {
-    title: "massalah Provider (مسلة مقدم الخدمة)",
-    image: "/مسلة.png",
-    appStore: "https://apps.apple.com/us/app/مسلة-مقدم-الخدمة/id6753877345",
-    playStore:
-      "https://play.google.com/store/apps/details?id=com.endpointsoft.masallah_provider",
-  },
-  {
-    title: "Feedback",
-    image: "/Feedback.png",
-    websiteLink: "https://endpointsoft.com/feedback/",
   },
   {
     title: "Courassy",
@@ -216,7 +224,7 @@ function showGitHubOptions(
   }
 }
 
-function showComingSoon() {
+function showComingSoon(store: string) {
   if (typeof window !== "undefined" && window.Swal) {
     window.Swal.fire({
       title: "Coming Soon",
@@ -230,7 +238,7 @@ function showComingSoon() {
             loop autoplay>
           </lottie-player>
           <p style="color:#374151;font-size:15px;margin:0;line-height:1.6;text-align:center">
-            This app is on its way to the <strong>Play Store</strong>.<br/>Stay tuned for the launch!
+            This app is on its way to the <strong>${store}</strong>.<br/>Stay tuned for the launch!
           </p>
           <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;border-radius:999px;padding:4px 14px;font-size:12px;font-weight:600">
             <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block"></span>
@@ -444,15 +452,15 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
                 Details
               </Link>
             )}
-            {project.appStore && (
+            {project.websiteLink && (
               <a
-                href={project.appStore}
+                href={project.websiteLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-black text-white text-xs font-semibold no-underline hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold no-underline hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
               >
-                <i className="fab fa-apple text-lg group-hover:scale-110 transition-transform"></i>
-                <span>App Store</span>
+                <i className="fas fa-globe text-base group-hover:rotate-12 transition-transform"></i>
+                <span>Website</span>
               </a>
             )}
             {project.playStore && (
@@ -468,23 +476,32 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
             )}
             {project.playStoreComingSoon && (
               <button
-                onClick={showComingSoon}
+                onClick={() => showComingSoon("Play Store")}
                 className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 text-white text-xs font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group cursor-pointer border-0"
               >
                 <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
                 <span>Play Store</span>
               </button>
             )}
-            {project.websiteLink && (
+            {project.appStore && (
               <a
-                href={project.websiteLink}
+                href={project.appStore}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold no-underline hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-black text-white text-xs font-semibold no-underline hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group"
               >
-                <i className="fas fa-globe text-base group-hover:rotate-12 transition-transform"></i>
-                <span>Website</span>
+                <i className="fab fa-apple text-lg group-hover:scale-110 transition-transform"></i>
+                <span>App Store</span>
               </a>
+            )}
+            {project.appStoreComingSoon && (
+              <button
+                onClick={() => showComingSoon("App Store")}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-black text-white text-xs font-semibold hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group cursor-pointer border-0"
+              >
+                <i className="fab fa-apple text-lg group-hover:scale-110 transition-transform"></i>
+                <span>App Store</span>
+              </button>
             )}
           </div>
         </div>

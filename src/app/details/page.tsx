@@ -1030,19 +1030,17 @@ function DetailsContent() {
                     ) : null}
                   </div>
                 )}
-                {project.appstoreLink && (
+                {project.websiteLink && (
                   <a
-                    href={project.appstoreLink}
+                    href={project.websiteLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-black text-white hover:bg-gray-800 transition-all duration-300 no-underline w-full shadow-lg hover:shadow-xl hover:scale-[1.02] group"
+                    className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 no-underline w-full shadow-lg hover:shadow-xl hover:scale-[1.02] group"
                   >
-                    <i className="fab fa-apple text-2xl group-hover:scale-110 transition-transform"></i>
+                    <i className="fas fa-globe text-2xl group-hover:scale-110 transition-transform"></i>
                     <div className="flex flex-col items-start leading-tight">
-                      <span className="text-[10px] opacity-90">
-                        Download on the
-                      </span>
-                      <span className="text-sm font-semibold">App Store</span>
+                      <span className="text-[10px] opacity-90">VISIT</span>
+                      <span className="text-sm font-semibold">Website</span>
                     </div>
                   </a>
                 )}
@@ -1072,17 +1070,19 @@ function DetailsContent() {
                     </div>
                   </button>
                 )}
-                {project.websiteLink && (
+                {project.appstoreLink && (
                   <a
-                    href={project.websiteLink}
+                    href={project.appstoreLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 no-underline w-full shadow-lg hover:shadow-xl hover:scale-[1.02] group"
+                    className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-black text-white hover:bg-gray-800 transition-all duration-300 no-underline w-full shadow-lg hover:shadow-xl hover:scale-[1.02] group"
                   >
-                    <i className="fas fa-globe text-2xl group-hover:scale-110 transition-transform"></i>
+                    <i className="fab fa-apple text-2xl group-hover:scale-110 transition-transform"></i>
                     <div className="flex flex-col items-start leading-tight">
-                      <span className="text-[10px] opacity-90">VISIT</span>
-                      <span className="text-sm font-semibold">Website</span>
+                      <span className="text-[10px] opacity-90">
+                        Download on the
+                      </span>
+                      <span className="text-sm font-semibold">App Store</span>
                     </div>
                   </a>
                 )}
