@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import JoinTestDialog, { type ClosedTesting } from "./JoinTestDialog";
 
 declare global {
   interface Window {
@@ -23,6 +24,7 @@ interface ProjectCard {
   appStoreComingSoon?: boolean;
   playStore?: string;
   playStoreComingSoon?: boolean;
+  closedTesting?: ClosedTesting;
   github?: string;
   githubOptions?: {
     front: { owner: string; projectId: string };
@@ -59,6 +61,17 @@ const projects: ProjectCard[] = [
     title: "Feedback",
     image: "/Feedback.png",
     websiteLink: "https://endpointsoft.com/feedback/",
+  },
+  {
+    title: "Rapidoo",
+    image: "/rapidoo/cover.png",
+    playStore: "https://play.google.com/store/apps/details?id=com.rapidoo.app",
+    closedTesting: {
+      groupUrl: "https://groups.google.com/g/rapidoo",
+      video: "/rapidoo/join-test.mp4",
+      poster: "/rapidoo/join-test-poster.jpg",
+    },
+    appStoreComingSoon: true,
   },
   {
     title: "NavMarket",
@@ -118,13 +131,6 @@ const projects: ProjectCard[] = [
     playStoreComingSoon: true,
     websiteLink: "https://dalilumrah.com/ar",
     detailsId: "dalil-umrah-app",
-  },
-  {
-    title: "VTC Platform",
-    image: "/vtc_app.png",
-    playStoreComingSoon: true,
-    websiteLink: "https://vtc-admin.netlify.app/",
-    detailsId: "vtc-platform",
   },
   {
     title: "Ajr",
@@ -338,6 +344,12 @@ function VideoDialog({
 
 function ProjectCardComponent({ project }: { project: ProjectCard }) {
   const [showDialog, setShowDialog] = useState(false);
+  const [showJoinTest, setShowJoinTest] = useState(false);
+
+  // Closed-testing apps play their video inside the join guide, same as the Play Store button.
+  const hasVideo = Boolean(project.video || project.closedTesting);
+  const openVideo = () =>
+    project.closedTesting ? setShowJoinTest(true) : setShowDialog(true);
 
   return (
     <>
@@ -351,6 +363,16 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
         />
       )}
 
+      {/* Closed-testing join guide */}
+      {project.closedTesting && project.playStore && showJoinTest && (
+        <JoinTestDialog
+          title={project.title}
+          playStore={project.playStore}
+          closedTesting={project.closedTesting}
+          onClose={() => setShowJoinTest(false)}
+        />
+      )}
+
       <div className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl dark:hover:shadow-black/40 transition-all duration-300 hover:-translate-y-1 flex flex-col relative">
         {project.inProgress && (
           <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-700/50">
@@ -359,10 +381,21 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
           </span>
         )}
 
-        {/* Beautiful PROMO badge */}
-        {project.video && (
+        {project.closedTesting && (
           <button
-            onClick={() => setShowDialog(true)}
+            onClick={() => setShowJoinTest(true)}
+            className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-700/50 cursor-pointer"
+            aria-label="How to join the closed test"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Closed Testing
+          </button>
+        )}
+
+        {/* Beautiful PROMO badge */}
+        {hasVideo && (
+          <button
+            onClick={openVideo}
             className="absolute top-3 right-3 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full cursor-pointer border-0 bg-linear-to-r from-rose-500 via-pink-500 to-orange-400 shadow-[0_0_12px_rgba(244,63,94,0.6)] hover:shadow-[0_0_20px_rgba(244,63,94,0.85)] transition-all duration-300 hover:scale-105"
             aria-label="Watch promo video"
           >
@@ -397,11 +430,11 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
           />
 
           {/* Play overlay — always visible, darkens on hover */}
-          {project.video && (
+          {hasVideo && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setShowDialog(true);
+                openVideo();
               }}
               className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/20 group-hover:bg-black/30 group-hover:backdrop-blur-[2px] transition-all duration-300 cursor-pointer border-0"
               aria-label="Play promo video"
@@ -463,7 +496,7 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
                 <span>Website</span>
               </a>
             )}
-            {project.playStore && (
+            {project.playStore && !project.closedTesting && (
               <a
                 href={project.playStore}
                 target="_blank"
@@ -473,6 +506,15 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
                 <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
                 <span>Play Store</span>
               </a>
+            )}
+            {project.closedTesting && (
+              <button
+                onClick={() => setShowJoinTest(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 text-white text-xs font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group cursor-pointer border-0"
+              >
+                <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
+                <span>Play Store</span>
+              </button>
             )}
             {project.playStoreComingSoon && (
               <button
