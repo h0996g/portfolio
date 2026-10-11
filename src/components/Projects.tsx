@@ -114,8 +114,7 @@ const projects: ProjectCard[] = [
   {
     title: "Courassy",
     image: "/courassy3.png",
-    inProgress: true,
-    playStoreComingSoon: true,
+    playStore: "https://play.google.com/store/apps/details?id=com.courassy.app",
     websiteLink: "https://courassy.com/",
     detailsId: "courassy-app",
   },

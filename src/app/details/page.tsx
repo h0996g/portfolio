@@ -675,7 +675,7 @@ const projectsData: Record<string, ProjectData> = {
     screenshots: Array.from({ length: 17 }, (_, i) => `/courassy/${i + 1}.png`),
     githubLinkFront: null,
     githubLinkBack: null,
-    playstoreComingSoon: true,
+    playstoreLink: "https://play.google.com/store/apps/details?id=com.courassy.app",
     websiteLink: "https://courassy.com/",
   },
 };
