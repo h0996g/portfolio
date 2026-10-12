@@ -63,6 +63,14 @@ const projects: ProjectCard[] = [
     websiteLink: "https://endpointsoft.com/feedback/",
   },
   {
+    title: "Courassy",
+    image: "/courassy3.png",
+    video: "https://www.youtube.com/watch?v=12x8usvaSaw",
+    themeColor: "rgb(201, 145, 92)",
+    playStore: "https://play.google.com/store/apps/details?id=com.courassy.app",
+    websiteLink: "https://courassy.com/",
+  },
+  {
     title: "Rapidoo",
     image: "/rapidoo/cover.png",
     playStore: "https://play.google.com/store/apps/details?id=com.rapidoo.app",
@@ -110,13 +118,6 @@ const projects: ProjectCard[] = [
     appStore: "https://apps.apple.com/us/app/navrestaurant/id6751362901",
     playStore:
       "https://play.google.com/store/apps/details?id=com.sarlkig.NavRestaurant",
-  },
-  {
-    title: "Courassy",
-    image: "/courassy3.png",
-    playStore: "https://play.google.com/store/apps/details?id=com.courassy.app",
-    websiteLink: "https://courassy.com/",
-    detailsId: "courassy-app",
   },
   {
     title: "Naqlax",
@@ -263,6 +264,10 @@ function showComingSoon(store: string) {
   }
 }
 
+function getYouTubeId(url: string) {
+  return url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/)?.[1];
+}
+
 function VideoDialog({
   src,
   title,
@@ -275,6 +280,7 @@ function VideoDialog({
   onClose: () => void;
 }) {
   const dialogVideoRef = useRef<HTMLVideoElement>(null);
+  const youtubeId = getYouTubeId(src);
 
   return (
     <div
@@ -323,15 +329,25 @@ function VideoDialog({
 
         {/* Video */}
         <div className="bg-black aspect-video">
-          <video
-            ref={dialogVideoRef}
-            src={src}
-            className="w-full h-full object-contain"
-            autoPlay
-            playsInline
-            controls
-            onEnded={onClose}
-          />
+          {youtubeId ? (
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`}
+              title={title}
+              className="w-full h-full border-0"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
+            />
+          ) : (
+            <video
+              ref={dialogVideoRef}
+              src={src}
+              className="w-full h-full object-contain"
+              autoPlay
+              playsInline
+              controls
+              onEnded={onClose}
+            />
+          )}
         </div>
 
         {/* Bottom accent bar */}
