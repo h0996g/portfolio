@@ -2,73 +2,15 @@
 
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
-import Link from "next/link";
+import ArticleLayout, {
+  ArticleLoading,
+  ArticleNotFound,
+} from "@/components/blog/ArticleLayout";
+import CodeBlock from "@/components/blog/CodeBlock";
+import { A, H2, InlineCode, Note, Ol, P, Ul } from "@/components/blog/prose";
 
-/* ── reusable small components ───────────────────────────────── */
-
-function CodeBlock({ children, lang }: { children: string; lang?: string }) {
-  return (
-    <div className="relative my-4">
-      {lang && (
-        <span className="absolute top-2 right-3 text-[10px] font-mono uppercase tracking-wider text-gray-400 select-none">
-          {lang}
-        </span>
-      )}
-      <pre className="bg-gray-900 text-gray-100 p-5 rounded-xl overflow-x-auto max-h-85 text-sm leading-relaxed shadow-lg scrollbar-thin">
-        <code>{children}</code>
-      </pre>
-    </div>
-  );
-}
-
-function SectionCard({
-  icon,
-  title,
-  children,
-}: {
-  icon: string;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 p-6 md:p-8 mb-6 transition-all duration-300 hover:-translate-y-0.5">
-      <h2 className="flex items-center gap-3 text-xl md:text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-5">
-        <i className={`${icon} text-lg`}></i>
-        {title}
-      </h2>
-      {children}
-    </section>
-  );
-}
-
-function AlertBox({
-  children,
-  variant = "info",
-}: {
-  children: React.ReactNode;
-  variant?: "info" | "warning" | "success" | "danger";
-}) {
-  const styles = {
-    info: "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700/50 text-blue-800 dark:text-blue-300",
-    warning: "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-700/50 text-amber-800 dark:text-amber-300",
-    success: "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-700/50 text-emerald-800 dark:text-emerald-300",
-    danger: "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700/50 text-red-800 dark:text-red-300",
-  };
-  const icons = {
-    info: "fas fa-info-circle",
-    warning: "fas fa-exclamation-triangle",
-    success: "fas fa-check-circle",
-    danger: "fas fa-exclamation-circle",
-  };
-  return (
-    <div
-      className={`flex items-start gap-3 p-4 rounded-xl border ${styles[variant]} my-4`}
-    >
-      <i className={`${icons[variant]} mt-0.5`}></i>
-      <div className="text-sm leading-relaxed">{children}</div>
-    </div>
-  );
-}
+const TITLE =
+  "Creating an Email Tracking System with Node.js and Deploying on Vercel";
 
 /* ── blog content ──────────────────────────────────────────── */
 
@@ -78,92 +20,40 @@ function BackendBlogContent() {
 
   useEffect(() => {
     if (id === "blog-1") {
-      document.title =
-        "Creating an Email Tracking System with Node.js and Deploying on Vercel";
+      document.title = TITLE;
     }
   }, [id]);
 
   if (id !== "blog-1") {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Blog Not Found
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            The blog post you&apos;re looking for doesn&apos;t exist.
-          </p>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium hover:bg-gray-700 dark:hover:bg-white transition-colors no-underline"
-          >
-            ← Back to Portfolio
-          </Link>
-        </div>
-      </div>
-    );
+    return <ArticleNotFound />;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
-      {/* ── Hero Header ── */}
-      <header className="relative bg-gray-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-br from-teal-600/20 to-cyan-600/20"></div>
-        <div className="relative max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
-          <span className="inline-block px-3 py-1 mb-4 text-xs font-semibold rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">
-            Node.js &middot; Backend &middot; Vercel
-          </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-6">
-            Creating an Email Tracking System with Node.js and Deploying on
-            Vercel
-          </h1>
-          <p className="max-w-3xl mx-auto text-gray-300 text-base md:text-lg leading-relaxed">
-            Tired of wondering if your emails are read or ignored? Let&apos;s
-            build something cool. In this tutorial, we&apos;ll create a simple
-            email tracking system using Node.js and Vercel. You&apos;ll learn to
-            make an invisible image that reports when an email is opened. Ready?
-            Let&apos;s dive in.
-          </p>
-        </div>
-        <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-gray-50 dark:bg-gray-950"
-          style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}
-        ></div>
-      </header>
+    <ArticleLayout
+      tag="Node.js · Express · Vercel"
+      title={TITLE}
+      lede="Ever sent an important email and wondered if anyone actually opened it? In this post I'll build a small email tracker with Node.js and deploy it on Vercel. The trick is an invisible image that tells your server when the email is opened."
+      readTime="6 min read"
+      currentHref="/backend?id=blog-1"
+    >
+      <H2>How it works</H2>
+      <P>
+        The whole thing is a tiny Express server that returns a 1×1
+        transparent PNG. You put a link to that image in an email. When the
+        recipient opens it, their email client asks your server for the image,
+        and that request is the signal: the server logs when it happened, then
+        sends the pixel back so nothing looks off.
+      </P>
+      <P>The server has four parts:</P>
+      <Ul>
+        <li>the Express server setup</li>
+        <li>a middleware that logs every request</li>
+        <li>a route that serves the transparent image</li>
+        <li>Vercel Blob, to store the logs</li>
+      </Ul>
+      <P>Here&apos;s the full code. I&apos;ll go through each part below.</P>
 
-      {/* ── Content ── */}
-      <main className="max-w-5xl mx-auto px-6 py-12 space-y-6">
-        {/* Understanding How the Code Works */}
-        <SectionCard
-          icon="fas fa-code"
-          title="Understanding How the Code Works"
-        >
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-            The core of this system is a Node.js Express server that serves a
-            1x1 transparent PNG image. When an email containing this image is
-            opened, the recipient&apos;s email client sends a request to our
-            server. This triggers our tracking mechanism, allowing us to log the
-            event and serve the image. Here&apos;s a breakdown of the main
-            components:
-          </p>
-          <ul className="space-y-2 mb-6">
-            {[
-              "Express server setup",
-              "Middleware for logging requests",
-              "Route for serving the transparent image",
-              "Integration with Vercel Blob for storing logs",
-            ].map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 border border-gray-100 dark:border-gray-600"
-              >
-                <i className="fas fa-chevron-right text-emerald-500 text-xs"></i>
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <CodeBlock lang="javascript">{`// Import required modules
+      <CodeBlock filename="app.js">{`// Import required modules
 const app = require('express')(); // Create an Express application
 const { put } = require('@vercel/blob'); // Import the 'put' function from Vercel Blob for storing logs
 const Jimp = require('jimp'); // Import Jimp for image manipulation
@@ -227,69 +117,31 @@ app.get('/image/:filename.png', (req, res) => {
 app.listen(PORT, () => {
   console.log(\`Server started on port \${PORT}\`);
 });`}</CodeBlock>
-        </SectionCard>
 
-        {/* Step 1: Setting Up the Environment */}
-        <SectionCard
-          icon="fas fa-cogs"
-          title="Step 1: Setting Up the Environment"
-        >
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
-            Before you start coding, ensure that you have Node.js installed on
-            your system. If not, you can download it from{" "}
-            <a
-              href="https://nodejs.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline"
-            >
-              Node.js
-            </a>
-            .
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
-            Next, install the necessary packages by running the following
-            commands in your terminal:
-          </p>
-          <CodeBlock lang="bash">{`npm install express`}</CodeBlock>
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-2">These packages include:</p>
-          <ul className="space-y-2">
-            <li className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 border border-gray-100 dark:border-gray-600">
-              <i className="fas fa-check-circle text-emerald-500 mt-0.5"></i>
-              <span>
-                <strong>Express:</strong> A minimal and flexible Node.js web
-                application framework.
-              </span>
-            </li>
-          </ul>
-        </SectionCard>
+      <H2>1. Set up the project</H2>
+      <P>
+        You&apos;ll need Node.js installed. If you don&apos;t have it yet, you
+        can download it from <A href="https://nodejs.org/">nodejs.org</A>.
+      </P>
+      <P>Then install the two packages the server uses:</P>
+      <CodeBlock lang="bash">{`npm install express jimp@0.22`}</CodeBlock>
+      <P>
+        Express is the web framework, and Jimp is what we&apos;ll use to draw
+        the pixel. I pinned Jimp to 0.22 because the code uses its older
+        callback API, which changed in version 1.0.
+      </P>
 
-        {/* Step 2: Understanding Jimp Usage */}
-        <SectionCard
-          icon="fas fa-image"
-          title="Step 2: Understanding Jimp Usage"
-        >
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-            Jimp (JavaScript Image Manipulation Program) is used in this code to
-            create a 1x1 transparent PNG image. Here&apos;s how it works:
-          </p>
-
-          <div className="space-y-4">
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">1.</span> Jimp
-                is imported at the beginning of the file:
-              </p>
-              <CodeBlock lang="javascript">{`const Jimp = require('jimp');`}</CodeBlock>
-            </div>
-
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">2.</span> In
-                the route handler for &apos;/image/:filename.png&apos;, Jimp
-                creates the image:
-              </p>
-              <CodeBlock lang="javascript">{`// Create a new 1x1 transparent image using Jimp
+      <H2>2. Generating the invisible image with Jimp</H2>
+      <P>
+        Jimp (JavaScript Image Manipulation Program) creates the 1×1 PNG on
+        the fly. It&apos;s imported at the top of the file:
+      </P>
+      <CodeBlock lang="javascript">{`const Jimp = require('jimp');`}</CodeBlock>
+      <P>
+        Then, inside the <InlineCode>/image/:filename.png</InlineCode> route,
+        it creates the image:
+      </P>
+      <CodeBlock lang="javascript">{`// Create a new 1x1 transparent image using Jimp
 new Jimp(width, height, 0x00000000, (err, image) => {
   // Error handling if image creation fails
   if (err) {
@@ -312,75 +164,29 @@ new Jimp(width, height, 0x00000000, (err, image) => {
     res.send(buffer);
   });
 });`}</CodeBlock>
-            </div>
+      <P>
+        The image is 1 pixel wide and 1 pixel high, and the color{" "}
+        <InlineCode>0x00000000</InlineCode> is fully transparent. Jimp turns it
+        into a PNG buffer, and we send that back with the{" "}
+        <InlineCode>image/png</InlineCode> content type. The recipient never
+        sees anything, and the email looks exactly the same.
+      </P>
 
-            <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-              <p>
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">3.</span> The
-                image is created with a width and height of 1 pixel, and a fully
-                transparent color (0x00000000).
-              </p>
-              <p>
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">4.</span> The
-                image is then converted to a buffer in PNG format and sent as
-                the response.
-              </p>
-            </div>
-          </div>
-
-          <AlertBox variant="success">
-            This approach allows us to serve a tiny, invisible image that can be
-            used for tracking email opens without affecting the email&apos;s
-            appearance.
-          </AlertBox>
-        </SectionCard>
-
-        {/* Step 3: Deploying the Project on Vercel */}
-        <SectionCard
-          icon="fas fa-cloud-upload-alt"
-          title="Step 3: Deploying the Project on Vercel"
-        >
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-            Deploying your Node.js application on Vercel is straightforward.
-            Here&apos;s the process:
-          </p>
-
-          <div className="space-y-5">
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">1.</span>{" "}
-                Create a Vercel account if you don&apos;t have one:{" "}
-                <a
-                  href="https://vercel.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline"
-                >
-                  Vercel
-                </a>
-              </p>
-            </div>
-
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">2.</span>{" "}
-                Install the Vercel CLI by running the following command in your
-                terminal:
-              </p>
-              <CodeBlock lang="bash">{`npm install -g vercel`}</CodeBlock>
-            </div>
-
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">3.</span>{" "}
-                Configure your project with a{" "}
-                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
-                  vercel.json
-                </code>{" "}
-                file to specify build and routing configurations. Here is an
-                example:
-              </p>
-              <CodeBlock lang="json">{`{
+      <H2>3. Deploy to Vercel</H2>
+      <P>Deploying a Node.js app on Vercel only takes a few commands:</P>
+      <Ol>
+        <li>
+          Create a <A href="https://vercel.com/">Vercel</A> account if you
+          don&apos;t have one.
+        </li>
+        <li>
+          Install the Vercel CLI:
+          <CodeBlock lang="bash">{`npm install -g vercel`}</CodeBlock>
+        </li>
+        <li>
+          Add a <InlineCode>vercel.json</InlineCode> file so Vercel knows how
+          to build and route the app. Here&apos;s mine:
+          <CodeBlock filename="vercel.json">{`{
   "version": 2,
   "builds": [
     {
@@ -395,87 +201,36 @@ new Jimp(width, height, 0x00000000, (err, image) => {
     }
   ]
 }`}</CodeBlock>
-            </div>
+        </li>
+        <li>
+          Link the project to your Vercel account:
+          <CodeBlock lang="bash">{`vercel`}</CodeBlock>
+        </li>
+        <li>
+          Deploy to production, and run the same command again whenever you
+          make changes:
+          <CodeBlock lang="bash">{`vercel --prod`}</CodeBlock>
+        </li>
+      </Ol>
 
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">4.</span>{" "}
-                Connect your local project with your Vercel account using the
-                command:
-              </p>
-              <CodeBlock lang="bash">{`vercel`}</CodeBlock>
-            </div>
-
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">5.</span>{" "}
-                Upload any changes to Vercel with the command:
-              </p>
-              <CodeBlock lang="bash">{`vercel --prod`}</CodeBlock>
-            </div>
-          </div>
-        </SectionCard>
-
-        {/* Step 4: Setting Up Vercel Blob */}
-        <SectionCard
-          icon="fas fa-database"
-          title="Step 4: Setting Up Vercel Blob for Storing Logs"
-        >
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-            To store the logs of when emails are opened, I used Vercel&apos;s
-            Blob storage. Here&apos;s how to set it up:
-          </p>
-
-          <div className="space-y-5">
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">1.</span>{" "}
-                Install the{" "}
-                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
-                  @vercel/blob
-                </code>{" "}
-                package by running the following command in your terminal:
-              </p>
-              <CodeBlock lang="bash">{`npm install @vercel/blob`}</CodeBlock>
-            </div>
-
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">2.</span>{" "}
-                Configure Vercel Blob in your project settings:
-              </p>
-              <ul className="space-y-2 ml-4">
-                {[
-                  "Go to your project in the Vercel dashboard.",
-                  'Navigate to the "Storage" section.',
-                  "Enable Blob storage for your project.",
-                ].map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300"
-                  >
-                    <i className="fas fa-chevron-right text-emerald-500 text-xs"></i>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">3.</span> Use
-                the{" "}
-                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
-                  put
-                </code>{" "}
-                function from the{" "}
-                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
-                  @vercel/blob
-                </code>{" "}
-                package to store logs. Here&apos;s a code snippet demonstrating
-                this:
-              </p>
-              <CodeBlock lang="javascript">{`// Import the 'put' function from Vercel Blob for storing logs
+      <H2>4. Store the logs in Vercel Blob</H2>
+      <P>
+        To keep a record of every open, I used Vercel&apos;s Blob storage.
+        Here&apos;s how to set it up:
+      </P>
+      <Ol>
+        <li>
+          Install the package:
+          <CodeBlock lang="bash">{`npm install @vercel/blob`}</CodeBlock>
+        </li>
+        <li>
+          In the Vercel dashboard, open your project, go to the Storage tab
+          and enable Blob storage.
+        </li>
+        <li>
+          Use the <InlineCode>put</InlineCode> function from{" "}
+          <InlineCode>@vercel/blob</InlineCode> to write each log entry:
+          <CodeBlock lang="javascript">{`// Import the 'put' function from Vercel Blob for storing logs
 const { put } = require('@vercel/blob');
 
 // Store the log entry in Vercel Blob
@@ -483,144 +238,68 @@ await put(\`logs/\${imageName}.txt\`, log, {
   access: 'public',  // Set the access level to public
   addRandomSuffix: false, // Do not add a random suffix to the filename
 });`}</CodeBlock>
-            </div>
+        </li>
+        <li>
+          Wrap the write in a <InlineCode>try/catch</InlineCode>, like in the
+          full code above, so a failed write doesn&apos;t break the image
+          response.
+        </li>
+      </Ol>
 
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">4.</span>{" "}
-                Implement error handling for any failed log writes to ensure
-                that your application can handle issues gracefully.
-              </p>
-            </div>
-          </div>
-        </SectionCard>
+      <H2>5. Try it with Gmail</H2>
+      <P>Now the fun part. I tested it with Gmail:</P>
+      <Ol>
+        <li>Open Gmail and click Compose.</li>
+        <li>Write your email as usual.</li>
+        <li>
+          Click the Insert photo icon in the formatting toolbar (it looks like
+          a picture).
+        </li>
+        <li>In the dialog, choose Web address (URL).</li>
+        <li>
+          Paste your Vercel URL, followed by <InlineCode>/image/</InlineCode>{" "}
+          and a unique name for the image. For example:
+          <CodeBlock lang="plaintext">{`https://your-vercel-app.vercel.app/image/uniqueimagename.png`}</CodeBlock>
+          Replace <InlineCode>your-vercel-app</InlineCode> with your app&apos;s
+          name, and <InlineCode>uniqueimagename</InlineCode> with any name you
+          like.
+        </li>
+        <li>Click Insert, then send the email.</li>
+      </Ol>
+      <P>
+        When the recipient opens the email, most email apps load the images
+        automatically. That includes our invisible pixel, so their email app
+        sends a GET request to your Vercel app, and the middleware writes a log
+        entry to Blob storage. Check your Blob storage in the Vercel dashboard
+        and you&apos;ll see when each email was opened.
+      </P>
 
-        {/* Step 5: Testing Your Email Tracking Script */}
-        <SectionCard
-          icon="fas fa-envelope"
-          title="Step 5: Testing Your Email Tracking Script"
-        >
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-            Moving on to testing, we&apos;ll use Gmail to verify your Vercel
-            deployment. Follow along:
-          </p>
+      <Note label="A word of caution:">
+        This isn&apos;t 100% reliable. Some email clients block images by
+        default, and some let users choose not to load them. Also, make sure
+        you follow the privacy laws that apply to you before tracking
+        anyone&apos;s emails.
+      </Note>
 
-          <div className="space-y-4">
-            {[
-              'Open Gmail and click on "Compose" to create a new email.',
-              "Write your email content as usual.",
-              'To insert the tracking image, click on the "Insert photo" icon in the formatting toolbar (it looks like a picture).',
-              'In the "Insert photo" dialog, choose "Web address (URL)".',
-            ].map((step, i) => (
-              <p key={i} className="text-sm text-gray-700 dark:text-gray-300">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">{i + 1}.</span>{" "}
-                {step}
-              </p>
-            ))}
-
-            <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">5.</span> In
-                the URL field, paste your Vercel deployment URL followed by the
-                endpoint{" "}
-                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs text-gray-800 dark:text-gray-200">
-                  /image/
-                </code>{" "}
-                and then add a unique name for the image. For example:
-              </p>
-              <CodeBlock lang="plaintext">{`https://your-vercel-app.vercel.app/image/uniqueimagename.png`}</CodeBlock>
-              <p className="text-sm text-gray-600 dark:text-gray-400 ml-4">
-                Replace{" "}
-                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">
-                  your-vercel-app
-                </code>{" "}
-                with your actual Vercel app name, and{" "}
-                <code className="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">
-                  uniqueimagename
-                </code>{" "}
-                with a name of your choice.
-              </p>
-            </div>
-
-            {[
-              'Click "Insert" to add the invisible tracking image to your email.',
-              "Send the email to the intended recipient.",
-              "When the recipient opens the email, most email applications automatically try to display all images in the message. This action triggers the email software to retrieve the invisible tracking pixel, which sends a GET request to your Vercel app.",
-              "Your app will log this request, storing information about when the email was opened in Vercel Blob storage.",
-              "After sending your email, you can monitor your Vercel Blob storage for real-time tracking data. This storage contains logs that record each instance when a recipient opens your email.",
-            ].map((step, i) => (
-              <p key={i} className="text-sm text-gray-700 dark:text-gray-300">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">{i + 6}.</span>{" "}
-                {step}
-              </p>
-            ))}
-          </div>
-
-          <AlertBox variant="info">
-            This tracking method uses an invisible 1x1 PNG image in your email.
-            When opened, it silently contacts your server, providing engagement
-            data without altering the email&apos;s appearance or alerting
-            recipients. This allows accurate measurement of open rates and
-            timing while preserving user experience.
-          </AlertBox>
-
-          <AlertBox variant="warning">
-            <strong>Note:</strong> Remember that this method isn&apos;t 100%
-            reliable as some email clients block images by default or give users
-            the option to not load images. Additionally, be sure to comply with
-            all relevant privacy laws and regulations when implementing email
-            tracking.
-          </AlertBox>
-        </SectionCard>
-
-        {/* Conclusion */}
-        <SectionCard icon="fas fa-flag-checkered" title="Conclusion">
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-            With these steps, We successfully created and deployed a simple
-            email tracking system using Node.js and Vercel. The key to this
-            project was understanding how to serve and log image requests, as
-            well as effectively deploying the server to Vercel. I hope this
-            guide helps you in building your own email tracking systems or
-            similar projects!
-          </p>
-          <div className="bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700/50 rounded-xl p-5">
-            <h4 className="flex items-center gap-2 font-semibold text-teal-800 dark:text-teal-300 mb-2">
-              <i className="fas fa-rocket"></i> Coming Soon
-            </h4>
-            <p className="text-sm text-teal-700 dark:text-teal-400">
-              As an upcoming feature, We plan to add functionality &quot;receive
-              SMS notifications on your phone when someone opens your
-              email&quot;. This will provide real-time alerts and further
-              enhance the tracking capabilities of the system. Stay tuned for
-              updates on how this SMS integration will be implemented!
-            </p>
-          </div>
-        </SectionCard>
-
-        {/* Footer */}
-        <div className="text-center pt-6 pb-12">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium hover:bg-gray-700 dark:hover:bg-white transition-all duration-200 no-underline shadow-lg hover:shadow-xl"
-          >
-            <i className="fas fa-arrow-left text-sm"></i>
-            Back to Portfolio
-          </Link>
-        </div>
-      </main>
-    </div>
+      <H2>Wrapping up</H2>
+      <P>
+        That&apos;s it: a small email tracker built with Node.js and deployed on
+        Vercel. The key idea is that serving an image lets you log a request.
+        Once that clicks, the rest is just deployment. I hope this helps you
+        build your own tracker, or something similar.
+      </P>
+      <P>
+        Next, I want to add SMS notifications, so I get a text on my phone the
+        moment someone opens my email. I&apos;ll write a follow-up when
+        it&apos;s ready.
+      </P>
+    </ArticleLayout>
   );
 }
 
 export default function BackendBlogPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
-          <div className="animate-pulse text-gray-400">Loading...</div>
-        </div>
-      }
-    >
+    <Suspense fallback={<ArticleLoading />}>
       <BackendBlogContent />
     </Suspense>
   );

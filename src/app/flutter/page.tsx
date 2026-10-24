@@ -2,126 +2,25 @@
 
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
-import Link from "next/link";
+import ArticleLayout, {
+  ArticleLoading,
+  ArticleNotFound,
+} from "@/components/blog/ArticleLayout";
+import CodeBlock from "@/components/blog/CodeBlock";
+import {
+  A,
+  Blockquote,
+  H2,
+  H3,
+  InlineCode,
+  P,
+  Ul,
+} from "@/components/blog/prose";
 
-/* ── reusable small components ───────────────────────────────── */
+const TITLE = "Flutter BlocProvider: Understanding Context and Performance";
 
-function CodeBlock({ children, lang }: { children: string; lang?: string }) {
-  return (
-    <div className="relative my-4">
-      {lang && (
-        <span className="absolute top-2 right-3 text-[10px] font-mono uppercase tracking-wider text-gray-400 select-none">
-          {lang}
-        </span>
-      )}
-      <pre className="bg-gray-900 text-gray-100 p-5 rounded-xl overflow-x-auto max-h-85 text-sm leading-relaxed shadow-lg scrollbar-thin">
-        <code>{children}</code>
-      </pre>
-    </div>
-  );
-}
-
-function SectionCard({
-  icon,
-  title,
-  children,
-  badge,
-  link,
-}: {
-  icon: string;
-  title: string;
-  children: React.ReactNode;
-  badge?: { text: string; href: string; icon: string };
-  link?: never;
-}) {
-  return (
-    <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 p-6 md:p-8 mb-6 transition-all duration-300 hover:-translate-y-0.5">
-      <div className="flex items-center justify-between flex-wrap gap-3 mb-5">
-        <h2 className="flex items-center gap-3 text-xl md:text-2xl font-bold text-emerald-600 dark:text-emerald-400">
-          <i className={`${icon} text-lg`}></i>
-          {title}
-        </h2>
-        {badge && (
-          <a
-            href={badge.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline"
-          >
-            <i className={badge.icon}></i> {badge.text}
-          </a>
-        )}
-      </div>
-      {children}
-    </section>
-  );
-}
-
-function InfoCard({
-  title,
-  children,
-  variant = "blue",
-}: {
-  title: React.ReactNode;
-  children: React.ReactNode;
-  variant?: "blue" | "green" | "red" | "yellow" | "purple";
-}) {
-  const colors = {
-    blue: "border-blue-200 dark:border-blue-700/50 bg-blue-50/50 dark:bg-blue-900/10",
-    green: "border-emerald-200 dark:border-emerald-700/50 bg-emerald-50/50 dark:bg-emerald-900/10",
-    red: "border-red-200 dark:border-red-700/50 bg-red-50/50 dark:bg-red-900/10",
-    yellow: "border-amber-200 dark:border-amber-700/50 bg-amber-50/50 dark:bg-amber-900/10",
-    purple: "border-purple-200 dark:border-purple-700/50 bg-purple-50/50 dark:bg-purple-900/10",
-  };
-  const headerColors = {
-    blue: "bg-blue-600",
-    green: "bg-emerald-600",
-    red: "bg-red-600",
-    yellow: "bg-amber-600",
-    purple: "bg-purple-600",
-  };
-  return (
-    <div
-      className={`rounded-xl border ${colors[variant]} overflow-hidden h-full`}
-    >
-      <div
-        className={`${headerColors[variant]} text-white px-4 py-2.5 text-sm font-semibold`}
-      >
-        {title}
-      </div>
-      <div className="p-4 text-sm text-gray-700 dark:text-gray-300">{children}</div>
-    </div>
-  );
-}
-
-function AlertBox({
-  children,
-  variant = "info",
-}: {
-  children: React.ReactNode;
-  variant?: "info" | "warning" | "success" | "danger";
-}) {
-  const styles = {
-    info: "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700/50 text-blue-800 dark:text-blue-300",
-    warning: "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-700/50 text-amber-800 dark:text-amber-300",
-    success: "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-700/50 text-emerald-800 dark:text-emerald-300",
-    danger: "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700/50 text-red-800 dark:text-red-300",
-  };
-  const icons = {
-    info: "fas fa-info-circle",
-    warning: "fas fa-exclamation-triangle",
-    success: "fas fa-check-circle",
-    danger: "fas fa-exclamation-circle",
-  };
-  return (
-    <div
-      className={`flex items-start gap-3 p-4 rounded-xl border ${styles[variant]} my-4`}
-    >
-      <i className={`${icons[variant]} mt-0.5`}></i>
-      <div className="text-sm leading-relaxed">{children}</div>
-    </div>
-  );
-}
+const SO_QUESTION =
+  "https://stackoverflow.com/questions/59902356/blocprovider-of-called-with-a-context-that-does-not-contain-a-bloc-even-that/";
 
 /* ── blog content ──────────────────────────────────────────── */
 
@@ -131,194 +30,53 @@ function FlutterBlogContent() {
 
   useEffect(() => {
     if (id === "blog-1") {
-      document.title =
-        "Flutter BlocProvider: Best Practices and Common Pitfalls";
+      document.title = TITLE;
     }
   }, [id]);
 
   if (id !== "blog-1") {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Blog Not Found
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            The blog post you&apos;re looking for doesn&apos;t exist.
-          </p>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium hover:bg-gray-700 dark:hover:bg-white transition-colors no-underline"
-          >
-            ← Back to Portfolio
-          </Link>
-        </div>
-      </div>
-    );
+    return <ArticleNotFound />;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
-      {/* ── Hero Header ── */}
-      <header className="relative bg-gray-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-br from-emerald-600/20 to-blue-600/20"></div>
-        <div className="relative max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
-          <span className="inline-block px-3 py-1 mb-4 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            Flutter &middot; State Management
-          </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-6">
-            Flutter BlocProvider: Understanding Context and Performance
-          </h1>
-          <p className="max-w-3xl mx-auto text-gray-300 text-base md:text-lg leading-relaxed">
-            Through my experience with Flutter state management, I&apos;ve
-            learned valuable lessons about Bloc, Cubit, and particularly
-            MultiBlocProvider implementations — often through practical
-            challenges in real projects. While MultiBlocProvider appears
-            straightforward at first, understanding its proper usage can make a
-            real difference in your app&apos;s performance and maintainability.
-            I&apos;d like to share these insights to help you build better
-            applications while avoiding some common pitfalls I&apos;ve
-            encountered along the way.
-          </p>
-        </div>
-        <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-gray-50 dark:bg-gray-950"
-          style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}
-        ></div>
-      </header>
+    <ArticleLayout
+      tag="Flutter · State management"
+      title={TITLE}
+      lede="MultiBlocProvider looks simple, but putting it in the wrong place can quietly hurt your app's performance and make it harder to maintain. Here's what I've learned about it on real projects, often the hard way."
+      readTime="8 min read"
+      currentHref="/flutter?id=blog-1"
+    >
+      <P>
+        If you&apos;ve used bloc for a while, you&apos;ve probably hit this
+        error at least once:{" "}
+        <InlineCode>
+          BlocProvider.of() called with a context that does not contain a Bloc
+        </InlineCode>
+        . When I looked into it, I found a{" "}
+        <A href={SO_QUESTION}>Stack Overflow question</A> where the answer with
+        36 upvotes suggests wrapping your whole app in a global{" "}
+        <InlineCode>MultiBlocProvider</InlineCode>.
+      </P>
+      <P>
+        That does make the error go away, but it can also cause performance
+        problems and memory leaks. Felix Angelov, who created the bloc library,
+        has explained why. In this post I&apos;ll go through the problem, why
+        the global fix is a bad idea, and how to scope blocs properly, with
+        real examples.
+      </P>
+      <P>
+        I&apos;ll assume you know the basics of Flutter and have used the BLoC
+        pattern before.
+      </P>
 
-      {/* ── Content ── */}
-      <main className="max-w-5xl mx-auto px-6 py-12 space-y-6">
-        {/* Why This Tutorial Exists */}
-        <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 md:p-8 mb-6">
-          <h2 className="flex items-center gap-3 text-xl md:text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-5">
-            <i className="fas fa-pen-fancy text-lg"></i>
-            Why This Tutorial Exists
-          </h2>
-          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6 border-l-4 border-emerald-500">
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">
-              <i className="fas fa-quote-left text-gray-300 dark:text-gray-500 mr-2"></i>
-              This tutorial aims to share some insights about BlocProvider
-              implementation patterns in Flutter. Through community discussions
-              and shared experiences on platforms like Stack Overflow, I noticed
-              some common challenges developers face when implementing state
-              management with BLoC. Let&apos;s explore together some effective
-              approaches and best practices that can help create more
-              maintainable Flutter applications.
-            </p>
-          </div>
-
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-            Key Motivations:
-          </h3>
-          <div className="grid md:grid-cols-3 gap-4 mb-6">
-            <InfoCard title={<><i className="fas fa-exclamation-triangle"></i> The Problem</>} variant="red">
-              <p>
-                A Stack Overflow answer with 36 upvotes was promoting a global
-                BlocProvider pattern that could lead to serious performance
-                issues and memory leaks.
-              </p>
-            </InfoCard>
-            <InfoCard title={<><i className="fas fa-bullseye"></i> The Goal</>} variant="green">
-              <p>
-                To provide clear, practical guidance on proper bloc
-                implementation, backed by insights from the bloc library creator
-                himself.
-              </p>
-            </InfoCard>
-            <InfoCard title={<><i className="fas fa-users"></i> The Impact</>} variant="blue">
-              <p>
-                Help developers avoid common pitfalls and build more
-                maintainable, performant Flutter applications.
-              </p>
-            </InfoCard>
-          </div>
-
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-            What You&apos;ll Learn:
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4 mb-6">
-            <ul className="space-y-2">
-              {[
-                "Proper BlocProvider implementation patterns",
-                "Common pitfalls and how to avoid them",
-                "Performance implications of different approaches",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3"
-                >
-                  <i className="fas fa-check-circle text-emerald-500 mt-0.5"></i>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-2">
-              {[
-                "Best practices for state management",
-                "Real-world examples and solutions",
-                "Insights from the bloc library creator",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3"
-                >
-                  <i className="fas fa-check-circle text-emerald-500 mt-0.5"></i>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <AlertBox variant="info">
-            <p className="font-semibold mb-1">Prerequisites</p>
-            <ul className="list-disc list-inside space-y-1 mt-2">
-              <li>Basic understanding of Flutter development</li>
-              <li>Familiarity with the BLoC pattern concept</li>
-              <li>Flutter development environment set up</li>
-            </ul>
-          </AlertBox>
-        </section>
-
-        {/* Common BlocProvider Issues */}
-        <SectionCard
-          icon="fas fa-question-circle"
-          title="Common BlocProvider Issues"
-          badge={{
-            text: "View Original Discussion",
-            href: "https://stackoverflow.com/questions/59902356/blocprovider-of-called-with-a-context-that-does-not-contain-a-bloc-even-that/",
-            icon: "fab fa-stack-overflow",
-          }}
-        >
-          <div className="bg-amber-50/50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/50 rounded-xl p-5 mb-5">
-            <span className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 mb-3">
-              Stack Overflow Question
-            </span>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-              Understanding Context Issues with BlocProvider
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              <i className="fas fa-exclamation-circle text-amber-500 mr-1"></i>
-              Common Error: &quot;BlocProvider.of() called with a context that
-              does not contain a Bloc&quot;
-            </p>
-          </div>
-
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Typical Scenario</h4>
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
-            Consider a common Flutter application structure with authentication
-            flow:
-          </p>
-          <CodeBlock lang="plaintext">{`App() => LoginPage() => HomePage() => UserTokensPage()`}</CodeBlock>
-
-          <AlertBox variant="info">
-            Many developers start with this seemingly correct implementation:
-          </AlertBox>
-
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-            Initial Implementation
-          </h4>
-          <CodeBlock lang="dart">{`void main() => runApp(App());
+      <H2>The error</H2>
+      <P>
+        Here&apos;s a typical setup. The app has an authentication flow like
+        this:
+      </P>
+      <CodeBlock lang="text">{`App() => LoginPage() => HomePage() => UserTokensPage()`}</CodeBlock>
+      <P>And a lot of us start with something like this:</P>
+      <CodeBlock filename="main.dart">{`void main() => runApp(App());
 
 class App extends StatelessWidget {
   @override
@@ -332,51 +90,25 @@ class App extends StatelessWidget {
     );
   }
 }`}</CodeBlock>
+      <P>
+        It looks right, but <InlineCode>BlocProvider</InlineCode> only wraps{" "}
+        <InlineCode>LoginPage</InlineCode>. When you navigate to{" "}
+        <InlineCode>HomePage</InlineCode>, the new route is added by the
+        Navigator, which sits above the provider in the widget tree, not below
+        it. So <InlineCode>HomePage</InlineCode> and{" "}
+        <InlineCode>UserTokensPage</InlineCode> can&apos;t see{" "}
+        <InlineCode>UserBloc</InlineCode>, the bloc is lost during navigation,
+        and you get the error.
+      </P>
 
-          <AlertBox variant="warning">
-            This implementation can lead to context-related issues when
-            navigating between pages
-          </AlertBox>
-
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-            Why This Can Be Problematic:
-          </h4>
-          <ul className="space-y-2 mb-4">
-            {[
-              "Bloc access lost during navigation",
-              "Context scope limited to LoginPage",
-              "State management becomes inconsistent",
-            ].map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 bg-red-50 dark:bg-red-900/10 rounded-lg p-3 border border-red-100 dark:border-red-700/30"
-              >
-                <i className="fas fa-times-circle text-red-500"></i>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </SectionCard>
-
-        {/* The Misleading Solution */}
-        <SectionCard
-          icon="fas fa-exclamation-triangle"
-          title="The Misleading Solution"
-          badge={{
-            text: "View Original Discussion",
-            href: "https://stackoverflow.com/questions/59902356/blocprovider-of-called-with-a-context-that-does-not-contain-a-bloc-even-that/60316681#60316681",
-            icon: "fab fa-stack-overflow",
-          }}
-        >
-          <AlertBox variant="danger">
-            Warning: This approach can lead to performance issues
-          </AlertBox>
-
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
-            A highly upvoted answer suggested wrapping the entire app with
-            MultiBlocProvider:
-          </p>
-          <CodeBlock lang="dart">{`void main() {
+      <H2>The popular fix, and why I&apos;d avoid it</H2>
+      <P>
+        The{" "}
+        <A href={`${SO_QUESTION}60316681#60316681`}>highly upvoted answer</A>{" "}
+        suggests moving the providers above <InlineCode>MaterialApp</InlineCode>{" "}
+        so every route can reach them:
+      </P>
+      <CodeBlock filename="main.dart">{`void main() {
   runApp(
     MultiBlocProvider(
       providers: [
@@ -389,137 +121,67 @@ class App extends StatelessWidget {
     )
   );
 }`}</CodeBlock>
+      <P>
+        The error goes away, but now these blocs are never disposed. They keep
+        using memory for the whole life of the app, even on screens that
+        don&apos;t need them, which can lead to memory leaks. The state also
+        becomes global: any widget can reach it, features aren&apos;t isolated
+        anymore, and you end up writing manual &quot;reset&quot; logic to clear
+        a bloc when the user leaves a screen.
+      </P>
+      <P>
+        The <A href={`${SO_QUESTION}59970345#59970345`}>accepted answer</A> on
+        that question is correct. But it never points out the problems with the
+        global approach, so the popular answer is still the one people copy.
+      </P>
 
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
-            Why This Solution Is Problematic:
-          </h4>
-          <div className="grid md:grid-cols-2 gap-4">
-            <InfoCard title="Memory Issues" variant="red">
-              <ul className="list-disc list-inside space-y-1">
-                <li>Blocs are never disposed</li>
-                <li>Resources are consumed unnecessarily</li>
-                <li>Memory leaks can occur</li>
-              </ul>
-            </InfoCard>
-            <InfoCard title="State Management Issues" variant="red">
-              <ul className="list-disc list-inside space-y-1">
-                <li>Global state becomes complex</li>
-                <li>Requires manual state resets</li>
-                <li>Poor feature isolation</li>
-              </ul>
-            </InfoCard>
-          </div>
-        </SectionCard>
+      <H2>What the bloc author says</H2>
+      <P>Felix Angelov wrote about this exact pattern in a GitHub issue:</P>
+      <Blockquote
+        cite={
+          <>
+            Felix Angelov, creator of bloc, in{" "}
+            <A href="https://github.com/felangel/bloc/issues/3272/">
+              felangel/bloc#3272
+            </A>{" "}
+            (March 10, 2022)
+          </>
+        }
+      >
+        <p className="mb-3">
+          The main disadvantages of providing all blocs globally are:
+        </p>
+        <ul className="ps-6 list-disc space-y-1 mb-3">
+          <li>
+            Blocs are never closed so they are consuming resources even if they
+            aren&apos;t being used by the current widget tree
+          </li>
+          <li>
+            Blocs can be accessed from anywhere even if the state of the bloc is
+            scoped to just a particular feature
+          </li>
+          <li>
+            Blocs typically end up needing some sort of &quot;reset&quot; event
+            to revert back to the initial state
+          </li>
+        </ul>
+        <p>
+          Create a bloc per feature and provide that bloc only to the specific
+          subtree that needs it.
+        </p>
+      </Blockquote>
+      <P>
+        So the rule is simple: give each bloc only to the widgets that need it,
+        let it be disposed when they&apos;re gone, and keep features separate.
+      </P>
 
-        {/* The Verified Solution */}
-        <SectionCard
-          icon="fas fa-check-circle"
-          title="The Verified Solution"
-          badge={{
-            text: "View Original Discussion",
-            href: "https://stackoverflow.com/questions/59902356/blocprovider-of-called-with-a-context-that-does-not-contain-a-bloc-even-that/59970345#59970345",
-            icon: "fab fa-stack-overflow",
-          }}
-        >
-          <AlertBox variant="info">
-            While a correct solution was provided and verified with a checkmark,
-            it didn&apos;t address or correct the misleading approach suggested
-            in the other answer. This missed opportunity to warn developers
-            about the potential issues with the global BlocProvider
-            implementation.
-          </AlertBox>
-        </SectionCard>
-
-        {/* Insights from the Creator */}
-        <SectionCard
-          icon="fas fa-lightbulb"
-          title="Insights from the Creator"
-          badge={{
-            text: "View GitHub Issue",
-            href: "https://github.com/felangel/bloc/issues/3272/",
-            icon: "fab fa-github",
-          }}
-        >
-          <div className="bg-emerald-50/50 dark:bg-emerald-900/10 border-l-4 border-emerald-500 rounded-r-xl p-5 mb-6">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="px-2.5 py-1 text-xs font-semibold rounded-md bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200">
-                Felix Angelov (bloc library creator)
-              </span>
-              <span className="text-xs text-gray-500 dark:text-gray-400">March 10, 2022</span>
-            </div>
-            <blockquote className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-              <p className="mb-3">
-                The main disadvantages of providing all blocs globally are:
-              </p>
-              <ul className="list-disc list-inside space-y-1 mb-3">
-                <li>
-                  Blocs are never closed so they are consuming resources even if
-                  they aren&apos;t being used by the current widget tree
-                </li>
-                <li>
-                  Blocs can be accessed from anywhere even if the state of the
-                  bloc is scoped to just a particular feature
-                </li>
-                <li>
-                  Blocs typically end up needing some sort of &quot;reset&quot;
-                  event to revert back to the initial state
-                </li>
-              </ul>
-              <p className="text-emerald-700 dark:text-emerald-400 font-medium italic border-t border-emerald-200 dark:border-emerald-700 pt-3">
-                Recommendation: Create a bloc per feature and provide that bloc
-                only to the specific subtree that needs it.
-              </p>
-            </blockquote>
-          </div>
-
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Key Takeaways:</h4>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 border border-gray-100 dark:border-gray-600 text-center">
-              <h5 className="font-bold text-gray-900 dark:text-white mb-2">Scoped Access</h5>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Limit bloc access to only the widgets that need it
-              </p>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 border border-gray-100 dark:border-gray-600 text-center">
-              <h5 className="font-bold text-gray-900 dark:text-white mb-2">
-                Resource Management
-              </h5>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Ensure proper disposal of blocs when not needed
-              </p>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 border border-gray-100 dark:border-gray-600 text-center">
-              <h5 className="font-bold text-gray-900 dark:text-white mb-2">
-                Feature Isolation
-              </h5>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Maintain clear boundaries between features
-              </p>
-            </div>
-          </div>
-        </SectionCard>
-
-        {/* Proper BlocProvider Disposal */}
-        <SectionCard
-          icon="fas fa-trash-alt"
-          title="Proper BlocProvider Disposal"
-        >
-          <span className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mb-4">
-            Best Practice
-          </span>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
-            Login Flow Example
-          </h3>
-
-          <AlertBox variant="warning">
-            Common Mistake: Keeping login-related blocs active after successful
-            authentication
-          </AlertBox>
-
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-            Proper Implementation:
-          </h4>
-          <CodeBlock lang="dart">{`class LoginPage extends StatelessWidget {
+      <H2>Scope blocs to the screen that needs them</H2>
+      <P>
+        A login flow is a good example. A common mistake is keeping the login
+        bloc alive after the user has signed in. Instead, provide it on the
+        login page only:
+      </P>
+      <CodeBlock filename="login_page.dart">{`class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -548,90 +210,38 @@ class LoginView extends StatelessWidget {
     );
   }
 }`}</CodeBlock>
+      <P>
+        Because of <InlineCode>pushReplacement</InlineCode>, the login route is
+        removed from the stack after a successful login, and{" "}
+        <InlineCode>LoginBloc</InlineCode> is disposed with it. That frees
+        memory, avoids leftover state, and keeps the login logic inside the
+        login feature where it belongs.
+      </P>
+      <P>A few things I keep in mind:</P>
+      <Ul>
+        <li>
+          Use <InlineCode>pushReplacement</InlineCode> instead of{" "}
+          <InlineCode>push</InlineCode> to remove the login page from the
+          navigation stack.
+        </li>
+        <li>Scope blocs to features, not to the whole app.</li>
+        <li>
+          Let the widget tree handle the bloc&apos;s lifecycle. When the widget
+          is disposed, so is the bloc.
+        </li>
+        <li>
+          Use <InlineCode>BlocProvider.value</InlineCode> only when you&apos;re
+          passing a bloc instance that already exists.
+        </li>
+      </Ul>
 
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
-            Benefits of Proper Disposal:
-          </h4>
-          <div className="grid md:grid-cols-3 gap-4 mb-6">
-            <InfoCard title={<><i className="fas fa-memory"></i> Memory Efficiency</>} variant="green">
-              <ul className="space-y-1">
-                <li><i className="fas fa-check text-green-600 mr-1"></i> Resources freed after use</li>
-                <li><i className="fas fa-check text-green-600 mr-1"></i> No memory leaks</li>
-                <li><i className="fas fa-check text-green-600 mr-1"></i> Better app performance</li>
-              </ul>
-            </InfoCard>
-            <InfoCard title={<><i className="fas fa-shield-halved"></i> State Management</>} variant="green">
-              <ul className="space-y-1">
-                <li><i className="fas fa-check text-green-600 mr-1"></i> Clean state transitions</li>
-                <li><i className="fas fa-check text-green-600 mr-1"></i> No state conflicts</li>
-                <li><i className="fas fa-check text-green-600 mr-1"></i> Predictable behavior</li>
-              </ul>
-            </InfoCard>
-            <InfoCard title={<><i className="fas fa-cube"></i> Code Organization</>} variant="green">
-              <ul className="space-y-1">
-                <li><i className="fas fa-check text-green-600 mr-1"></i> Better feature isolation</li>
-                <li><i className="fas fa-check text-green-600 mr-1"></i> Clearer dependencies</li>
-                <li><i className="fas fa-check text-green-600 mr-1"></i> Easier maintenance</li>
-              </ul>
-            </InfoCard>
-          </div>
-
-          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700/50 rounded-xl p-5">
-            <h4 className="flex items-center gap-2 font-semibold text-amber-800 dark:text-amber-300 mb-3">
-              <i className="fas fa-lightbulb"></i> Pro Tips:
-            </h4>
-            <ul className="space-y-2 text-sm text-amber-900 dark:text-amber-300">
-              <li>
-                • Use{" "}
-                <code className="bg-amber-100 dark:bg-amber-900/50 px-1.5 py-0.5 rounded text-xs">
-                  pushReplacement
-                </code>{" "}
-                instead of{" "}
-                <code className="bg-amber-100 dark:bg-amber-900/50 px-1.5 py-0.5 rounded text-xs">
-                  push
-                </code>{" "}
-                to remove the login page from navigation stack
-              </li>
-              <li>
-                • Scope blocs to specific features rather than making them
-                global
-              </li>
-              <li>
-                • Let the widget tree handle bloc lifecycle through proper
-                widget disposal
-              </li>
-              <li>
-                • Consider using{" "}
-                <code className="bg-amber-100 dark:bg-amber-900/50 px-1.5 py-0.5 rounded text-xs">
-                  BlocProvider.value
-                </code>{" "}
-                only when passing existing bloc instances
-              </li>
-            </ul>
-          </div>
-        </SectionCard>
-
-        {/* Understanding MultiBlocProvider Usage */}
-        <SectionCard
-          icon="fas fa-layer-group"
-          title="Understanding MultiBlocProvider Usage"
-        >
-          <span className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mb-4">
-            Best Practice
-          </span>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
-            When and How to Use MultiBlocProvider
-          </h3>
-
-          <AlertBox variant="info">
-            MultiBlocProvider isn&apos;t inherently bad — it&apos;s about using
-            it correctly and when necessary.
-          </AlertBox>
-
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-            Good Use Cases for MultiBlocProvider:
-          </h4>
-          <CodeBlock lang="dart">{`// Example: Dashboard page requiring multiple related features
+      <H2>So when is MultiBlocProvider fine?</H2>
+      <P>
+        <InlineCode>MultiBlocProvider</InlineCode> isn&apos;t bad on its own.
+        The problem is where you put it. It&apos;s a good fit when one screen
+        needs several related blocs, like a dashboard:
+      </P>
+      <CodeBlock filename="dashboard_page.dart">{`// Example: Dashboard page requiring multiple related features
 class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -651,82 +261,48 @@ class DashboardPage extends StatelessWidget {
     );
   }
 }`}</CodeBlock>
+      <P>
+        The way I think about it: group blocs that belong to the same feature
+        and share the same lifecycle, and keep everything else apart.
+      </P>
 
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
-            Appropriate vs Inappropriate Usage:
-          </h4>
-          <div className="grid md:grid-cols-2 gap-4 mb-6">
-            <InfoCard title={<><i className="fas fa-circle-check"></i> Good Usage</>} variant="green">
-              <div className="space-y-4">
-                <div>
-                  <p className="font-semibold">Feature-Specific Pages:</p>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs">
-                    When multiple blocs are needed for a specific feature&apos;s
-                    functionality
-                  </p>
-                  <code className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded block mt-1">
-                    DashboardPage with related stats, notifications, and
-                    activity blocs
-                  </code>
-                </div>
-                <div>
-                  <p className="font-semibold">Related Data Management:</p>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs">
-                    When blocs have interdependent functionality
-                  </p>
-                  <code className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded block mt-1">
-                    Shopping cart with inventory and payment blocs
-                  </code>
-                </div>
-                <div>
-                  <p className="font-semibold">Scoped Feature Sets:</p>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs">
-                    When multiple blocs share the same lifecycle
-                  </p>
-                  <code className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded block mt-1">
-                    User profile with settings and preferences blocs
-                  </code>
-                </div>
-              </div>
-            </InfoCard>
-            <InfoCard title={<><i className="fas fa-circle-xmark"></i> Bad Usage</>} variant="red">
-              <div className="space-y-4">
-                <div>
-                  <p className="font-semibold">Global App State:</p>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs">
-                    Don&apos;t wrap MaterialApp with unrelated blocs
-                  </p>
-                  <code className="text-xs text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded block mt-1">
-                    Wrapping entire app with authentication, settings, and cart
-                    blocs
-                  </code>
-                </div>
-                <div>
-                  <p className="font-semibold">Unrelated Features:</p>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs">
-                    Don&apos;t combine blocs that serve different purposes
-                  </p>
-                  <code className="text-xs text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded block mt-1">
-                    Mixing login bloc with product catalog bloc
-                  </code>
-                </div>
-                <div>
-                  <p className="font-semibold">Different Lifecycles:</p>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs">
-                    Don&apos;t combine blocs with different disposal needs
-                  </p>
-                  <code className="text-xs text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded block mt-1">
-                    Combining temporary chat bloc with persistent theme bloc
-                  </code>
-                </div>
-              </div>
-            </InfoCard>
-          </div>
+      <H3>Good fits</H3>
+      <Ul>
+        <li>
+          A feature page that needs several blocs, like a dashboard with stats,
+          notifications and activity.
+        </li>
+        <li>
+          Blocs that depend on each other, like a shopping cart with inventory
+          and payment blocs.
+        </li>
+        <li>
+          Blocs that share the same lifecycle, like a user profile with
+          settings and preferences blocs.
+        </li>
+      </Ul>
 
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-            Practical Implementation Example:
-          </h4>
-          <CodeBlock lang="dart">{`// E-commerce product detail page example
+      <H3>Bad fits</H3>
+      <Ul>
+        <li>
+          Wrapping <InlineCode>MaterialApp</InlineCode> with unrelated blocs,
+          like authentication, settings and cart.
+        </li>
+        <li>
+          Mixing blocs for different purposes, like a login bloc with a product
+          catalog bloc.
+        </li>
+        <li>
+          Combining blocs with different lifecycles, like a temporary chat bloc
+          with a persistent theme bloc.
+        </li>
+      </Ul>
+
+      <P>
+        Here&apos;s another example, a product detail page in an e-commerce
+        app:
+      </P>
+      <CodeBlock filename="product_detail_page.dart">{`// E-commerce product detail page example
 class ProductDetailPage extends StatelessWidget {
   final String productId;
 
@@ -755,74 +331,39 @@ class ProductDetailPage extends StatelessWidget {
 }
 
 // These blocs will be disposed when leaving ProductDetailPage`}</CodeBlock>
+      <P>
+        All three blocs are about the same product, and all three are disposed
+        when the user leaves the page.
+      </P>
 
-          <div className="bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl p-5 mb-4">
-            <h4 className="flex items-center gap-2 font-semibold text-gray-900 dark:text-white mb-3">
-              <i className="fas fa-star text-amber-500"></i> Best Practices:
-            </h4>
-            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-              <li>
-                • Group blocs that are logically related and share the same
-                lifecycle
-              </li>
-              <li>
-                • Dispose of blocs when their feature/page is no longer needed
-              </li>
-              <li>
-                • Consider performance implications of initializing multiple
-                blocs
-              </li>
-              <li>• Use lazy loading when possible to defer bloc creation</li>
-              <li>
-                • Keep bloc providers as close as possible to where they&apos;re
-                needed
-              </li>
-            </ul>
-          </div>
-
-          <AlertBox variant="warning">
-            <p className="font-semibold mb-2">Common Pitfalls to Avoid:</p>
-            <ul className="space-y-1">
-              <li>
-                • Don&apos;t use MultiBlocProvider at app root unless absolutely
-                necessary
-              </li>
-              <li>• Avoid mixing blocs with different scopes or lifecycles</li>
-              <li>
-                • Don&apos;t initialize blocs that aren&apos;t immediately
-                needed
-              </li>
-              <li>
-                • Be cautious of memory usage when creating multiple blocs
-              </li>
-            </ul>
-          </AlertBox>
-        </SectionCard>
-
-        {/* Footer */}
-        <div className="text-center pt-6 pb-12">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium hover:bg-gray-700 dark:hover:bg-white transition-all duration-200 no-underline shadow-lg hover:shadow-xl"
-          >
-            <i className="fas fa-arrow-left text-sm"></i>
-            Back to Portfolio
-          </Link>
-        </div>
-      </main>
-    </div>
+      <H2>Rules of thumb</H2>
+      <Ul>
+        <li>
+          Keep providers as close as possible to the widgets that use them.
+        </li>
+        <li>
+          Don&apos;t put <InlineCode>MultiBlocProvider</InlineCode> at the app
+          root unless you really need to.
+        </li>
+        <li>Only group blocs that are related and share the same lifecycle.</li>
+        <li>Let blocs be disposed when their page or feature is gone.</li>
+        <li>
+          Use lazy loading where you can, so blocs aren&apos;t created before
+          they&apos;re needed.
+        </li>
+        <li>Watch memory usage when a page creates many blocs.</li>
+      </Ul>
+      <P>
+        That&apos;s what I wish I&apos;d known the first time I saw that error.
+        I hope it saves you some debugging time.
+      </P>
+    </ArticleLayout>
   );
 }
 
 export default function FlutterBlogPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
-          <div className="animate-pulse text-gray-400">Loading...</div>
-        </div>
-      }
-    >
+    <Suspense fallback={<ArticleLoading />}>
       <FlutterBlogContent />
     </Suspense>
   );

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import JoinTestDialog, { type ClosedTesting } from "./JoinTestDialog";
+import { tutorials, type TutorialCard } from "./blog/tutorials";
 
 declare global {
   interface Window {
@@ -162,31 +163,6 @@ const projects: ProjectCard[] = [
     image: "/responsive.jpg",
     github: "https://github.com/h0996g/figma",
     detailsId: "responsive-design-showcase",
-  },
-];
-
-interface TutorialCard {
-  title: string;
-  image: string;
-  href: string;
-}
-
-const tutorials: TutorialCard[] = [
-  {
-    title: "Pixel espion with Express.js",
-    image: "/pixel.png",
-    href: "/backend?id=blog-1",
-  },
-  {
-    title:
-      "BlocProvider.of() called with a context that does not contain a Bloc",
-    image: "/stackoverflow.webp",
-    href: "/flutter?id=blog-1",
-  },
-  {
-    title: "Optimize Heavy Tasks in Flutter Using Isolate",
-    image: "/isolate.png",
-    href: "/tutorials/isolate",
   },
 ];
 
@@ -567,10 +543,27 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
   );
 }
 
+type Tab = "projects" | "tutorials";
+
+// One-shot return point: saved when a tutorial is opened, consumed when the home page mounts again.
+const RETURN_KEY = "projects:return";
+
+function saveReturnPoint(e: React.MouseEvent) {
+  // Modifier clicks open a new tab/window, so this page isn't actually leaving.
+  if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+  try {
+    sessionStorage.setItem(
+      RETURN_KEY,
+      JSON.stringify({ tab: "tutorials", scrollY: window.scrollY }),
+    );
+  } catch {}
+}
+
 function TutorialCardComponent({ tutorial }: { tutorial: TutorialCard }) {
   return (
     <Link
       href={tutorial.href}
+      onClick={saveReturnPoint}
       className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl dark:hover:shadow-black/40 transition-all duration-300 hover:-translate-y-1 flex flex-col cursor-pointer no-underline"
     >
       <div className="aspect-video overflow-hidden bg-gray-200 dark:bg-gray-700 animate-pulse">
@@ -599,9 +592,27 @@ function TutorialCardComponent({ tutorial }: { tutorial: TutorialCard }) {
 }
 
 export default function Projects() {
-  const [activeTab, setActiveTab] = useState<"projects" | "tutorials">(
-    "projects",
-  );
+  const [activeTab, setActiveTab] = useState<Tab>("projects");
+  const pendingRestore = useRef<{ tab: Tab; scrollY: number } | null>(null);
+
+  // Coming back from a tutorial: reselect its tab before paint so the Projects grid never flashes.
+  useLayoutEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(RETURN_KEY);
+      if (!saved) return;
+      sessionStorage.removeItem(RETURN_KEY);
+      pendingRestore.current = JSON.parse(saved);
+      setActiveTab(pendingRestore.current!.tab);
+    } catch {}
+  }, []);
+
+  // Scroll once the restored tab has rendered. Instant, since <html> is scroll-smooth.
+  useEffect(() => {
+    const pending = pendingRestore.current;
+    if (!pending || pending.tab !== activeTab) return;
+    window.scrollTo({ top: pending.scrollY, behavior: "instant" });
+    pendingRestore.current = null;
+  }, [activeTab]);
 
   return (
     <section
