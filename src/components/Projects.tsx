@@ -129,7 +129,8 @@ const projects: ProjectCard[] = [
   {
     title: "Dalil Umrah App",
     image: "/umrah-client/cover.png",
-    playStoreComingSoon: true,
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.dalilumrah.app",
     websiteLink: "https://dalilumrah.com/ar",
     detailsId: "dalil-umrah-app",
   },

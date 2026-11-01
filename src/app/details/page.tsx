@@ -115,7 +115,8 @@ const projectsData: Record<string, ProjectData> = {
       { length: 12 },
       (_, i) => `/umrah-client/${i + 1}.png`,
     ),
-    playstoreComingSoon: true,
+    playstoreLink:
+      "https://play.google.com/store/apps/details?id=com.dalilumrah.app",
     websiteLink: "https://dalilumrah.com/ar",
   },
   "naqlax-app": {
