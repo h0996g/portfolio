@@ -121,18 +121,17 @@ const projects: ProjectCard[] = [
       "https://play.google.com/store/apps/details?id=com.sarlkig.NavRestaurant",
   },
   {
-    title: "Naqlax",
-    image: "/naqlax/cover.png",
-    playStoreComingSoon: true,
-    detailsId: "naqlax-app",
-  },
-  {
     title: "Dalil Umrah App",
     image: "/umrah-client/cover.png",
     playStore:
       "https://play.google.com/store/apps/details?id=com.dalilumrah.app",
     websiteLink: "https://dalilumrah.com/ar",
-    detailsId: "dalil-umrah-app",
+  },
+  {
+    title: "Naqlax",
+    image: "/naqlax/cover.png",
+    playStoreComingSoon: true,
+    detailsId: "naqlax-app",
   },
   {
     title: "Ajr",
@@ -202,40 +201,6 @@ function showGitHubOptions(
             window.open(`https://github.com/${back.owner}/${back.projectId}`);
             window.Swal.close();
           });
-      },
-    });
-  }
-}
-
-function showComingSoon(store: string) {
-  if (typeof window !== "undefined" && window.Swal) {
-    window.Swal.fire({
-      title: "Coming Soon",
-      html: `
-        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:4px 0 8px">
-          <lottie-player
-            src="/lottie/Coming soon.json"
-            background="transparent"
-            speed="1"
-            style="width:200px;height:200px"
-            loop autoplay>
-          </lottie-player>
-          <p style="color:#374151;font-size:15px;margin:0;line-height:1.6;text-align:center">
-            This app is on its way to the <strong>${store}</strong>.<br/>Stay tuned for the launch!
-          </p>
-          <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;border-radius:999px;padding:4px 14px;font-size:12px;font-weight:600">
-            <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block"></span>
-            In Development
-          </span>
-        </div>
-      `,
-      showConfirmButton: false,
-      showCloseButton: true,
-      background: "#ffffff",
-      customClass: {
-        popup: "swal-popup",
-        title: "swal-title",
-        closeButton: "swal-close-button",
       },
     });
   }
@@ -510,11 +475,12 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
             )}
             {project.playStoreComingSoon && (
               <button
-                onClick={() => showComingSoon("Play Store")}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 text-white text-xs font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group cursor-pointer border-0"
+                disabled
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs font-semibold cursor-not-allowed border-0"
               >
-                <i className="fab fa-google-play text-base group-hover:rotate-12 transition-transform"></i>
+                <i className="fab fa-google-play text-base"></i>
                 <span>Play Store</span>
+                <span className="text-[10px] font-medium">Soon</span>
               </button>
             )}
             {project.appStore && (
@@ -530,11 +496,12 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
             )}
             {project.appStoreComingSoon && (
               <button
-                onClick={() => showComingSoon("App Store")}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-black text-white text-xs font-semibold hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 group cursor-pointer border-0"
+                disabled
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs font-semibold cursor-not-allowed border-0"
               >
-                <i className="fab fa-apple text-lg group-hover:scale-110 transition-transform"></i>
+                <i className="fab fa-apple text-lg"></i>
                 <span>App Store</span>
+                <span className="text-[10px] font-medium">Soon</span>
               </button>
             )}
           </div>
