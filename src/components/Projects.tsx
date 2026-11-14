@@ -125,6 +125,7 @@ const projects: ProjectCard[] = [
     image: "/umrah-client/cover.png",
     playStore:
       "https://play.google.com/store/apps/details?id=com.dalilumrah.app",
+    appStore: "https://apps.apple.com/dz/app/dalil-umrah/id6827456246",
     websiteLink: "https://dalilumrah.com/ar",
   },
   {
