@@ -131,7 +131,7 @@ const workEntries: WorkEntry[] = [
   },
   {
     company: "Koudri Innovations Group",
-    url: "https://sarlkig.com/",
+    url: "https://www.eurlkoudri.com/",
     logoSrc: "/companies/kig-logo.png",
     bgColor: "bg-amber-800",
     location: "Algiers, Algeria",
