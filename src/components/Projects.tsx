@@ -37,6 +37,13 @@ interface ProjectCard {
 
 const projects: ProjectCard[] = [
   {
+    title: "XP Academy",
+    image: "/academy/cover.png",
+    websiteLink: "https://academy.houssameddine.dev",
+    playStoreComingSoon: true,
+    appStoreComingSoon: true,
+  },
+  {
     title: "Nouba Plus",
     image: "/noubaplus.png",
     playStore: "https://play.google.com/store/apps/details?id=com.noubaplus.app",
