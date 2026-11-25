@@ -137,9 +137,17 @@ const projects: ProjectCard[] = [
   },
   {
     title: "Naqlax",
-    image: "/naqlax/cover.png",
-    playStoreComingSoon: true,
+    image: "/naqlax/cover-user.jpg",
+    playStore: "https://play.google.com/store/apps/details?id=com.naqlax",
+    appStore: "https://apps.apple.com/cm/app/naqlax/id6753671505?l=en-GB",
     detailsId: "naqlax-app",
+  },
+  {
+    title: "Naqlax Driver",
+    image: "/naqlax/cover-driver.jpg",
+    playStore: "https://play.google.com/store/apps/details?id=com.naqladriver",
+    appStore:
+      "https://apps.apple.com/cm/app/naqlax-driver/id6753668968?l=en-GB",
   },
   {
     title: "Ajr",

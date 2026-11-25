@@ -114,7 +114,8 @@ const projectsData: Record<string, ProjectData> = {
       },
     ],
     screenshots: Array.from({ length: 8 }, (_, i) => `/naqlax/${i + 1}.png`),
-    playstoreComingSoon: true,
+    playstoreLink: "https://play.google.com/store/apps/details?id=com.naqlax",
+    appstoreLink: "https://apps.apple.com/cm/app/naqlax/id6753671505?l=en-GB",
   },
   "memory-card-game": {
     title: "Memory Card Game",
